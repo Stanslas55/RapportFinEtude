@@ -170,7 +170,7 @@
  
   \begin{figure}[hbt]  
     \includegraphics[width=\textwidth]{PresentationAubay1.png}    
-    \caption{Chiffres clés pour Aubay en 2021}
+    \caption{Chiffres clés pour Aubay en 2021.}
     \label{fig:PA1}
   \end{figure}  
   
@@ -198,23 +198,23 @@
   de cette contrainte afin de permettre une plus grande polyvalence pour ce genre d'outil.
   Le projet a été séparé en plusieurs parties délimitées par des dates clés qui sont présentées dans la Figure \ref{fig:Planning} 
   avec les livrables associés à chaque fin de phase.
-  La prise en main du projet a démarée début février, s'en est suivi la partie concernant les états de l'art (EA sur la Figure \ref{fig:Planning}) qui devait être 
-  réalisée entre mi-février et mi-mars en parallèle du Design Thinking qui nous a permis de cadrer et définir le projet par rapport 
-  aux besoins de l'application et les tâches à accomplir. La phase de preuve de concept qui a suivi a duré jusqu'à mi-mai. 
+  La prise en main du projet a démarée début février, s'en est suivi la partie concernant les états de l'art (EA sur la Figure \ref{fig:Planning}) 
+  qui devait être réalisée entre mi-février et mi-mars en parallèle du Design Thinking qui nous a permis de cadrer et définir le projet par 
+  rapport aux besoins de l'application et les tâches à accomplir. La phase de preuve de concept qui a suivi a duré jusqu'à mi-mai. 
   Une fois ces étapes réalisées nous avons pu passer à la phase projet afin de réunir toutes les preuves de concept et concevoir l'application 
   de démonstration nécessaire à la journée des stagiaires (JDS) du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
   les stagiaires présentent leurs projets lors d'une démonstration auprès des directeurs généraux et directeurs commerciaux de l'entreprise.
 
   \begin{figure}[hbt]  
     \includegraphics[width=\textwidth]{Planning.png}    
-    \caption{Planning prévisionnel du projet FYW}
+    \caption{Planning prévisionnel du projet FYW.}
     \label{fig:Planning}
   \end{figure}  
   
-  J'ai réalisé ce projet dans une équipe de 11 stagiaires, tous en stage de fin d'études. Étant donné les multiples parties concernant le projet, à savoir la détection d'objets, la localisation de
-  l'utilisateur et la gestion des interactions vocales, nous avons dû nous séparer en 3 groupes afin de réaliser les états de l'art
-  et les preuves de concept. J'ai personnellement travaillé sur la partie s'intéressant à la localisation et le guidage de l'utilisateur
-  dans son environnement. 
+  J'ai réalisé ce projet dans une équipe de 11 stagiaires, tous en stage de fin d'études. Étant donné les multiples parties concernant le projet, 
+  à savoir la détection d'objets, la localisation de l'utilisateur et la gestion des interactions vocales, nous avons dû nous séparer en 3 
+  groupes afin de réaliser les états de l'art et les preuves de concept. J'ai personnellement travaillé sur la partie s'intéressant à la 
+  localisation et le guidage de l'utilisateur dans son environnement. 
   \pagebreak
  
   \section{État de l'art (8 à 10 p)}  
@@ -235,16 +235,53 @@
   \subsection{Recherches bibliographiques}
   
   Dans cette section je présente les recherches bibliographiques que j'ai pu éffectuer avec mon groupe lors de la phase d'état de l'art.
-  8 publications ont été retenues, nous les avons confrontées et comparées afin de n'en sélectionner qu'une sur laquelle nous allions nous concentrer
-  lors de la phase de preuve de concept. 
+  8 publications ont été retenues, nous les avons confrontées et comparées afin de n'en sélectionner qu'une sur laquelle nous allions nous 
+  concentrer lors de la phase de preuve de concept. 
 
   \subsubsection{Wearable Travel Aid for Environment Perception and Navigation of
   Visually Impaired People}
 
-  Début de rédaction
+  L'appareil consiste en une caméra grand public rouge, vert, bleu avec de la profondeur (RGB-D pour red, green, blue, depth)
+  et une unité de mesure inertielle (IMU pour Inertial Measurement Unit), c'est un capteur qui consiste généralement en des gyroscopes 
+  pour mesurer des vitesses angulaires et des accéléromètres pour mesurer la force. Ces appareils sont montés sur une paire de lunettes
+  et reliés à un téléphone. L'appareil proposé dans cette solution se sert de la continuité de la hauteur du sol entre les images adjacentes
+  pour segmenter le sol avec précision et rapidité pour ensuite chercher la direction du mouvement en fonction du sol.
+  Un réseau de neurones à convolution (CNN pour Convolutional Neural Network) léger utilisé pour la reconnaissance d'objets est 
+  déployé sur le téléphone pour améliorer la capacité de perception des personnes malvoyantes (VIP pour Visually Impaired Person) aidées 
+  par le dispositif et ainsi améliorer le système global. Ce petit CNN permet de récupérer des informations concernant les endroits 
+  aux alentours et l'orientation des objets environnants. Les interactions personne-machine se font par un module audio introduisant un bip 
+  pour alerter l'utilisateur des obstacles présents sur son chemin, de la reconnaissance vocale afin de réagir aux commandes vocales 
+  de l'utilisateur et pour exprimer à l'oral les informations sur l'environnement. Le schéma de fonctionnement du système est présenté dans 
+  la Figure \ref{fig:PipelineP1}.
 
-  \paragraph{Method}  
-  \subparagraph{Test result}
+  \begin{figure}[hbt]  
+    \includegraphics[width=\textwidth]{PipelineP1.png}    
+    \caption{Schéma de fonctionnement du système proposé.}
+    \label{fig:PipelineP1}
+  \end{figure} 
+
+  Le système de navigation est composé d'un module de localisation intérieur (un algorithme VSLAM (Visual Simultaneous 
+  Localization and Mapping) est utilisé), d'un module de localisation extérieur (des outils tels qu'un GPS, un IMU et un filtre de Kalman 
+  sont utilisés), d'un module de prévision de chemin qui est décrit dans des publications précédant celle-ci, d'un module d'évitement 
+  d'obstacles (segmentation du sol par la méthode Otsu et l'algorithme RANSAC (Random Sample Consensus)). Une illustration du système de
+  navigation est présentée dans la Figure \ref{fig:NavigationP1}.
+
+  \begin{figure}[hbt]  
+    \includegraphics[width=\textwidth]{NavigationP1.png}    
+    \caption{Schéma presentant les différents points de vu du système de navigation.}
+    \label{fig:NavigationP1}
+  \end{figure} 
+
+  Le système de reconnaissance d'objets est basé sur un CNN 2D (PeelNet avec l'ensemble de données "MS COCO" contenant des images de dimensions
+  640 x 640). Son schéma de fonctionnement est présenté dans la figure \ref{fig:ReconnaissanceP1}.
+
+  \begin{figure}[hbt]  
+    \includegraphics[width=\textwidth]{RecognitionP1.png}    
+    \caption{Schéma présentant le fonctionnement du système de reconnaissance d'objets.}
+    \label{fig:ReconnaissanceP1}
+  \end{figure} 
+
+  Cet article très complêt explique l'ensemble de sa solution et pourrait être implémenté dans le cadre de ce stage. 
   
   \pagebreak
 
