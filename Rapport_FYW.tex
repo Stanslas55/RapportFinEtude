@@ -220,7 +220,7 @@
   \section{État de l'art (8 à 10 p)}  
   \subsection{Recherches bibliographiques}
   
-  Dans cette section je présente les recherches bibliographiques que j'ai pu éffectuer avec mon groupe lors de la phase d'état de l'art.
+  Dans cette section je présente les recherches bibliographiques que j'ai pu effectuer avec mon groupe lors de la phase d'état de l'art.
   8 publications ont été retenues, nous les avons confrontées et comparées afin de n'en sélectionner qu'une sur laquelle nous allions nous 
   concentrer lors de la phase de preuve de concept. 
 
@@ -254,7 +254,7 @@
 
   \begin{figure}[hbt]  
     \includegraphics[width=\textwidth]{NavigationP1.png}    
-    \caption{Schéma presentant les différents points de vu du système de navigation.}
+    \caption{Schéma présentant les différents points de vue du système de navigation.}
     \label{fig:NavigationP1}
   \end{figure} 
 
@@ -267,11 +267,11 @@
     \label{fig:ReconnaissanceP1}
   \end{figure} 
 
-  Cet article très complêt explique l'ensemble de sa solution et pourrait être implémenté dans le cadre de ce stage, cependant aucun code
-  source sur lequel nous pourrions nous baser n'est fournis alors son implémentation prendrait un temps considérable. Aussi, les auteurs 
+  Cet article très complet explique l'ensemble de sa solution et pourrait être implémenté dans le cadre de ce stage, cependant aucun code
+  source sur lequel nous pourrions nous baser n'est fourni alors son implémentation prendrait un temps considérable. Aussi, les auteurs 
   utilisent une caméra RGB-D alors il faudrait soit aussi utiliser ce type de caméra soit adapter notre module de détection d'objets à 
   leur travail.
-  Leur méthode de localisation intérieur utilisant VSLAM nécéssite de créer une carte de l'environnement avant l'utilisation du module, cependant
+  Leur méthode de localisation intérieure utilisant VSLAM nécessite de créer une carte de l'environnement avant l'utilisation du module, cependant
   les contraintes imposées par nos superviseurs ne nous permettent pas de procéder de la sorte alors il faudrait trouver un moyen de créer 
   cette carte intérieur en temps réel.
   
@@ -279,16 +279,16 @@
 
   \subsubsection{CDSFusion: Dense Semantic SLAM for Indoor Environment Using CPU
   Computing}
-  /!\ Relire pour completer les acronymes et explications manquantes.
+  /!\ Relire pour compléter les acronymes et explications manquantes.
 
-  La solution CDSFusion se sert d'images RGB comme l'article précédent ainsi qu'un capteur IMU comme paramètres d'entrée et est composé de 
+  La solution CDSFusion se sert d'images RGB comme l'article précédent ainsi qu'un capteur IMU comme paramètres d'entrée et est composée de 
   3 modules imagés dans la Figure \ref{fig:PipelineP2}:
 
   \paragraph{Le module VIO}
   Le module d'odométrie visuelle-innertielle (VIO pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
   afin de proposer une trajectoire. Ce module VIO est basé sur VINS-Mono. Les features FAST ont été adaptées pour accélérer le VIO à 
   la place des feature Shi-Thomas corner et la profondeur a été introduite afin d'obtenir une échelle plus précise. Les résultats 
-  expérimentaux montrent que les features FAST augmente la rapidité du système d'une manière plus conséquente que les features Shi-Tomas 
+  expérimentaux montrent que les features FAST augmentent la rapidité du système d'une manière plus conséquente que les features Shi-Tomas 
   et ORB avec la même précision et robustesse. Ce module est composé de 3 parties:
 
   \underline{Visual-Inertial Frontend: }
@@ -297,29 +297,29 @@
   en utilisant l'algorithme KLT optical flow.
 
   % TODO: Heu, c'est quoi le problème des fenêtres glissantes ? Se renseigner.
-  \underline{Back-End:} est utilsié pour fusionner les mesures traitées afin d'obtenir l'estimation de la position. Une optimisation non-linéaire
+  \underline{Back-End:} est utilisé pour fusionner les mesures traitées afin d'obtenir l'estimation de la position. Une optimisation non linéaire
   est utilisée pour régler le problème des fenêtres glissantes en utilisant le solveur Ceres
 
   \underline{Le module de détection de boucle: } est utilisé pour relocaliser et optimiser le calcul de la position en fonction de
   la boucle détectée. En effet, une boucle se produit lorsque l'on a réalisé une boucle dans le parcours d'un chemin, il devient alors inutile
   de recalculer la position tant que l'utilisateur se situe dans cette boucle, on peut alors facilement optimiser le calcul de la position en se 
-  basant sur des calculs précédemment éffectués. Cela se base sur la bibliothèque DBoW2 qui est à l'état de l'art de la reconnaissance d'endroits 
+  basant sur des calculs précédemment effectués. Cela se base sur la bibliothèque DBoW2 qui est à l'état de l'art de la reconnaissance d'endroits 
   par sac de mots (bag of words approach). De même, lorsqu'une boucle est détectée, une optimisation est possible pour le calcul de la position 
   globale. Cette optimisation est similaire à la méthode VINS-Mono.
 
   \paragraph{Le module de segmentation sémantique}
-  La segmentation sémantique resulte d'images RGB en entrée qui sont acquises en temps réel en utilisant le module de segmentation PSPNet.
+  La segmentation sémantique résulte d'images RGB en entrée qui sont acquises en temps réel en utilisant le module de segmentation PSPNet.
   L'implémentation originale de PSPNet est faite avec PyTorch.
-  Le module de segmentation sémantique traite chaque image RGB and retourne des vecteurs indiquant la probabilité d'appartenance à une classe
+  Le module de segmentation sémantique traite chaque image RGB et retourne des vecteurs indiquant la probabilité d'appartenance à une classe
   pour chaque pixel. Ils classifient et colorent chaque pixel en fonction de la plus haute probabilité d'appartenance à une classe. 
-  L'image segmentée finale est composée des pixels colorés et est transmis au module de reconstruction 3D.
+  L'image segmentée finale est composée des pixels colorés et est transmise au module de reconstruction 3D.
 
   \paragraph{Le module de reconstruction 3D}
 
-  Le nuage sémantique local est géneré en utilisant une image sémantique (générée par la module précédant) et une carte de profondeur. 
-  Ce nuage local servira à produire un nuage global une fois qu'il sera combiné avec les estimation de position de la caméra depuis le module VIO.
+  Le nuage sémantique local est généré en utilisant une image sémantique (générée par le module précédent) et une carte de profondeur. 
+  Ce nuage local servira à produire un nuage global une fois qu'il sera combiné avec les estimations de position de la caméra depuis le module VIO.
   Pour construire une carte 3D globale qui soit précise, un modèle basé sur des Voxels est utilisé pour filtrer le bruit et extraire un mesh global.
-  A chaque image importante (Keyframe), la carte de profondeur courante est transformée en nuage de points 3D, ensuite les options Bovblox et FAST
+  À chaque image importante (Keyframe), la carte de profondeur courante est transformée en nuage de points 3D, ensuite les options Bovblox et FAST
   sont adaptées, le nuage local de points 3D est transformé en mesh local et ensuite ce mesh local est intégré dans le mesh global. L'ensemble de 
   cette procédure est réalisée en temps réel sur CPU.
 
