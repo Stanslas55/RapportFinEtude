@@ -278,30 +278,32 @@
   \pagebreak
 
   \subsubsection{CDSFusion: Dense Semantic SLAM for Indoor Environment Using CPU
-  Computing}
-  /!\ Relire pour compléter les acronymes et explications manquantes.
+  Computing}  
 
   La solution CDSFusion se sert d'images RGB comme l'article précédent ainsi qu'un capteur IMU comme paramètres d'entrée et est composée de 
   3 modules imagés dans la Figure \ref{fig:PipelineP2}:
 
   \paragraph{Le module VIO}
   Le module d'odométrie visuelle-innertielle (VIO pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
-  afin de proposer une trajectoire. Ce module VIO est basé sur VINS-Mono. Les features FAST ont été adaptées pour accélérer le VIO à 
+  afin de proposer une trajectoire. Ce module VIO est basé sur VINS-Mono. VINS-Mono est un framework SLAM en temps réel pour les 
+  systèmes visuo-inertiels monoculaires. Il utilise une méthode de fenêtre glissante basée sur des optimisations pour fournir une odométrie 
+  visuelle-inertielle de haute précision.
+  Les features FAST (Features from accelerated segment test) ont été adaptées pour accélérer le VIO à 
   la place des feature Shi-Thomas corner et la profondeur a été introduite afin d'obtenir une échelle plus précise. Les résultats 
   expérimentaux montrent que les features FAST augmentent la rapidité du système d'une manière plus conséquente que les features Shi-Tomas 
   et ORB avec la même précision et robustesse. Ce module est composé de 3 parties:
 
   \underline{Visual-Inertial Frontend: }
-  Cette partie prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur IMU
-  sont préintégrées entre deux images consécutives, le frontend de vision détecte les FAST corners et les traque entre les images consécutives
-  en utilisant l'algorithme KLT optical flow.
+  prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur IMU
+  sont préintégrées entre deux images consécutives, le frontend de vision détecte les FAST
+  et les traque entre les images consécutives en utilisant l'algorithme KLT optical flow.
 
-  % TODO: Heu, c'est quoi le problème des fenêtres glissantes ? Se renseigner.
   \underline{Back-End:} est utilisé pour fusionner les mesures traitées afin d'obtenir l'estimation de la position. Une optimisation non linéaire
-  est utilisée pour régler le problème des fenêtres glissantes en utilisant le solveur Ceres
+  est utilisée pour relocaliser et optimiser le calcul de la position en fonction de la boucle détectée, en utilisant le solveur Ceres. La 
+  notion de boucle correspond au fait de retomber à un endroit déjà vu par l'algorithme. Ce cas est fréquent en milieu intérieur.
 
-  \underline{Le module de détection de boucle: } est utilisé pour relocaliser et optimiser le calcul de la position en fonction de
-  la boucle détectée. En effet, une boucle se produit lorsque l'on a réalisé une boucle dans le parcours d'un chemin, il devient alors inutile
+  \underline{Le module de détection de boucle: } permet de relocaliser et optimiser le calcul de la position en fonction de
+  la boucle détectée. En effet, une boucle est détectée lorsque l'on a réalisé une boucle dans le parcours d'un chemin, il devient alors inutile
   de recalculer la position tant que l'utilisateur se situe dans cette boucle, on peut alors facilement optimiser le calcul de la position en se 
   basant sur des calculs précédemment effectués. Cela se base sur la bibliothèque DBoW2 qui est à l'état de l'art de la reconnaissance d'endroits 
   par sac de mots (bag of words approach). De même, lorsqu'une boucle est détectée, une optimisation est possible pour le calcul de la position 
@@ -318,20 +320,18 @@
 
   Le nuage sémantique local est généré en utilisant une image sémantique (générée par le module précédent) et une carte de profondeur. 
   Ce nuage local servira à produire un nuage global une fois qu'il sera combiné avec les estimations de position de la caméra depuis le module VIO.
-  Pour construire une carte 3D globale qui soit précise, un modèle basé sur des Voxels est utilisé pour filtrer le bruit et extraire un mesh global.
-  À chaque image importante (Keyframe), la carte de profondeur courante est transformée en nuage de points 3D, ensuite les options Bovblox et FAST
+  Pour construire une carte 3D globale qui soit précise, un modèle basé sur des voxels est utilisé pour filtrer le bruit et extraire un mesh global.
+  À chaque image importante (Keyframe), la carte de profondeur courante est transformée en nuage de points 3D, ensuite les options Voxblox et FAST
   sont adaptées, le nuage local de points 3D est transformé en mesh local et ensuite ce mesh local est intégré dans le mesh global. L'ensemble de 
-  cette procédure est réalisée en temps réel sur CPU.
+  cette procédure est réalisée en temps réel sur CPU. Voxblox est une bibliothèque de cartographie volumétrique basée principalement 
+  sur les TSDF (Truncated Signed Distance Fields).
 
   \begin{figure}[hbt]  
     \includegraphics[width=\textwidth]{PipelineP2.png}    
     \caption{Schéma présentant le fonctionnement du système proposé.}
     \label{fig:PipelineP2}
   \end{figure} 
-
   
-
-
   \pagebreak
  
   \subsubsection{Towards Real-time Semantic RGB-D SLAM in Dynamic Environments}
