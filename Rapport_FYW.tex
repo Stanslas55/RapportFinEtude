@@ -218,10 +218,11 @@
  
   \section{État de l'art (8 à 10 p)}  
   \subsection{Recherches bibliographiques}
-  
+  % TODO: Modifier le nombre d'articles si j'en résume moins. Pour le moment j'ai écrit "8".
   Dans cette section je présente les recherches bibliographiques que j'ai pu effectuer avec mon groupe lors de la phase d'état de l'art.
-  8 publications ont été retenues, nous les avons confrontées et comparées afin de n'en sélectionner qu'une sur laquelle nous allions nous 
-  concentrer lors de la phase de preuve de concept. 
+  Cet état de l'art concerne la partie de localisation et de guidage de l'utilisateur. 8 publications ont été retenues, nous les avons 
+  confrontées et comparées afin de n'en sélectionner qu'une sur laquelle nous allions nous concentrer lors de la phase de preuve de 
+  concept. 
 
   \subsubsection{Wearable Travel Aid for Environment Perception and Navigation of
   Visually Impaired People}
@@ -229,36 +230,12 @@
   L'appareil consiste en une caméra grand public rouge, vert, bleu avec de la profondeur (RGB-D pour red, green, blue, depth)
   et une unité de mesure inertielle (IMU pour Inertial Measurement Unit), c'est un capteur qui consiste généralement en des gyroscopes 
   pour mesurer des vitesses angulaires et des accéléromètres pour mesurer la force. Ces appareils sont montés sur une paire de lunettes
-  et reliés à un téléphone. L'appareil proposé dans cette solution se sert de la continuité de la hauteur du sol entre les images adjacentes
-  pour segmenter le sol avec précision et rapidité pour ensuite chercher la direction du mouvement en fonction du sol.
-  Un réseau de neurones à convolution (CNN pour Convolutional Neural Network) léger utilisé pour la reconnaissance d'objets est 
-  déployé sur le téléphone pour améliorer la capacité de perception des personnes malvoyantes (VIP pour Visually Impaired Person) aidées 
-  par le dispositif et améliore ainsi le système global. Ce petit CNN permet de récupérer des informations concernant les endroits 
-  aux alentours et l'orientation des objets environnants. Les interactions personne-machine se font par un module audio introduisant un bip 
-  pour alerter l'utilisateur des obstacles présents sur son chemin, de la reconnaissance vocale afin de réagir aux commandes vocales 
-  de l'utilisateur et pour exprimer à l'oral les informations sur l'environnement. Le schéma de fonctionnement du système est présenté dans 
-  la Figure \ref{fig:PipelineP1}.
-
-  \begin{figure}[hbt]  
-    \includegraphics[width=\textwidth]{PipelineP1.png}    
-    \caption{Schéma de fonctionnement du système proposé.}
-    \label{fig:PipelineP1}
-  \end{figure} 
-
-  Le système de navigation est composé d'un module de localisation intérieur (un algorithme VSLAM (Visual Simultaneous 
-  Localization and Mapping) est utilisé), d'un module de localisation extérieur (des outils tels qu'un GPS, un IMU et un filtre de Kalman 
-  sont utilisés), d'un module de prévision de chemin qui est décrit dans des publications précédant celle-ci, d'un module d'évitement 
-  d'obstacles (segmentation du sol par la méthode Otsu et l'algorithme RANSAC (Random Sample Consensus)). Une illustration du système de
-  navigation est présentée dans la Figure \ref{fig:NavigationP1}.
-
-  \begin{figure}[hbt]  
-    \includegraphics[width=\textwidth]{NavigationP1.png}    
-    \caption{Schéma présentant les différents points de vue du système de navigation.}
-    \label{fig:NavigationP1}
-  \end{figure} 
-
-  Le système de reconnaissance d'objets est basé sur un CNN 2D (PeelNet avec l'ensemble de données "MS COCO" contenant des images de dimensions
-  640 x 640). Son schéma de fonctionnement est présenté dans la figure \ref{fig:ReconnaissanceP1}.
+  et reliés à un téléphone. L'appareil proposé dans cette solution se sert de la continuité de la hauteur du sol entre les images 
+  adjacentes pour segmenter le sol avec précision et rapidité pour ensuite chercher la direction du mouvement en fonction du sol.
+  Un réseau de neurones à convolution (CNN pour Convolutional Neural Network) léger est utilisé pour la reconnaissance d'objets 
+  (PeelNet avec l'ensemble de données "MS COCO" contenant des images de dimensions 640 x 640). Son schéma de fonctionnement est présenté 
+  dans la figure \ref{fig:ReconnaissanceP1}. Il permet de récupérer des informations concernant les endroits aux alentours et l'orientation 
+  des objets environnants. Le schéma de fonctionnement du système est présenté dans la Figure \ref{fig:PipelineP1}.
 
   \begin{figure}[hbt]  
     \includegraphics[width=\textwidth]{RecognitionP1.png}    
@@ -266,13 +243,14 @@
     \label{fig:ReconnaissanceP1}
   \end{figure} 
 
-  Cet article très complet explique l'ensemble de sa solution et pourrait être implémenté dans le cadre de ce stage, cependant aucun code
-  source sur lequel nous pourrions nous baser n'est fourni alors son implémentation prendrait un temps considérable. Aussi, les auteurs 
-  utilisent une caméra RGB-D alors il faudrait soit aussi utiliser ce type de caméra soit adapter notre module de détection d'objets à 
-  leur travail.
-  Leur méthode de localisation intérieure utilisant VSLAM nécessite de créer une carte de l'environnement avant l'utilisation du module, cependant
-  les contraintes imposées par nos superviseurs ne nous permettent pas de procéder de la sorte alors il faudrait trouver un moyen de créer 
-  cette carte intérieur en temps réel.
+  \begin{figure}[hbt]  
+    \includegraphics[width=\textwidth]{PipelineP1.png}    
+    \caption{Schéma de fonctionnement du système proposé.}
+    \label{fig:PipelineP1}
+  \end{figure} 
+
+  Le système de navigation contient un module de localisation intérieur qui va nous intéresser: un algorithme VSLAM (Visual Simultaneous 
+  Localization and Mapping) est utilisé.   
   
   \pagebreak
 
@@ -288,9 +266,9 @@
   systèmes visuo-inertiels monoculaires. Il utilise une méthode de fenêtre glissante basée sur des optimisations pour fournir une odométrie 
   visuelle-inertielle de haute précision.
   Les features FAST (Features from accelerated segment test) ont été adaptées pour accélérer le VIO à 
-  la place des feature Shi-Thomas (une manière de détecter les coins sur une image) et la profondeur a été introduite afin d'obtenir une échelle plus précise. Les résultats 
-  expérimentaux montrent que les features FAST augmentent la rapidité du système d'une manière plus conséquente que les features Shi-Tomas 
-  et ORB avec la même précision et robustesse. Ce module est composé de 3 parties:
+  la place des feature Shi-Thomas (une manière de détecter les coins sur une image) et la profondeur a été introduite afin d'obtenir une échelle 
+  plus précise. Les résultats expérimentaux montrent que les features FAST augmentent la rapidité du système d'une manière plus conséquente 
+  que les features Shi-Tomas et ORB avec la même précision et robustesse. Ce module est composé de 3 parties:
 
   \underline{Visual-Inertial Frontend: }
   prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur IMU
@@ -298,8 +276,7 @@
   et les traque entre les images consécutives en utilisant l'algorithme KLT optical flow.
 
   \underline{Back-End:} est utilisé pour fusionner les mesures traitées afin d'obtenir l'estimation de la position. Une optimisation non linéaire
-  est utilisée pour relocaliser et optimiser le calcul de la position en fonction de la boucle détectée, en utilisant le solveur Ceres. La 
-  notion de boucle correspond au fait de retomber à un endroit déjà vu par l'algorithme. Ce cas est fréquent en milieu intérieur.
+  est utilisée pour relocaliser et optimiser le calcul de la position en fonction de la boucle détectée, en utilisant le solveur Ceres. 
 
   \underline{Le module de détection de boucle: } permet de relocaliser et optimiser le calcul de la position en fonction de
   la boucle détectée. En effet, une boucle est détectée lorsque l'on a réalisé une boucle dans le parcours d'un chemin, il devient alors inutile
@@ -309,8 +286,7 @@
   globale. Cette optimisation est similaire à la méthode VINS-Mono.
 
   \paragraph{Le module de segmentation sémantique}
-  La segmentation sémantique résulte d'images RGB en entrée qui sont acquises en temps réel en utilisant le module de segmentation PSPNet.
-  L'implémentation originale de PSPNet est faite avec PyTorch.
+  La segmentation sémantique résulte d'images RGB en entrée qui sont acquises en temps réel en utilisant le module de segmentation PSPNet. 
   Le module de segmentation sémantique traite chaque image RGB et retourne des vecteurs indiquant la probabilité d'appartenance à une classe
   pour chaque pixel. Ils classifient et colorent chaque pixel en fonction de la plus haute probabilité d'appartenance à une classe. 
   L'image segmentée finale est composée des pixels colorés et est transmise au module de reconstruction 3D.
@@ -332,7 +308,7 @@
   \end{figure} 
   
   \pagebreak  
-   
+
   \subsubsection{Towards Real-time Semantic RGB-D SLAM in Dynamic Environments} 
 
   \pagebreak
