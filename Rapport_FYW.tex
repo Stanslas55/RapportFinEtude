@@ -250,7 +250,10 @@
   \end{figure} 
 
   Le système de navigation contient un module de localisation intérieur qui va nous intéresser: un algorithme VSLAM (Visual Simultaneous 
-  Localization and Mapping) est utilisé.   
+  Localization and Mapping) est utilisé. SLAM est un problème de computer vision visant à traquer les mouvements d'un module en se basant
+  sur ce qu'il voit. Il faut traiter les objets dynamiques qui entrent et sortent du champ de vision pour ne pas les prendre en computer
+  dans l'estimation de la position du module. L'estimation se fait en trouvant des points clés sur les images successives.  Visual SLAM
+  se sert des informations récuperées pour trianguler la position 3D du module. 
   
   \pagebreak
 
@@ -310,6 +313,19 @@
   \pagebreak  
 
   \subsubsection{Towards Real-time Semantic RGB-D SLAM in Dynamic Environments} 
+
+  Cet article présente une méthode de SLAM s'inspirant des features ORB (Oriented FAST and Rotated Brief).
+  Le module de segmentation sémantique est une adaptation de SegNet, un réseau de neurones léger qui permet un traitement en temps réel.
+  La segmentation se concentre sur des objets dynamiques dont les caractéristiques ne seront pas utilisées dans la création de 
+  la carte locale. La segmentation est faite uniquement sur les images clés les plus récentes, accélérant grandement le processus.
+  La segmentation peut être très rapide, mais reconnaît principalement les objets qu'elle connaît déjà et est moins efficace dans des 
+  milieux inconnus avec des objets dynamiques nouveaux. Ce module essaye de résoudre ce problème.
+  Pour chaque nouvelle image l'idée est d'utiliser l'algorithme du K-means pour segmenter l'image de profondeur en N clusters.
+  Chaque cluster est considéré comme faisant partie du même objet. Pour chaque cluster, une erreur de reprojection est calculée. Si une 
+  des erreurs moyennes est relativement supérieure aux autres, le cluster est considéré comme un objet dynamique et les points caractéristiques
+  de l'objet seront supprimés du traitement. Cette manière de traiter les images permet de réduire le taux de faux positifs. 
+  Les comparaisons sont effectuées d'une image clé à une autre puisqu'elles se ressemblent beaucoup, mais aussi entre la première estimation
+  et les cartes locales obtenues.
 
   \pagebreak
   % TODO: Prendre l'explication d'ORB SLAM2 et insérer l'ajout d'ORB SLAM 3.
