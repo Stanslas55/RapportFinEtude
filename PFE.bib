@@ -1,0 +1,75 @@
+
+@article{baiWearableTravelAid2019,
+  title = {Wearable {{Travel Aid}} for {{Environment Perception}} and {{Navigation}} of {{Visually Impaired People}}},
+  author = {Bai, Jinqiang and Liu, Zhaoxiang and Lin, Yimin and Li, Ye and Lian, Shiguo and Liu, Dijun},
+  year = {2019},
+  month = jun,
+  journal = {Electronics},
+  volume = {8},
+  number = {6},
+  pages = {697},
+  publisher = {{Multidisciplinary Digital Publishing Institute}},
+  issn = {2079-9292},
+  doi = {10.3390/electronics8060697},
+  abstract = {Assistive devices for visually impaired people (VIP) which support daily traveling and improve social inclusion are developing fast. Most of them try to solve the problem of navigation or obstacle avoidance, and other works focus on helping VIP to recognize their surrounding objects. However, very few of them couple both capabilities (i.e., navigation and recognition). Aiming at the above needs, this paper presents a wearable assistive device that allows VIP to (i) navigate safely and quickly in unfamiliar environment, and (ii) to recognize the objects in both indoor and outdoor environments. The device consists of a consumer Red, Green, Blue and Depth (RGB-D) camera and an Inertial Measurement Unit (IMU), which are mounted on a pair of eyeglasses, and a smartphone. The device leverages the ground height continuity among adjacent image frames to segment the ground accurately and rapidly, and then search the moving direction according to the ground. A lightweight Convolutional Neural Network (CNN)-based object recognition system is developed and deployed on the smartphone to increase the perception ability of VIP and promote the navigation system. It can provide the semantic information of surroundings, such as the categories, locations, and orientations of objects. Human\textendash machine interaction is performed through audio module (a beeping sound for obstacle alert, speech recognition for understanding the user commands, and speech synthesis for expressing semantic information of surroundings). We evaluated the performance of the proposed system through many experiments conducted in both indoor and outdoor scenarios, demonstrating the efficiency and safety of the proposed assistive system.},
+  copyright = {http://creativecommons.org/licenses/by/3.0/},
+  langid = {english},
+  keywords = {blind navigation,ground segmentation,object recognition,visually impaired people,wearable assistive device},
+  file = {C\:\\Users\\nicol\\Zotero\\storage\\D5Z42TJJ\\Bai et al. - 2019 - Wearable Travel Aid for Environment Perception and.pdf}
+}
+
+@article{camposORBSLAM3AccurateOpenSource2021,
+  title = {{{ORB-SLAM3}}: {{An Accurate Open-Source Library}} for {{Visual}}, {{Visual}}\textendash{{Inertial}}, and {{Multimap SLAM}}},
+  shorttitle = {{{ORB-SLAM3}}},
+  author = {Campos, Carlos and Elvira, Richard and Rodr{\'i}guez, Juan J. G{\'o}mez and M. Montiel, Jos{\'e} M. and D. Tard{\'o}s, Juan},
+  year = {2021},
+  month = dec,
+  journal = {IEEE Transactions on Robotics},
+  volume = {37},
+  number = {6},
+  pages = {1874--1890},
+  issn = {1941-0468},
+  doi = {10.1109/TRO.2021.3075644},
+  abstract = {This article presents ORB-SLAM3, the first system able to perform visual, visual-inertial and multimap SLAM with monocular, stereo and RGB-D cameras, using pin-hole and fisheye lens models. The first main novelty is a tightly integrated visual-inertial SLAM system that fully relies on maximum a posteriori (MAP) estimation, even during IMU initialization, resulting in real-time robust operation in small and large, indoor and outdoor environments, being two to ten times more accurate than previous approaches. The second main novelty is a multiple map system relying on a new place recognition method with improved recall that lets ORB-SLAM3 survive to long periods of poor visual information: when it gets lost, it starts a new map that will be seamlessly merged with previous maps when revisiting them. Compared with visual odometry systems that only use information from the last few seconds, ORB-SLAM3 is the first system able to reuse in all the algorithm stages all previous information from high parallax co-visible keyframes, even if they are widely separated in time or come from previous mapping sessions, boosting accuracy. Our experiments show that, in all sensor configurations, ORB-SLAM3 is as robust as the best systems available in the literature and significantly more accurate. Notably, our stereo-inertial SLAM achieves an average accuracy of 3.5 cm in the EuRoC drone and 9 mm under quick hand-held motions in the room of TUM-VI dataset, representative of AR/VR scenarios. For the benefit of the community we make public the source code.},
+  keywords = {Computer vision,Feature extraction,inertial navigation,Inertial navigation,Optimization,Robustness,simult- aneous localization and mapping,Simultaneous localization and mapping},
+  file = {C\:\\Users\\nicol\\Zotero\\storage\\JD4Z49JH\\Campos et al. - 2021 - ORB-SLAM3 An Accurate Open-Source Library for Vis.pdf}
+}
+
+@inproceedings{jiRealtimeSemanticRGBD2021,
+  title = {Towards {{Real-time Semantic RGB-D SLAM}} in {{Dynamic Environments}}},
+  booktitle = {2021 {{IEEE International Conference}} on {{Robotics}} and {{Automation}} ({{ICRA}})},
+  author = {Ji, Tete and Wang, Chen and Xie, Lihua},
+  year = {2021},
+  month = may,
+  eprint = {2104.01316},
+  eprinttype = {arxiv},
+  primaryclass = {cs},
+  pages = {11175--11181},
+  doi = {10.1109/ICRA48506.2021.9561743},
+  abstract = {Most of the existing visual SLAM methods heavily rely on a static world assumption and easily fail in dynamic environments. Some recent works eliminate the influence of dynamic objects by introducing deep learning-based semantic information to SLAM systems. However such methods suffer from high computational cost and cannot handle unknown objects. In this paper, we propose a real-time semantic RGB-D SLAM system for dynamic environments that is capable of detecting both known and unknown moving objects. To reduce the computational cost, we only perform semantic segmentation on keyframes to remove known dynamic objects, and maintain a static map for robust camera tracking. Furthermore, we propose an efficient geometry module to detect unknown moving objects by clustering the depth image into a few regions and identifying the dynamic regions via their reprojection errors. The proposed method is evaluated on public datasets and real-world conditions. To the best of our knowledge, it is one of the first semantic RGB-D SLAM systems that run in real-time on a low-power embedded platform and provide high localization accuracy in dynamic environments.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Robotics},
+  file = {C\:\\Users\\nicol\\Zotero\\storage\\HIE7JZ48\\Ji et al. - 2021 - Towards Real-time Semantic RGB-D SLAM in Dynamic E.pdf;C\:\\Users\\nicol\\Zotero\\storage\\CNPICKTZ\\2104.html}
+}
+
+@article{wangCDSFusionDenseSemantic2022,
+  title = {{{CDSFusion}}: {{Dense Semantic SLAM}} for {{Indoor Environment Using CPU Computing}}},
+  shorttitle = {{{CDSFusion}}},
+  author = {Wang, Sheng and Gou, Guohua and Sui, Haigang and Zhou, Yufeng and Zhang, Hao and Li, Jiajie},
+  year = {2022},
+  month = jan,
+  journal = {Remote Sensing},
+  volume = {14},
+  number = {4},
+  pages = {979},
+  publisher = {{Multidisciplinary Digital Publishing Institute}},
+  issn = {2072-4292},
+  doi = {10.3390/rs14040979},
+  abstract = {Unmanned Aerial Vehicles (UAVs) require the ability to robustly perceive surrounding scenes for autonomous navigation. The semantic reconstruction of the scene is a truly functional understanding of the environment. However, high-performance computing is generally not available on most UAVs, so a lightweight real-time semantic reconstruction method is necessary. Existing methods rely on GPU, and it is difficult to achieve real-time semantic reconstruction on CPU. To solve the problem, an indoor dense semantic Simultaneous Localization and Mapping (SLAM) method using CPU computing is proposed in this paper, named CDSFusion. The CDSFusion is the first system integrating RGBD-based Visual-Inertial Odometry (VIO), semantic segmentation and 3D reconstruction in real-time on a CPU. In our VIO method, the depth information is introduced to improve the accuracy of pose estimation, and FAST features are used for faster tracking. In our semantic reconstruction method, the PSPNet (Pyramid Scene Parsing Network) pre-trained model is optimized to provide the semantic information in real-time on the CPU, and the semantic point clouds are fused using Voxblox. The experimental results demonstrate that camera tracking is accelerated without loss of accuracy in our VIO, and a 3D semantic map is reconstructed in real-time, which is comparable to one generated by the GPU-dependent method.},
+  copyright = {http://creativecommons.org/licenses/by/3.0/},
+  langid = {english},
+  keywords = {3D semantic reconstruction,CPU computing,dense semantic SLAM,indoor environment,RGBD-based VIO},
+  file = {C\:\\Users\\nicol\\Zotero\\storage\\9M8SHI4V\\Wang et al. - 2022 - CDSFusion Dense Semantic SLAM for Indoor Environm.pdf;C\:\\Users\\nicol\\Zotero\\storage\\ASXPZYIM\\979.html}
+}
+
+

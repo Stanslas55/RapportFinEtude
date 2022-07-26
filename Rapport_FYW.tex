@@ -1,5 +1,3 @@
-% This is my first .tex document. It's used to learn LateX while writing my end of studies report.
-
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
@@ -24,9 +22,25 @@
     colorlinks,
     citecolor=blue,
     filecolor=red,
-    linkcolor=black,
-    urlcolor=green
+    linkcolor=blue,
+    urlcolor=blue
 }
+\usepackage[
+   backend=biber,
+   style=numeric,
+   sorting=nyt,
+   url=true,
+   doi=true,
+   isbn=false,
+]{biblatex}
+\usepackage{csquotes}
+
+\defbibenvironment{bibliography}
+  {\begin{enumerate}}
+  {\end{enumerate}}
+  {\item}
+
+\addbibresource{PFE.bib}
 
 % Defines graphics path.
 \graphicspath{ {./images/} }
@@ -223,12 +237,11 @@
   confrontées et comparées afin de n'en sélectionner qu'une sur laquelle nous allions nous concentrer lors de la phase de preuve de 
   concept. Je présente ici 4 des publications les plus pertinentes sur le sujet.
 
-  \subsubsection{Wearable Travel Aid for Environment Perception and Navigation of
-  Visually Impaired People}
+  \subsubsection{Wearable Travel Aid for Environment Perception and Navigation of Visually Impaired People}
 
   L'appareil consiste en une caméra grand public rouge, vert, bleu avec de la profondeur (RGB-D pour red, green, blue, depth)
   et une unité de mesure inertielle (IMU pour Inertial Measurement Unit), c'est un capteur qui consiste généralement en des gyroscopes 
-  pour mesurer des vitesses angulaires et des accéléromètres pour mesurer la force. Ces appareils sont montés sur une paire de lunettes
+  pour mesurer des vitesses angulaires et des accéléromètres pour mesurer la force \cite{baiWearableTravelAid2019}. Ces appareils sont montés sur une paire de lunettes
   et reliés à un téléphone. L'appareil proposé dans cette solution se sert de la continuité de la hauteur du sol entre les images 
   adjacentes pour segmenter le sol avec précision et rapidité pour ensuite chercher la direction du mouvement en fonction du sol.
   Un réseau de neurones à convolution (CNN pour Convolutional Neural Network) léger est utilisé pour la reconnaissance d'objets 
@@ -259,7 +272,7 @@
   \subsubsection{CDSFusion: Dense Semantic SLAM for Indoor Environment Using CPU
   Computing}  
 
-  La solution CDSFusion se sert d'images RGB comme l'article précédent ainsi qu'un capteur IMU comme paramètres d'entrée et est composée de 
+  La solution CDSFusion \cite{wangCDSFusionDenseSemantic2022} se sert d'images RGB comme l'article précédent ainsi qu'un capteur IMU comme paramètres d'entrée et est composée de 
   3 modules imagés dans la Figure \ref{fig:PipelineP2}:
 
   \paragraph{Le module VIO}
@@ -313,7 +326,7 @@
 
   \subsubsection{Towards Real-time Semantic RGB-D SLAM in Dynamic Environments} 
 
-  Cet article présente une méthode de SLAM s'inspirant des features ORB (Oriented FAST and Rotated Brief).
+  Cet article \cite{jiRealtimeSemanticRGBD2021} présente une méthode de SLAM s'inspirant des features ORB (Oriented FAST and Rotated Brief).
   Le module de segmentation sémantique est une adaptation de SegNet, un réseau de neurones léger qui permet un traitement en temps réel.
   La segmentation se concentre sur des objets dynamiques dont les caractéristiques ne seront pas utilisées dans la création de 
   la carte locale. La segmentation est faite uniquement sur les images clés les plus récentes, accélérant grandement le processus.
@@ -330,7 +343,7 @@
 
   \subsubsection{ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM}
 
-  ORB-SLAM3 est une amélioration d'ORB-SLAM2, présenté en Figure \ref{fig:ORBSLAM2}, qui consistait à travailler sur trois tâches simultanément : 
+  ORB-SLAM3 \cite{camposORBSLAM3AccurateOpenSource2021} est une amélioration d'ORB-SLAM2, présenté en Figure \ref{fig:ORBSLAM2}, qui consistait à travailler sur trois tâches simultanément : 
   le suivi, la cartographie locale et la fermeture de boucle. Dans sa partie de suivi, ORB-SLAM2 fait correspondre les caractéristiques image 
   par image et les compare avec une carte locale pour trouver l'emplacement exact de la caméra en temps réel. Il procède à un ajustement 
   du faisceau en fonction du mouvement afin de minimiser l'erreur de reprojection. Vient ensuite la partie cartographie locale 
@@ -445,9 +458,8 @@
 
   \pagebreak
   \section{Bibliographie}
-  Les sources extérieures sont bienvenues à condition d’être citées avec précision et mentionnées dans
-  une annexe bibliographique au rapport et d’être multiples et diversifiées.
-  Ces sources doivent être clairement renvoyées aux éléments numérotés de la bibliographie.
+
+  \printbibliography[heading=none]
 
   \pagebreak
   \section{Annexes}
