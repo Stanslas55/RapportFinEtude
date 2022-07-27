@@ -16,13 +16,40 @@
 % is the main reason that requires T1 font encoding.
 \usepackage[T1]{fontenc}
 
+\usepackage[acronym]{glossaries}
+
+\makenoidxglossaries
+
+
+\newacronym{esn}{ESN}{Entreprise de Services Numériques}
+\newacronym{fyw}{FYW}{Find Your Way}
+\newacronym{ea}{EA}{État de l'art}
+\newacronym{jds}{JDS}{Journée des stagiaires}
+\newacronym{rgbd}{RGB-D}{Red, Green, Blue and Depth}
+\newacronym{imu}{IMU}{Inertial Measurement Unit}
+\newacronym{slam}{SLAM}{Simultaneous Localization and Mapping}
+\newacronym{cnn}{CNN}{Convolutional Neural Network}
+\newacronym{vio}{VIO}{Visual-Inertial Odometry}
+\newacronym{fast}{FAST}{Features from accelerated segment test}
+\newacronym{orb}{ORB}{Oriented \acrshort{fast} and Rotated Brief}
+\newacronym{cpu}{CPU}{Central Processing Unit}
+\newacronym{gpu}{GPU}{Graphical Processing Unit}
+\newacronym{tsdf}{TSDF}{Truncated Signed Distance Fields}
+\newacronym{icp}{ICP}{Iterative Closest Point}
+
+
+
+
+
+
+
 % Used to manage hyperlinks and make a clickable table of contents.
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
     citecolor=blue,
     filecolor=red,
-    linkcolor=blue,
+    linkcolor=black,
     urlcolor=blue
 }
 \usepackage[
@@ -47,6 +74,8 @@
 
 % Defines a new command for the horizontal lines, change thickness here.
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+
+
 
 \begin{document}
 
@@ -133,7 +162,7 @@
   \pagebreak
 
   \selectlanguage{french} 
-  \setcounter{tocdepth}{5}
+  \setcounter{tocdepth}{3}
   \tableofcontents
 
   \pagebreak
@@ -166,10 +195,11 @@
     Enfin, je remercie les autres étudiants d’Aubay Innov' avec lesquels j'ai eu l'occasion d'échanger aussi bien humainement que techniquement.
 
   \pagebreak
+
   \section{Introduction et contexte}    
   
   Mon stage s'est déroulé dans une entreprise appelée Aubay, pour une durée de 6 mois (du 28 février 2022 au 31 août 2022). 
-  En détail, Aubay est une ESN (Entreprise de Services Numériques) qui a été fondée par Christian Aubert en 1998 et 
+  En détail, Aubay est une entreprise de services numériques (\acrshort{esn}) qui a été fondée par Christian Aubert en 1998 et 
   dont le siège social est situé au 13 rue Louis Pasteur à Boulogne-Billancourt. L'entreprise est spécialisée dans les domaines 
   liés à la finance, à l'assurance et à la banque et est également impliquée dans divers marchés, tels que les télécoms, 
   les services, les réseaux, l'énergie et les transports. Aubay accompagne la transformation et la modernisation des systèmes 
@@ -177,7 +207,7 @@
   référent de la transformation digitale. Son secteur d'activité est centré autour du conseil sur tout type de projet technologique.  
   C'est une ESN cotée en Bourse (SBF 250) et 46\% du capital est détenu par les managers. Les chiffres clés concernant Aubay 
   sont présentés dans la Figure \ref{fig:PA1} ci-après. En 2022, l'entreprise emploie 7306 travailleurs, dont 2728 en France. 
-  Selon son site internet, Aubay est implanté dans 7 pays européens, et a réalisé un chiffre d'affaires de 470,6 M€ en 2021. 
+  Selon son site internet, Aubay est implantée dans 7 pays européens, et a réalisée un chiffre d'affaires de 470,6 M€ en 2021. 
   D'ailleurs, ces dernières années, l'entreprise a connu une forte croissance de 10,4\% en 2021, qui coïncide avec une augmentation 
   constante des effectifs de l'entreprise, passant de 4600 employés en 2015 à plus de 7000 aujourd'hui.
  
@@ -185,7 +215,7 @@
     \includegraphics[width=\textwidth]{PresentationAubay1.png}    
     \caption{Chiffres clés pour Aubay en 2021.}
     \label{fig:PA1}
-  \end{figure}  
+  \end{figure}    
   
   J'ai eu le privilège d'effectuer mon stage au sein de l'unité "Aubay Innov'" qui est la division d’Aubay France dédiée 
   à la recherche et à l'innovation. Ses membres sont impliqués dans différents projets, chacun lié à la data science, l'analyse 
@@ -198,7 +228,7 @@
   innovantes disponibles dans les domaines de la recherche. Par ailleurs, l'unité "Aubay Innov'" est largement considérée comme 
   une source de recrutement pour l'entreprise, qui a souhaité cette année engager environ 800 nouveaux collaborateurs en France. 
   
-  C'est dans ce cadre que ma mission de fin d'études a débuté. Le projet "Find Your Way" (FYW), qui représente l'expérience que je 
+  C'est dans ce cadre que ma mission de fin d'études a débuté. Le projet "Find Your Way" (\acrshort{fyw}), qui représente l'expérience que je 
   vais détailler dans ce document, a été lancé en février 2022 et a pour objectif de créer une application embarquée sur des lunettes, 
   basée sur des algorithmes capables de reconnaître les éléments de l'environnement immédiat d'un utilisateur malvoyant pour le guider 
   vers des lieux ou l'avertir d'obstacles présents sur son chemin tels que des chaises ou une personne par exemple. Un objectif majeur 
@@ -211,16 +241,16 @@
   de cette contrainte afin de permettre une plus grande polyvalence pour ce genre d'outil.
   Le projet a été séparé en plusieurs parties délimitées par des dates clés qui sont présentées dans la Figure \ref{fig:Planning} 
   avec les livrables associés à chaque fin de phase.
-  La prise en main du projet a démarée début février, s'en est suivi la partie concernant les états de l'art (EA sur la Figure \ref{fig:Planning}) 
+  La prise en main du projet a démarée début février, s'en est suivi la partie concernant les états de l'art (\acrshort{ea} sur la Figure \ref{fig:Planning}) 
   qui devait être réalisée entre mi-février et mi-mars en parallèle du Design Thinking qui nous a permis de cadrer et définir le projet par 
   rapport aux besoins de l'application et les tâches à accomplir. La phase de preuve de concept qui a suivi a duré jusqu'à mi-mai. 
   Une fois ces étapes réalisées nous avons pu passer à la phase projet afin de réunir toutes les preuves de concept et concevoir l'application 
-  de démonstration nécessaire à la journée des stagiaires (JDS) du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
+  de démonstration nécessaire à la journée des stagiaires (\acrshort{jds}) du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
   les stagiaires présentent leurs projets lors d'une démonstration auprès des directeurs généraux et directeurs commerciaux de l'entreprise.
 
   \begin{figure}[hbt]  
     \includegraphics[width=\textwidth]{Planning.png}    
-    \caption{Planning prévisionnel du projet FYW.}
+    \caption{Planning prévisionnel du projet \acrshort{fyw}.}
     \label{fig:Planning}
   \end{figure}  
   
@@ -230,7 +260,7 @@
   localisation et le guidage de l'utilisateur dans son environnement. 
   \pagebreak
  
-  \section{État de l'art (8 à 10 p)}  
+  \section{État de l'art}  
   \subsection{Recherches bibliographiques}
   Dans cette section je présente les recherches bibliographiques que j'ai pu effectuer avec mon groupe lors de la phase d'état de l'art.
   Cet état de l'art concerne la partie de localisation et de guidage de l'utilisateur. Nous avons retenu 8 publications, nous les avons 
@@ -239,12 +269,12 @@
 
   \subsubsection{Wearable Travel Aid for Environment Perception and Navigation of Visually Impaired People}
 
-  L'appareil consiste en une caméra grand public rouge, vert, bleu avec de la profondeur (RGB-D pour red, green, blue, depth)
-  et une unité de mesure inertielle (IMU pour Inertial Measurement Unit), c'est un capteur qui consiste généralement en des gyroscopes 
+  L'appareil consiste en une caméra grand public rouge, vert, bleu avec de la profondeur (\acrshort{rgbd} pour red, green, blue, depth)
+  et une unité de mesure inertielle (\acrshort{imu} pour Inertial Measurement Unit), c'est un capteur qui consiste généralement en des gyroscopes 
   pour mesurer des vitesses angulaires et des accéléromètres pour mesurer la force \cite{baiWearableTravelAid2019}. Ces appareils sont montés sur une paire de lunettes
   et reliés à un téléphone. L'appareil proposé dans cette solution se sert de la continuité de la hauteur du sol entre les images 
   adjacentes pour segmenter le sol avec précision et rapidité pour ensuite chercher la direction du mouvement en fonction du sol.
-  Un réseau de neurones à convolution (CNN pour Convolutional Neural Network) léger est utilisé pour la reconnaissance d'objets 
+  Un réseau de neurones à convolution (\acrshort{cnn} pour Convolutional Neural Network) léger est utilisé pour la reconnaissance d'objets 
   (PeelNet avec l'ensemble de données "MS COCO" contenant des images de dimensions 640 x 640). Son schéma de fonctionnement est présenté 
   dans la figure \ref{fig:ReconnaissanceP1}. Il permet de récupérer des informations concernant les endroits aux alentours et l'orientation 
   des objets environnants. Le schéma de fonctionnement du système est présenté dans la Figure \ref{fig:PipelineP1}.
@@ -261,33 +291,32 @@
     \label{fig:PipelineP1}
   \end{figure} 
 
-  Le système de navigation contient un module de localisation intérieur qui va nous intéresser: un algorithme VSLAM (Visual Simultaneous 
-  Localization and Mapping) est utilisé. SLAM est un problème de computer vision visant à traquer les mouvements d'un module en se basant
+  Le système de navigation contient un module de localisation intérieur qui va nous intéresser: un algorithme V\acrshort{slam} (Visual Simultaneous 
+  Localization and Mapping) est utilisé. \acrshort{slam} est un problème de computer vision visant à traquer les mouvements d'un module en se basant
   sur ce qu'il voit. Il faut traiter les objets dynamiques qui entrent et sortent du champ de vision pour ne pas les prendre en computer
-  dans l'estimation de la position du module. L'estimation se fait en trouvant des points clés sur les images successives.  Visual SLAM
+  dans l'estimation de la position du module. L'estimation se fait en trouvant des points clés sur les images successives.  Visual \acrshort{slam}
   se sert des informations récuperées pour trianguler la position 3D du module. 
   
   \pagebreak
 
-  \subsubsection{CDSFusion: Dense Semantic SLAM for Indoor Environment Using CPU
-  Computing}  
+  \subsubsection{CDSFusion: Dense Semantic SLAM for Indoor Environment Using CPU Computing}
 
-  La solution CDSFusion \cite{wangCDSFusionDenseSemantic2022} se sert d'images RGB comme l'article précédent ainsi qu'un capteur IMU comme paramètres d'entrée et est composée de 
+  La solution CDSFusion \cite{wangCDSFusionDenseSemantic2022} se sert d'images RGB comme l'article précédent ainsi qu'un capteur \acrshort{imu} comme paramètres d'entrée et est composée de 
   3 modules imagés dans la Figure \ref{fig:PipelineP2}:
 
   \paragraph{Le module VIO}
-  Le module d'odométrie visuelle-innertielle (VIO pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
-  afin de proposer une trajectoire. Ce module VIO est basé sur VINS-Mono. VINS-Mono est un framework SLAM en temps réel pour les 
+  Le module d'odométrie visuelle-innertielle (\acrshort{vio} pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
+  afin de proposer une trajectoire. Ce module \acrshort{vio} est basé sur VINS-Mono. VINS-Mono est un framework \acrshort{slam} en temps réel pour les 
   systèmes visuo-inertiels monoculaires. Il utilise une méthode de fenêtre glissante basée sur des optimisations pour fournir une odométrie 
   visuelle-inertielle de haute précision.
-  Les features FAST (Features from accelerated segment test) ont été adaptées pour accélérer le VIO à 
+  Les features \acrshort{fast} (Features from accelerated segment test) ont été adaptées pour accélérer le \acrshort{vio} à 
   la place des feature Shi-Thomas (une manière de détecter les coins sur une image) et la profondeur a été introduite afin d'obtenir une échelle 
-  plus précise. Les résultats expérimentaux montrent que les features FAST augmentent la rapidité du système d'une manière plus conséquente 
-  que les features Shi-Tomas et ORB avec la même précision et robustesse. Ce module est composé de 3 parties:
+  plus précise. Les résultats expérimentaux montrent que les features \acrshort{fast} augmentent la rapidité du système d'une manière plus conséquente 
+  que les features Shi-Tomas et \acrshort{orb} avec la même précision et robustesse. Ce module est composé de 3 parties:
 
   \underline{Visual-Inertial Frontend: }
-  prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur IMU
-  sont préintégrées entre deux images consécutives, le frontend de vision détecte les FAST
+  prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur \acrshort{imu}
+  sont préintégrées entre deux images consécutives, le frontend de vision détecte les \acrshort{fast}
   et les traque entre les images consécutives en utilisant l'algorithme KLT optical flow.
 
   \underline{Back-End:} est utilisé pour fusionner les mesures traitées afin d'obtenir l'estimation de la position. Une optimisation non linéaire
@@ -309,12 +338,12 @@
   \paragraph{Le module de reconstruction 3D}
 
   Le nuage sémantique local est généré en utilisant une image sémantique (générée par le module précédent) et une carte de profondeur. 
-  Ce nuage local servira à produire un nuage global une fois qu'il sera combiné avec les estimations de position de la caméra depuis le module VIO.
+  Ce nuage local servira à produire un nuage global une fois qu'il sera combiné avec les estimations de position de la caméra depuis le module \acrshort{vio}.
   Pour construire une carte 3D globale qui soit précise, un modèle basé sur des voxels est utilisé pour filtrer le bruit et extraire un mesh global.
-  À chaque image importante (Keyframe), la carte de profondeur courante est transformée en nuage de points 3D, ensuite les options Voxblox et FAST
+  À chaque image importante (Keyframe), la carte de profondeur courante est transformée en nuage de points 3D, ensuite les options Voxblox et \acrshort{fast}
   sont adaptées, le nuage local de points 3D est transformé en mesh local et ensuite ce mesh local est intégré dans le mesh global. L'ensemble de 
-  cette procédure est réalisée en temps réel sur CPU. Voxblox est une bibliothèque de cartographie volumétrique basée principalement 
-  sur les TSDF (Truncated Signed Distance Fields).
+  cette procédure est réalisée en temps réel sur \acrshort{cpu}. Voxblox est une bibliothèque de cartographie volumétrique basée principalement 
+  sur les \acrshort{tsdf} (Truncated Signed Distance Fields).
 
   \begin{figure}[hbt]  
     \includegraphics[width=\textwidth]{PipelineP2.png}    
@@ -326,7 +355,7 @@
 
   \subsubsection{Towards Real-time Semantic RGB-D SLAM in Dynamic Environments} 
 
-  Cet article \cite{jiRealtimeSemanticRGBD2021} présente une méthode de SLAM s'inspirant des features ORB (Oriented FAST and Rotated Brief).
+  Cet article \cite{jiRealtimeSemanticRGBD2021} présente une méthode de \acrshort{slam} s'inspirant des features \acrshort{orb} (Oriented \acrshort{fast} and Rotated Brief).
   Le module de segmentation sémantique est une adaptation de SegNet, un réseau de neurones léger qui permet un traitement en temps réel.
   La segmentation se concentre sur des objets dynamiques dont les caractéristiques ne seront pas utilisées dans la création de 
   la carte locale. La segmentation est faite uniquement sur les images clés les plus récentes, accélérant grandement le processus.
@@ -343,27 +372,27 @@
 
   \subsubsection{ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM}
 
-  ORB-SLAM3 \cite{camposORBSLAM3AccurateOpenSource2021} est une amélioration d'ORB-SLAM2, présenté en Figure \ref{fig:ORBSLAM2}, qui consistait à travailler sur trois tâches simultanément : 
-  le suivi, la cartographie locale et la fermeture de boucle. Dans sa partie de suivi, ORB-SLAM2 fait correspondre les caractéristiques image 
+  \acrshort{orb}-SLAM3 \cite{camposORBSLAM3AccurateOpenSource2021} est une amélioration d'\acrshort{orb}-\acrshort{slam}2, présenté en Figure \ref{fig:ORBSLAM2}, qui consistait à travailler sur trois tâches simultanément : 
+  le suivi, la cartographie locale et la fermeture de boucle. Dans sa partie de suivi, \acrshort{orb}-\acrshort{slam}2 fait correspondre les caractéristiques image 
   par image et les compare avec une carte locale pour trouver l'emplacement exact de la caméra en temps réel. Il procède à un ajustement 
   du faisceau en fonction du mouvement afin de minimiser l'erreur de reprojection. Vient ensuite la partie cartographie locale 
-  dans laquelle ORB-SLAM2 
-  créer des cartes locales et les optimise en utilisant des algorithmes tels que ICP (Iterative Closest Point) et effectue un ajustement 
+  dans laquelle \acrshort{orb}-\acrshort{slam}2 
+  créer des cartes locales et les optimise en utilisant des algorithmes tels que Iterative Closest Point (\acrshort{icp}) et effectue un ajustement 
   local du faisceau afin de calculer la position la plus probable de la caméra. Enfin, il utilise l'optimisation du graphe des positions 
   pour corriger la dérive accumulée et effectuer une fermeture de boucle. Il est nécessaire d'effectuer un ajustement groupé
   après la fermeture de la boucle, afin que le robot se trouve à l'emplacement le plus probable dans la carte corrigée. 
   Après l'ajout d'une image clé à la carte ou l'exécution d'une fermeture de boucle, 
-  ORB-SLAM2 peut démarrer un nouveau fil d'exécution qui effectue un ajustement de l'ensemble de la carte afin que 
+  \acrshort{orb}-\acrshort{slam}2 peut démarrer un nouveau fil d'exécution qui effectue un ajustement de l'ensemble de la carte afin que 
   l'emplacement de chaque image clé et des points dans celle-ci obtienne une valeur d'emplacement ajustée.
 
-  Pour traiter une image RGB-D, on calcule d'abord les caractéristiques ORB sur l'image RGB, ensuite on estime les coordonnées de l'image de 
+  Pour traiter une image \acrshort{rgbd}, on calcule d'abord les caractéristiques \acrshort{orb} sur l'image RGB, ensuite on estime les coordonnées de l'image de 
   gauche depuis une paire d'images. Un point est associé à "proche" ou "éloigné" en fonction de sa profondeur. Chaque dénomination a des
   caractéristiques utiles, un point proche sera représentatif pour l'échelle, la translation, la rotation alors qu'un point éloigné
   sera surtout utile pour la rotation et devra être supporté par un plus grand nombre d'images.
   À l'initialisation, le système nécessite seulement les premières images clés pour estimer la première carte locale en utilisant les informations
   de profondeur. 
   L'insertion d'une nouvelle image clé est importante, car elle définit le nouvel environnement sur lequel se base l'estimation du mouvement 
-  de la caméra. Elle suit l'idée établie par la première version d'ORB-SLAM, d'insérer régulièrement de nouvelles images clés, 
+  de la caméra. Elle suit l'idée établie par la première version d'\acrshort{orb}-\acrshort{slam}, d'insérer régulièrement de nouvelles images clés, 
   même si cela implique de devoir les retirer si elles sont redondantes. L'ajout de points clés proches et éloignés permet un nouveau seuil 
   d'apparaître pour déterminer si une nouvelle image clé est nécessaire. 
   Si le nombre de points proches devient inférieur à un seuil, il sera nécessaire d'insérer une nouvelle image clé comportant au moins un certain
@@ -371,16 +400,16 @@
 
   \begin{figure}[hbt]  
     \includegraphics[width=\textwidth]{ORB_SLAM2.png}    
-    \caption{Schéma présentant le fonctionnement d'ORB-SLAM2.}
+    \caption{Schéma présentant le fonctionnement d'\acrshort{orb}-SLAM2.}
     \label{fig:ORBSLAM2}
   \end{figure} 
 
-  ORB-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme. En se servant des données que l'on a déjà vues, on peut retrouver
+  \acrshort{orb}-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme. En se servant des données que l'on a déjà vues, on peut retrouver
   facilement les boucles et ainsi réduire les erreurs de dérive. Ce système est présenté en Figure \ref{fig:ORBSLAM3}
 
   \begin{figure}[hbt]  
     \includegraphics[width=\textwidth]{ORB_SLAM3.png}    
-    \caption{Schéma présentant le fonctionnement d'ORB-SLAM3.}
+    \caption{Schéma présentant le fonctionnement d'\acrshort{orb}-SLAM3.}
     \label{fig:ORBSLAM3}
   \end{figure} 
 
@@ -402,16 +431,16 @@
   Il faudrait parcourir tous leurs travaux précédents pour comprendre l'intégralité de leur solution. De plus il faudrait adapter les travaux
   proposés afin de créer la carte locale en temps-réel plutôt qu'avant, puisque c'est une des contraintes imposées par nos superviseurs. 
 
-  L'article "CDSFusion : Dense Semantic SLAM for Indoor Environment Using CPU Computing" est très prometeur mais n'est pas assez détaillé 
-  pour nous permettre de reproduire leur solution à partir de rien. De plus ils utilisent des capteurs IMU, que nous avons convenu de ne pas 
+  L'article "CDSFusion : Dense Semantic \acrshort{slam} for Indoor Environment Using \acrshort{cpu} Computing" est très prometeur mais n'est pas assez détaillé 
+  pour nous permettre de reproduire leur solution à partir de rien. De plus ils utilisent des capteurs \acrshort{imu}, que nous avons convenu de ne pas 
   utiliser dans le cadre de ce projet.
 
-  L'article "Towards Real-time Semantic RGB-D SLAM in Dynamic Environments" apporte une solution de tracking de la localisation 
+  L'article "Towards Real-time Semantic \acrshort{rgbd} \acrshort{slam} in Dynamic Environments" apporte une solution de tracking de la localisation 
   d'un module en temps réel, ce qui correspond à ce que l'on recherche dans le cadre de ce projet. Cette solution aide à garder en 
-  mémoire les directions prises jusqu'à arriver à un point donné. Cependant les auteurs ne parlent que peu d'ORB-SLAM et se focalisent 
+  mémoire les directions prises jusqu'à arriver à un point donné. Cependant les auteurs ne parlent que peu d'\acrshort{orb}-\acrshort{slam} et se focalisent 
   surtout sur leur valeur ajouté permettant d'améliorer les résultats de ce dernier.
 
-  Enfin, l'article "ORB-SLAM3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM" semble être le plus abouti
+  Enfin, l'article "\acrshort{orb}-\acrshort{slam}3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map \acrshort{slam}" semble être le plus abouti
   que nous aillons pu lire, il est à l'état de l'art et obtient de meilleurs performances que ses concurants. L'article est assez bien expliqué
   et fourni un code source disponible sur Github. Leur solution semble réutilisable pour notre problème, cela apporterait un bon moyen
   de traquer une personne malvoyante dans une pièce. Certains aspects de la publication semblent compliqués à comprendre mais la méthode en 
@@ -424,8 +453,8 @@
   Pour conclure sur cet état de l'art, nous avons découvert plusieurs méthodes permettant de traquer le mouvement d'une caméra dans un
   milieu intérieur, chacune avec son niveau de complexité et de faisabilité par rapport à nos contraintes qui étaient de n'utiliser aucun
   autre capteur qu'une camera. Notre but final était de fournir un module permettant de guider une personne d'un point A à un point B, 
-  s'emboîtant avec les modules de traîtement du langage naturel, et le module de détection d'objets. L'article "ORB-SLAM3 : An Accurate 
-  Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM" nous as emblé être le plus pertinent pour arriver à notre but. 
+  s'emboîtant avec les modules de traîtement du langage naturel, et le module de détection d'objets. L'article "\acrshort{orb}-\acrshort{slam}3 : An Accurate 
+  Open-Source Library for Visual, Visual-Inertial and Multi-Map \acrshort{slam}" nous as emblé être le plus pertinent pour arriver à notre but. 
   En effet nous pourrions nous baser sur leur solution de tracking et construire pas dessus pour répondre au besoin fonctionnel de ce projet.
   De plus le fait que les auteurs mettent à disposition leur code source donne une première vision de ce qui pourrait être réalisé en terme de 
   performances avec notre propre environnement.
@@ -463,8 +492,9 @@
 
   \pagebreak
   \section{Annexes}
-  - Glossaires des termes techniques, notions fondamentales rappelées simplement, \\
-  - Code informatique, éventuellement utile pour démontrer la réalité des livraisons, \\
-  - Détails sur le contexte ou sur la structure d’accueil. 
+ 
+  \printnoidxglossary[type=acronym]
+  \printacronyms
+ 
 
 \end{document}
