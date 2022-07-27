@@ -5,6 +5,7 @@
 \usepackage[english, french]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+
 % Used to format pars, specify the indent size and jump after par ending
 \usepackage[skip=10pt plus1pt, indent=25pt]{parskip}
 
@@ -16,10 +17,10 @@
 % is the main reason that requires T1 font encoding.
 \usepackage[T1]{fontenc}
 
+% Package used to create glossaries, acronym list...
 \usepackage[acronym]{glossaries}
 
 \makenoidxglossaries
-
 
 \newacronym{esn}{ESN}{Entreprise de Services Numériques}
 \newacronym{fyw}{FYW}{Find Your Way}
@@ -31,17 +32,15 @@
 \newacronym{cnn}{CNN}{Convolutional Neural Network}
 \newacronym{vio}{VIO}{Visual-Inertial Odometry}
 \newacronym{fast}{FAST}{Features from accelerated segment test}
-\newacronym{orb}{ORB}{Oriented \acrshort{fast} and Rotated Brief}
+\newacronym{orb}{ORB}{Oriented \acrshort{fast} and Rotated BRIEF}
 \newacronym{cpu}{CPU}{Central Processing Unit}
 \newacronym{gpu}{GPU}{Graphical Processing Unit}
 \newacronym{tsdf}{TSDF}{Truncated Signed Distance Fields}
 \newacronym{icp}{ICP}{Iterative Closest Point}
-
-
-
-
-
-
+\newacronym{brief}{BRIEF}{Binary Robust Independent Elementary Features}
+\newacronym{vm}{VM}{Virtual Machine}
+\newacronym{wsl2}{WSL2}{Windows Subsystem for Linux 2}
+\newacronym{poi}{POI}{Point of Interest}
 
 % Used to manage hyperlinks and make a clickable table of contents.
 \usepackage{hyperref}
@@ -52,6 +51,8 @@
     linkcolor=black,
     urlcolor=blue
 }
+
+% Used to create a bibliography using a .bib file.
 \usepackage[
    backend=biber,
    style=numeric,
@@ -74,8 +75,6 @@
 
 % Defines a new command for the horizontal lines, change thickness here.
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
-
-
 
 \begin{document}
 
@@ -148,6 +147,7 @@
   % Used to write the abstract in french.
   \selectlanguage{french} 
   \begin{abstract}
+    % TODO: Abstract à écrire.
     Vous donnerez une description du
     sujet et des grandes parties de l’ouvrage. Il s’agit ici de motiver un lecteur potentiel en lui
     décrivant le contenu du document et les implications que l’on peut en tirer,
@@ -157,6 +157,7 @@
   % Used to write the abstract in english.
   \selectlanguage{english} 
   \begin{abstract}
+  % TODO: Abstract en anglais à écrire.
     Abstract in English
   \end{abstract}
   \pagebreak
@@ -198,274 +199,272 @@
 
   \section{Introduction et contexte}    
   
-  Mon stage s'est déroulé dans une entreprise appelée Aubay, pour une durée de 6 mois (du 28 février 2022 au 31 août 2022). 
-  En détail, Aubay est une entreprise de services numériques (\acrshort{esn}) qui a été fondée par Christian Aubert en 1998 et 
-  dont le siège social est situé au 13 rue Louis Pasteur à Boulogne-Billancourt. L'entreprise est spécialisée dans les domaines 
-  liés à la finance, à l'assurance et à la banque et est également impliquée dans divers marchés, tels que les télécoms, 
-  les services, les réseaux, l'énergie et les transports. Aubay accompagne la transformation et la modernisation des systèmes 
-  d’information de ses clients. Ils opèrent sur des marchés à forte valeur ajoutée, en France comme en Europe. C'est un acteur 
-  référent de la transformation digitale. Son secteur d'activité est centré autour du conseil sur tout type de projet technologique.  
-  C'est une ESN cotée en Bourse (SBF 250) et 46\% du capital est détenu par les managers. Les chiffres clés concernant Aubay 
-  sont présentés dans la Figure \ref{fig:PA1} ci-après. En 2022, l'entreprise emploie 7306 travailleurs, dont 2728 en France. 
-  Selon son site internet, Aubay est implantée dans 7 pays européens, et a réalisée un chiffre d'affaires de 470,6 M€ en 2021. 
-  D'ailleurs, ces dernières années, l'entreprise a connu une forte croissance de 10,4\% en 2021, qui coïncide avec une augmentation 
-  constante des effectifs de l'entreprise, passant de 4600 employés en 2015 à plus de 7000 aujourd'hui.
- 
-  \begin{figure}[hbt]  
-    \includegraphics[width=\textwidth]{PresentationAubay1.png}    
-    \caption{Chiffres clés pour Aubay en 2021.}
-    \label{fig:PA1}
-  \end{figure}    
+    Mon stage s'est déroulé dans une entreprise appelée Aubay, pour une durée de 6 mois (du 28 février 2022 au 31 août 2022). 
+    En détail, Aubay est une entreprise de services numériques (\acrshort{esn}) qui a été fondée par Christian Aubert en 1998 et 
+    dont le siège social est situé au 13 rue Louis Pasteur à Boulogne-Billancourt. L'entreprise est spécialisée dans les domaines 
+    liés à la finance, à l'assurance et à la banque et est également impliquée dans divers marchés, tels que les télécoms, 
+    les services, les réseaux, l'énergie et les transports. Aubay accompagne la transformation et la modernisation des systèmes 
+    d’information de ses clients. Ils opèrent sur des marchés à forte valeur ajoutée, en France comme en Europe. C'est un acteur 
+    référent de la transformation digitale. Son secteur d'activité est centré autour du conseil sur tout type de projet technologique.  
+    C'est une ESN cotée en Bourse (SBF 250) et 46\% du capital est détenu par les managers. Les chiffres clés concernant Aubay 
+    sont présentés dans la Figure \ref{fig:PA1} ci-après. En 2022, l'entreprise emploie 7306 travailleurs, dont 2728 en France. 
+    Selon son site internet, Aubay est implantée dans 7 pays européens, et a réalisée un chiffre d'affaires de 470,6 M€ en 2021. 
+    D'ailleurs, ces dernières années, l'entreprise a connu une forte croissance de 10,4\% en 2021, qui coïncide avec une augmentation 
+    constante des effectifs de l'entreprise, passant de 4600 employés en 2015 à plus de 7000 aujourd'hui.
   
-  J'ai eu le privilège d'effectuer mon stage au sein de l'unité "Aubay Innov'" qui est la division d’Aubay France dédiée 
-  à la recherche et à l'innovation. Ses membres sont impliqués dans différents projets, chacun lié à la data science, l'analyse 
-  de données ou tout autre domaine liés aux nouvelles technologies numériques. L'objectif de l'unité est d'acquérir 
-  les connaissances et le savoir-faire pour construire des solutions durables et innovantes adaptées aux besoins futurs des clients. 
-  Les projets dirigés dans la cellule innovation d'Aubay ne sont donc soumis à aucun client pendant leur réalisation, 
-  ce qui laisse l'opportunité aux stagiaires d'expérimenter autant qu'ils le souhaitent durant leur stage.
-  Chaque année, cette unité donne la chance à des dizaines de stagiaires d'améliorer ou de perfectionner leurs connaissances
-  relatives à la science des données en leur laissant l'opportunité de découvrir et d'expérimenter les technologies les plus 
-  innovantes disponibles dans les domaines de la recherche. Par ailleurs, l'unité "Aubay Innov'" est largement considérée comme 
-  une source de recrutement pour l'entreprise, qui a souhaité cette année engager environ 800 nouveaux collaborateurs en France. 
-  
-  C'est dans ce cadre que ma mission de fin d'études a débuté. Le projet "Find Your Way" (\acrshort{fyw}), qui représente l'expérience que je 
-  vais détailler dans ce document, a été lancé en février 2022 et a pour objectif de créer une application embarquée sur des lunettes, 
-  basée sur des algorithmes capables de reconnaître les éléments de l'environnement immédiat d'un utilisateur malvoyant pour le guider 
-  vers des lieux ou l'avertir d'obstacles présents sur son chemin tels que des chaises ou une personne par exemple. Un objectif majeur 
-  de ce projet est également de localiser l'utilisateur dans son environnement afin de lui permettre de retrouver son chemin jusqu'à
-  un endroit précédemment enregistré et de le guider avec des indications de direction et d'orientation dans ses déplacements en intérieur
-  en temps réel, le tout répondant à un système de commandes vocales.  
-  
-  Les systèmes d'aide automatisés au déplacement de personnes malvoyantes existent déjà sur le marché et nécessitent de fournir une 
-  carte du bâtiment avec les lieux importants préalablement renseignés afin de rendre le guidage possible. Ce projet vise à s'affranchir 
-  de cette contrainte afin de permettre une plus grande polyvalence pour ce genre d'outil.
-  Le projet a été séparé en plusieurs parties délimitées par des dates clés qui sont présentées dans la Figure \ref{fig:Planning} 
-  avec les livrables associés à chaque fin de phase.
-  La prise en main du projet a démarée début février, s'en est suivi la partie concernant les états de l'art (\acrshort{ea} sur la Figure \ref{fig:Planning}) 
-  qui devait être réalisée entre mi-février et mi-mars en parallèle du Design Thinking qui nous a permis de cadrer et définir le projet par 
-  rapport aux besoins de l'application et les tâches à accomplir. La phase de preuve de concept qui a suivi a duré jusqu'à mi-mai. 
-  Une fois ces étapes réalisées nous avons pu passer à la phase projet afin de réunir toutes les preuves de concept et concevoir l'application 
-  de démonstration nécessaire à la journée des stagiaires (\acrshort{jds}) du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
-  les stagiaires présentent leurs projets lors d'une démonstration auprès des directeurs généraux et directeurs commerciaux de l'entreprise.
+    \begin{figure}[hbt]  
+      \includegraphics[width=\textwidth]{PresentationAubay1.png}    
+      \caption{Chiffres clés pour Aubay en 2021.}
+      \label{fig:PA1}
+    \end{figure}    
+    
+    J'ai eu le privilège d'effectuer mon stage au sein de l'unité "Aubay Innov'" qui est la division d’Aubay France dédiée 
+    à la recherche et à l'innovation. Ses membres sont impliqués dans différents projets, chacun lié à la data science, l'analyse 
+    de données ou tout autre domaine liés aux nouvelles technologies numériques. L'objectif de l'unité est d'acquérir 
+    les connaissances et le savoir-faire pour construire des solutions durables et innovantes adaptées aux besoins futurs des clients. 
+    Les projets dirigés dans la cellule innovation d'Aubay ne sont donc soumis à aucun client pendant leur réalisation, 
+    ce qui laisse l'opportunité aux stagiaires d'expérimenter autant qu'ils le souhaitent durant leur stage.
+    Chaque année, cette unité donne la chance à des dizaines de stagiaires d'améliorer ou de perfectionner leurs connaissances
+    relatives à la science des données en leur laissant l'opportunité de découvrir et d'expérimenter les technologies les plus 
+    innovantes disponibles dans les domaines de la recherche. Par ailleurs, l'unité "Aubay Innov'" est largement considérée comme 
+    une source de recrutement pour l'entreprise, qui a souhaité cette année engager environ 800 nouveaux collaborateurs en France. 
+    
+    C'est dans ce cadre que ma mission de fin d'études a débuté. Le projet "Find Your Way" (\acrshort{fyw}), qui représente l'expérience que je 
+    vais détailler dans ce document, a été lancé en février 2022 et a pour objectif de créer une application embarquée sur des lunettes, 
+    basée sur des algorithmes capables de reconnaître les éléments de l'environnement immédiat d'un utilisateur malvoyant pour le guider 
+    vers des lieux ou l'avertir d'obstacles présents sur son chemin tels que des chaises ou une personne par exemple. Un objectif majeur 
+    de ce projet est également de localiser l'utilisateur dans son environnement afin de lui permettre de retrouver son chemin jusqu'à
+    un endroit précédemment enregistré et de le guider avec des indications de direction et d'orientation dans ses déplacements en intérieur
+    en temps réel, le tout répondant à un système de commandes vocales.  
+    
+    Les systèmes d'aide automatisés au déplacement de personnes malvoyantes existent déjà sur le marché et nécessitent de fournir une 
+    carte du bâtiment avec les lieux importants préalablement renseignés afin de rendre le guidage possible. Ce projet vise à s'affranchir 
+    de cette contrainte afin de permettre une plus grande polyvalence pour ce genre d'outil.
+    Le projet a été séparé en plusieurs parties délimitées par des dates clés qui sont présentées dans la Figure \ref{fig:Planning} 
+    avec les livrables associés à chaque fin de phase.
+    La prise en main du projet a démarée début février, s'en est suivi la partie concernant les états de l'art (\acrshort{ea} sur la Figure \ref{fig:Planning}) 
+    qui devait être réalisée entre mi-février et mi-mars en parallèle du Design Thinking qui nous a permis de cadrer et définir le projet par 
+    rapport aux besoins de l'application et les tâches à accomplir. La phase de preuve de concept qui a suivi a duré jusqu'à mi-mai. 
+    Une fois ces étapes réalisées nous avons pu passer à la phase projet afin de réunir toutes les preuves de concept et concevoir l'application 
+    de démonstration nécessaire à la journée des stagiaires (\acrshort{jds}) du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
+    les stagiaires présentent leurs projets lors d'une démonstration auprès des directeurs généraux et directeurs commerciaux de l'entreprise.
 
-  \begin{figure}[hbt]  
-    \includegraphics[width=\textwidth]{Planning.png}    
-    \caption{Planning prévisionnel du projet \acrshort{fyw}.}
-    \label{fig:Planning}
-  \end{figure}  
+    \begin{figure}[hbt]  
+      \includegraphics[width=\textwidth]{Planning.png}    
+      \caption{Planning prévisionnel du projet \acrshort{fyw}.}
+      \label{fig:Planning}
+    \end{figure}  
+    
+    J'ai réalisé ce projet dans une équipe de 11 stagiaires, tous en stage de fin d'études. Étant donné les multiples parties concernant le projet, 
+    à savoir la détection d'objets, la localisation de l'utilisateur et la gestion des interactions vocales, nous avons dû nous séparer en 3 
+    groupes afin de réaliser les états de l'art et les preuves de concept. J'ai personnellement travaillé sur la partie s'intéressant à la 
+    localisation et le guidage de l'utilisateur dans son environnement. 
+    \pagebreak
   
-  J'ai réalisé ce projet dans une équipe de 11 stagiaires, tous en stage de fin d'études. Étant donné les multiples parties concernant le projet, 
-  à savoir la détection d'objets, la localisation de l'utilisateur et la gestion des interactions vocales, nous avons dû nous séparer en 3 
-  groupes afin de réaliser les états de l'art et les preuves de concept. J'ai personnellement travaillé sur la partie s'intéressant à la 
-  localisation et le guidage de l'utilisateur dans son environnement. 
-  \pagebreak
- 
   \section{État de l'art}  
-  \subsection{Recherches bibliographiques}
-  Dans cette section je présente les recherches bibliographiques que j'ai pu effectuer avec mon groupe lors de la phase d'état de l'art.
-  Cet état de l'art concerne la partie de localisation et de guidage de l'utilisateur. Nous avons retenu 8 publications, nous les avons 
-  confrontées et comparées afin de n'en sélectionner qu'une sur laquelle nous allions nous concentrer lors de la phase de preuve de 
-  concept. Je présente ici 4 des publications les plus pertinentes sur le sujet.
 
-  \subsubsection{Wearable Travel Aid for Environment Perception and Navigation of Visually Impaired People}
+    \subsection{Recherches bibliographiques}
+      Dans cette section je présente les recherches bibliographiques que j'ai pu effectuer avec mon groupe lors de la phase d'état de l'art.
+      Cet état de l'art concerne la partie de localisation et de guidage de l'utilisateur. Nous avons retenu 8 publications, nous les avons 
+      confrontées et comparées afin de n'en sélectionner qu'une sur laquelle nous allions nous concentrer lors de la phase de preuve de 
+      concept. Je présente ici 4 des publications les plus pertinentes sur le sujet.
+      
+        \subsubsection{Wearable Travel Aid for Environment Perception and Navigation of Visually Impaired People}
+          L'appareil consiste en une caméra grand public rouge, vert, bleu avec de la profondeur (\acrshort{rgbd} pour red, green, blue, depth)
+          et une unité de mesure inertielle (\acrshort{imu} pour Inertial Measurement Unit), c'est un capteur qui consiste généralement en des gyroscopes 
+          pour mesurer des vitesses angulaires et des accéléromètres pour mesurer la force \cite{baiWearableTravelAid2019}. Ces appareils sont montés sur une paire de lunettes
+          et reliés à un téléphone. L'appareil proposé dans cette solution se sert de la continuité de la hauteur du sol entre les images 
+          adjacentes poursegmenter le sol avec précision et rapidité pour ensuite chercher la direction du mouvement en fonction du sol.
+          Un réseau de neurones à convolution (\acrshort{cnn} pour Convolutional Neural Network) léger est utilisé pour la reconnaissance d'objets 
+          (PeelNet avec l'ensemble de données "MS COCO" contenant des images de dimensions 640 x 640). Son schéma de fonctionnement est présenté 
+          dans la figure \ref{fig:ReconnaissanceP1}. Il permet de récupérer des informations concernant les endroits aux alentours et l'orientation 
+          des objets environnants. Le schéma de fonctionnement du système est présenté dans la Figure \ref{fig:PipelineP1}.
 
-  L'appareil consiste en une caméra grand public rouge, vert, bleu avec de la profondeur (\acrshort{rgbd} pour red, green, blue, depth)
-  et une unité de mesure inertielle (\acrshort{imu} pour Inertial Measurement Unit), c'est un capteur qui consiste généralement en des gyroscopes 
-  pour mesurer des vitesses angulaires et des accéléromètres pour mesurer la force \cite{baiWearableTravelAid2019}. Ces appareils sont montés sur une paire de lunettes
-  et reliés à un téléphone. L'appareil proposé dans cette solution se sert de la continuité de la hauteur du sol entre les images 
-  adjacentes pour segmenter le sol avec précision et rapidité pour ensuite chercher la direction du mouvement en fonction du sol.
-  Un réseau de neurones à convolution (\acrshort{cnn} pour Convolutional Neural Network) léger est utilisé pour la reconnaissance d'objets 
-  (PeelNet avec l'ensemble de données "MS COCO" contenant des images de dimensions 640 x 640). Son schéma de fonctionnement est présenté 
-  dans la figure \ref{fig:ReconnaissanceP1}. Il permet de récupérer des informations concernant les endroits aux alentours et l'orientation 
-  des objets environnants. Le schéma de fonctionnement du système est présenté dans la Figure \ref{fig:PipelineP1}.
+          \begin{figure}[hbt]  
+            \includegraphics[width=\textwidth]{RecognitionP1.png}    
+            \caption{Schéma présentant le fonctionnement du système de reconnaissance d'objets.}
+            \label{fig:ReconnaissanceP1}
+          \end{figure} 
 
-  \begin{figure}[hbt]  
-    \includegraphics[width=\textwidth]{RecognitionP1.png}    
-    \caption{Schéma présentant le fonctionnement du système de reconnaissance d'objets.}
-    \label{fig:ReconnaissanceP1}
-  \end{figure} 
+          \begin{figure}[hbt]  
+            \includegraphics[width=\textwidth]{PipelineP1.png}    
+            \caption{Schéma de fonctionnement du système proposé.}
+            \label{fig:PipelineP1}
+          \end{figure} 
 
-  \begin{figure}[hbt]  
-    \includegraphics[width=\textwidth]{PipelineP1.png}    
-    \caption{Schéma de fonctionnement du système proposé.}
-    \label{fig:PipelineP1}
-  \end{figure} 
+          Le système de navigation contient un module de localisation intérieur qui va nous intéresser: un algorithme V\acrshort{slam} (Visual Simultaneous 
+          Localization and Mapping) est utilisé. \acrshort{slam} est un problème de computer vision visant à traquer les mouvements d'un module en se basant
+          sur ce qu'il voit. Il faut traiter les objets dynamiques qui entrent et sortent du champ de vision pour ne pas les prendre en computer
+          dans l'estimation de la position du module. L'estimation se fait en trouvant des points clés sur les images successives.  Visual \acrshort{slam}
+          se sert des informations récuperées pour trianguler la position 3D du module. 
+    
+        \pagebreak
 
-  Le système de navigation contient un module de localisation intérieur qui va nous intéresser: un algorithme V\acrshort{slam} (Visual Simultaneous 
-  Localization and Mapping) est utilisé. \acrshort{slam} est un problème de computer vision visant à traquer les mouvements d'un module en se basant
-  sur ce qu'il voit. Il faut traiter les objets dynamiques qui entrent et sortent du champ de vision pour ne pas les prendre en computer
-  dans l'estimation de la position du module. L'estimation se fait en trouvant des points clés sur les images successives.  Visual \acrshort{slam}
-  se sert des informations récuperées pour trianguler la position 3D du module. 
+        \subsubsection{CDSFusion: Dense Semantic SLAM for Indoor Environment Using CPU Computing}
+          La solution CDSFusion \cite{wangCDSFusionDenseSemantic2022} se sert d'images RGB comme l'article précédent ainsi qu'un capteur \acrshort{imu} comme paramètres d'entrée et est composée de 
+          3 modules imagés dans la Figure \ref{fig:PipelineP2}:
+
+          \paragraph{Le module VIO}
+            Le module d'odométrie visuelle-innertielle (\acrshort{vio} pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
+            afin de proposer une trajectoire. Ce module \acrshort{vio} est basé sur VINS-Mono. VINS-Mono est un framework \acrshort{slam} en temps réel pour les 
+            systèmes visuo-inertiels monoculaires. Il utilise une méthode de fenêtre glissante basée sur des optimisations pour fournir une odométrie 
+            visuelle-inertielle de haute précision.
+            Les features \acrshort{fast} (Features from accelerated segment test) ont été adaptées pour accélérer le \acrshort{vio} à 
+            la place des feature Shi-Thomas (une manière de détecter les coins sur une image) et la profondeur a été introduite afin d'obtenir une échelle 
+            plus précise. Les résultats expérimentaux montrent que les features \acrshort{fast} augmentent la rapidité du système d'une manière plus conséquente 
+            que les features Shi-Tomas et \acrshort{orb} avec la même précision et robustesse. Ce module est composé de 3 parties:
+
+          \underline{Visual-Inertial Frontend: }
+            prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur \acrshort{imu}
+            sont préintégrées entre deux images consécutives, le frontend de vision détecte les \acrshort{fast}
+            et les traque entre les images consécutives en utilisant l'algorithme KLT optical flow.
+
+          \underline{Back-End:} est utilisé pour fusionner les mesures traitées afin d'obtenir l'estimation de la position. Une optimisation non linéaire
+            est utilisée pour relocaliser et optimiser le calcul de la position en fonction de la boucle détectée, en utilisant le solveur Ceres. 
+
+          \underline{Le module de détection de boucle: } permet de relocaliser et optimiser le calcul de la position en fonction de
+            la boucle détectée. En effet, une boucle est détectée lorsque l'on a réalisé une boucle dans le parcours d'un chemin, il devient alors inutile
+            de recalculer la position tant que l'utilisateur se situe dans cette boucle, on peut alors facilement optimiser le calcul de la position en se 
+            basant sur des calculs précédemment effectués. Cela se base sur la bibliothèque DBoW2 qui est à l'état de l'art de la reconnaissance d'endroits 
+            par sac de mots (bag of words approach). De même, lorsqu'une boucle est détectée, une optimisation est possible pour le calcul de la position 
+            globale. Cette optimisation est similaire à la méthode VINS-Mono.
+
+          \paragraph{Le module de segmentation sémantique}
+            La segmentation sémantique résulte d'images RGB en entrée qui sont acquises en temps réel en utilisant le module de segmentation PSPNet. 
+            Le module de segmentation sémantique traite chaque image RGB et retourne des vecteurs indiquant la probabilité d'appartenance à une classe
+            pour chaque pixel. Ils classifient et colorent chaque pixel en fonction de la plus haute probabilité d'appartenance à une classe. 
+            L'image segmentée finale est composée des pixels colorés et est transmise au module de reconstruction 3D.
+
+          \paragraph{Le module de reconstruction 3D}
+            Le nuage sémantique local est généré en utilisant une image sémantique (générée par le module précédent) et une carte de profondeur. 
+            Ce nuage local servira à produire un nuage global une fois qu'il sera combiné avec les estimations de position de la caméra depuis le module \acrshort{vio}.
+            Pour construire une carte 3D globale qui soit précise, un modèle basé sur des voxels est utilisé pour filtrer le bruit et extraire un mesh global.
+            À chaque image importante (Keyframe), la carte de profondeur courante est transformée en nuage de points 3D, ensuite les options Voxblox et \acrshort{fast}
+            sont adaptées, le nuage local de points 3D est transformé en mesh local et ensuite ce mesh local est intégré dans le mesh global. L'ensemble de 
+            cette procédure est réalisée en temps réel sur \acrshort{cpu}. Voxblox est une bibliothèque de cartographie volumétrique basée principalement 
+            sur les \acrshort{tsdf} (Truncated Signed Distance Fields).
+
+            \begin{figure}[hbt]  
+              \includegraphics[width=\textwidth]{PipelineP2.png}    
+              \caption{Schéma présentant le fonctionnement du système proposé.}
+              \label{fig:PipelineP2}
+            \end{figure} 
+          
+        \pagebreak  
+
+        \subsubsection{Towards Real-time Semantic RGB-D SLAM in Dynamic Environments} 
+          Cet article \cite{jiRealtimeSemanticRGBD2021} présente une méthode de \acrshort{slam} s'inspirant des features \acrshort{orb} (Oriented \acrshort{fast} and Rotated \acrshort{brief}).
+          Le module de segmentation sémantique est une adaptation de SegNet, un réseau de neurones léger qui permet un traitement en temps réel.
+          La segmentation se concentre sur des objets dynamiques dont les caractéristiques ne seront pas utilisées dans la création de 
+          la carte locale. La segmentation est faite uniquement sur les images clés les plus récentes, accélérant grandement le processus.
+          La segmentation peut être très rapide, mais reconnaît principalement les objets qu'elle connaît déjà et est moins efficace dans des 
+          milieux inconnus avec des objets dynamiques nouveaux. Ce module essaye de résoudre ce problème.
+          Pour chaque nouvelle image l'idée est d'utiliser l'algorithme du K-means pour segmenter l'image de profondeur en N clusters.
+          Chaque cluster est considéré comme faisant partie du même objet. Pour chaque cluster, une erreur de reprojection est calculée. Si une 
+          des erreurs moyennes est relativement supérieure aux autres, le cluster est considéré comme un objet dynamique et les points caractéristiques
+          de l'objet seront supprimés du traitement. Cette manière de traiter les images permet de réduire le taux de faux positifs. 
+          Les comparaisons sont effectuées d'une image clé à une autre puisqu'elles se ressemblent beaucoup, mais aussi entre la première estimation
+          et les cartes locales obtenues.
+
+        \pagebreak
+
+        \subsubsection{ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM}
+          \acrshort{orb}-SLAM3 \cite{camposORBSLAM3AccurateOpenSource2021} est une amélioration d'\acrshort{orb}-\acrshort{slam}2, présenté en Figure \ref{fig:ORBSLAM2}, qui consistait à travailler sur trois tâches simultanément : 
+          le suivi, la cartographie locale et la fermeture de boucle. Dans sa partie de suivi, \acrshort{orb}-\acrshort{slam}2 fait correspondre les caractéristiques image 
+          par image et les compare avec une carte locale pour trouver l'emplacement exact de la caméra en temps réel. Il procède à un ajustement 
+          du faisceau en fonction du mouvement afin de minimiser l'erreur de reprojection. Vient ensuite la partie cartographie locale 
+          dans laquelle \acrshort{orb}-\acrshort{slam}2 
+          créer des cartes locales et les optimise en utilisant des algorithmes tels que Iterative Closest Point (\acrshort{icp}) et effectue un ajustement 
+          local du faisceau afin de calculer la position la plus probable de la caméra. Enfin, il utilise l'optimisation du graphe des positions 
+          pour corriger la dérive accumulée et effectuer une fermeture de boucle. Il est nécessaire d'effectuer un ajustement groupé
+          après la fermeture de la boucle, afin que le robot se trouve à l'emplacement le plus probable dans la carte corrigée. 
+          Après l'ajout d'une image clé à la carte ou l'exécution d'une fermeture de boucle, 
+          \acrshort{orb}-\acrshort{slam}2 peut démarrer un nouveau fil d'exécution qui effectue un ajustement de l'ensemble de la carte afin que 
+          l'emplacement de chaque image clé et des points dans celle-ci obtienne une valeur d'emplacement ajustée.
+
+          Pour traiter une image \acrshort{rgbd}, on calcule d'abord les caractéristiques \acrshort{orb} sur l'image RGB, ensuite on estime les coordonnées de l'image de 
+          gauche depuis une paire d'images. Un point est associé à "proche" ou "éloigné" en fonction de sa profondeur. Chaque dénomination a des
+          caractéristiques utiles, un point proche sera représentatif pour l'échelle, la translation, la rotation alors qu'un point éloigné
+          sera surtout utile pour la rotation et devra être supporté par un plus grand nombre d'images.
+          À l'initialisation, le système nécessite seulement les premières images clés pour estimer la première carte locale en utilisant les informations
+          de profondeur. 
+          L'insertion d'une nouvelle image clé est importante, car elle définit le nouvel environnement sur lequel se base l'estimation du mouvement 
+          de la caméra. Elle suit l'idée établie par la première version d'\acrshort{orb}-\acrshort{slam}, d'insérer régulièrement de nouvelles images clés, 
+          même si cela implique de devoir les retirer si elles sont redondantes. L'ajout de points clés proches et éloignés permet un nouveau seuil 
+          d'apparaître pour déterminer si une nouvelle image clé est nécessaire. 
+          Si le nombre de points proches devient inférieur à un seuil, il sera nécessaire d'insérer une nouvelle image clé comportant au moins un certain
+          nombre de points proches supérieur à un autre seuil.
+
+          \begin{figure}[hbt]  
+            \includegraphics[width=\textwidth]{ORB_SLAM2.png}    
+            \caption{Schéma présentant le fonctionnement d'\acrshort{orb}-SLAM2.}
+            \label{fig:ORBSLAM2}
+          \end{figure} 
+
+          \acrshort{orb}-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme. En se servant des données que l'on a déjà vues, on peut retrouver
+          facilement les boucles et ainsi réduire les erreurs de dérive. Ce système est présenté en Figure \ref{fig:ORBSLAM3}
+
+          \begin{figure}[hbt]  
+            \includegraphics[width=\textwidth]{ORB_SLAM3.png}    
+            \caption{Schéma présentant le fonctionnement d'\acrshort{orb}-SLAM3.}
+            \label{fig:ORBSLAM3}
+          \end{figure} 
+
+          Le thread de tracking traite chaque nouvelle image afin de vérifier si elle représente une nouvelle image clé afin de la localiser
+          dans la carte active de l'atlas. Si le tracking est perdu, le système essaye de se relocaliser en cherchant des repères visuels 
+          qu'il a déjà rencontrés par le passé. Si cela ne fonctionne pas, il créera une nouvelle carte qui sera la nouvelle carte active dans l'atlas.
+          On dispose donc d'un atlas de cartes locales, un ensemble de cartes déconnectées qui seront peut-être combinées avec le temps grâce au 
+          système de fermeture de boucles.
+
+        \pagebreak
+
+    \subsection{Synthèse}
+      L'article "Wearable Travel Aid for Environment Perception and Navigation of Visually Impaired People" est très détaillé et demande beaucoup 
+      de temps pour saisir chaque subtilité.
+      Au début de l'article, les auteurs listent les solutions qui existent déjà et expliquent leurs limitations respectives. 
+      Chaque partie de la solution est expliquée et peut être trouvé dans leur travaux précédents. Cette solution prendrait beaucoup de temps
+      à implémenter puisque les auteurs font surtout une description de leur travail sans mettre à disposition de code source. 
+      Il faudrait parcourir tous leurs travaux précédents pour comprendre l'intégralité de leur solution. De plus il faudrait adapter les travaux
+      proposés afin de créer la carte locale en temps-réel plutôt qu'avant, puisque c'est une des contraintes imposées par nos superviseurs. 
+
+      L'article "CDSFusion : Dense Semantic \acrshort{slam} for Indoor Environment Using \acrshort{cpu} Computing" est très prometeur mais n'est pas assez détaillé 
+      pour nous permettre de reproduire leur solution à partir de rien. De plus ils utilisent des capteurs \acrshort{imu}, que nous avons convenu de ne pas 
+      utiliser dans le cadre de ce projet.
+
+      L'article "Towards Real-time Semantic \acrshort{rgbd} \acrshort{slam} in Dynamic Environments" apporte une solution de tracking de la localisation 
+      d'un module en temps réel, ce qui correspond à ce que l'on recherche dans le cadre de ce projet. Cette solution aide à garder en 
+      mémoire les directions prises jusqu'à arriver à un point donné. Cependant les auteurs ne parlent que peu d'\acrshort{orb}-\acrshort{slam} et se focalisent 
+      surtout sur leur valeur ajouté permettant d'améliorer les résultats de ce dernier.
+
+      Enfin, l'article "\acrshort{orb}-\acrshort{slam}3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map \acrshort{slam}" semble être le plus abouti
+      que nous aillons pu lire, il est à l'état de l'art et obtient de meilleurs performances que ses concurants. L'article est assez bien expliqué
+      et fourni un code source disponible sur Github. Leur solution semble réutilisable pour notre problème, cela apporterait un bon moyen
+      de traquer une personne malvoyante dans une pièce. Certains aspects de la publication semblent compliqués à comprendre mais la méthode en 
+      elle même nous semble accessible. Il faudrait passer du temps sur leur code source afin de l'appréhender et se rendre compte de la faisabilité
+      de sa mise en place.
+
+    \pagebreak
+
+    \subsection{Conclusion}
+      Pour conclure sur cet état de l'art, nous avons découvert plusieurs méthodes permettant de traquer le mouvement d'une caméra dans un
+      milieu intérieur, chacune avec son niveau de complexité et de faisabilité par rapport à nos contraintes qui étaient de n'utiliser aucun
+      autre capteur qu'une camera. Notre but final était de fournir un module permettant de guider une personne d'un point A à un point B avec 
+      l'aide de notre module créant une carte locale de l'environnement en se basant sur des points et des lieux d'intérêt, 
+      s'emboîtant avec les modules de traîtement du langage naturel, et le module de détection d'objets. 
+      L'article "\acrshort{orb}-\acrshort{slam}3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map \acrshort{slam}" 
+      nous a semblé être le plus pertinent pour arriver à notre but. En effet nous pourrions nous baser sur leur solution de tracking et construire 
+      par dessus pour répondre au besoin fonctionnel de ce projet.
+      De plus le fait que les auteurs mettent à disposition leur code source donne une première vision de ce qui pourrait être réalisé en terme de 
+      performances avec notre propre environnement.
+
+    \pagebreak
   
-  \pagebreak
-
-  \subsubsection{CDSFusion: Dense Semantic SLAM for Indoor Environment Using CPU Computing}
-
-  La solution CDSFusion \cite{wangCDSFusionDenseSemantic2022} se sert d'images RGB comme l'article précédent ainsi qu'un capteur \acrshort{imu} comme paramètres d'entrée et est composée de 
-  3 modules imagés dans la Figure \ref{fig:PipelineP2}:
-
-  \paragraph{Le module VIO}
-  Le module d'odométrie visuelle-innertielle (\acrshort{vio} pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
-  afin de proposer une trajectoire. Ce module \acrshort{vio} est basé sur VINS-Mono. VINS-Mono est un framework \acrshort{slam} en temps réel pour les 
-  systèmes visuo-inertiels monoculaires. Il utilise une méthode de fenêtre glissante basée sur des optimisations pour fournir une odométrie 
-  visuelle-inertielle de haute précision.
-  Les features \acrshort{fast} (Features from accelerated segment test) ont été adaptées pour accélérer le \acrshort{vio} à 
-  la place des feature Shi-Thomas (une manière de détecter les coins sur une image) et la profondeur a été introduite afin d'obtenir une échelle 
-  plus précise. Les résultats expérimentaux montrent que les features \acrshort{fast} augmentent la rapidité du système d'une manière plus conséquente 
-  que les features Shi-Tomas et \acrshort{orb} avec la même précision et robustesse. Ce module est composé de 3 parties:
-
-  \underline{Visual-Inertial Frontend: }
-  prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur \acrshort{imu}
-  sont préintégrées entre deux images consécutives, le frontend de vision détecte les \acrshort{fast}
-  et les traque entre les images consécutives en utilisant l'algorithme KLT optical flow.
-
-  \underline{Back-End:} est utilisé pour fusionner les mesures traitées afin d'obtenir l'estimation de la position. Une optimisation non linéaire
-  est utilisée pour relocaliser et optimiser le calcul de la position en fonction de la boucle détectée, en utilisant le solveur Ceres. 
-
-  \underline{Le module de détection de boucle: } permet de relocaliser et optimiser le calcul de la position en fonction de
-  la boucle détectée. En effet, une boucle est détectée lorsque l'on a réalisé une boucle dans le parcours d'un chemin, il devient alors inutile
-  de recalculer la position tant que l'utilisateur se situe dans cette boucle, on peut alors facilement optimiser le calcul de la position en se 
-  basant sur des calculs précédemment effectués. Cela se base sur la bibliothèque DBoW2 qui est à l'état de l'art de la reconnaissance d'endroits 
-  par sac de mots (bag of words approach). De même, lorsqu'une boucle est détectée, une optimisation est possible pour le calcul de la position 
-  globale. Cette optimisation est similaire à la méthode VINS-Mono.
-
-  \paragraph{Le module de segmentation sémantique}
-  La segmentation sémantique résulte d'images RGB en entrée qui sont acquises en temps réel en utilisant le module de segmentation PSPNet. 
-  Le module de segmentation sémantique traite chaque image RGB et retourne des vecteurs indiquant la probabilité d'appartenance à une classe
-  pour chaque pixel. Ils classifient et colorent chaque pixel en fonction de la plus haute probabilité d'appartenance à une classe. 
-  L'image segmentée finale est composée des pixels colorés et est transmise au module de reconstruction 3D.
-
-  \paragraph{Le module de reconstruction 3D}
-
-  Le nuage sémantique local est généré en utilisant une image sémantique (générée par le module précédent) et une carte de profondeur. 
-  Ce nuage local servira à produire un nuage global une fois qu'il sera combiné avec les estimations de position de la caméra depuis le module \acrshort{vio}.
-  Pour construire une carte 3D globale qui soit précise, un modèle basé sur des voxels est utilisé pour filtrer le bruit et extraire un mesh global.
-  À chaque image importante (Keyframe), la carte de profondeur courante est transformée en nuage de points 3D, ensuite les options Voxblox et \acrshort{fast}
-  sont adaptées, le nuage local de points 3D est transformé en mesh local et ensuite ce mesh local est intégré dans le mesh global. L'ensemble de 
-  cette procédure est réalisée en temps réel sur \acrshort{cpu}. Voxblox est une bibliothèque de cartographie volumétrique basée principalement 
-  sur les \acrshort{tsdf} (Truncated Signed Distance Fields).
-
-  \begin{figure}[hbt]  
-    \includegraphics[width=\textwidth]{PipelineP2.png}    
-    \caption{Schéma présentant le fonctionnement du système proposé.}
-    \label{fig:PipelineP2}
-  \end{figure} 
-  
-  \pagebreak  
-
-  \subsubsection{Towards Real-time Semantic RGB-D SLAM in Dynamic Environments} 
-
-  Cet article \cite{jiRealtimeSemanticRGBD2021} présente une méthode de \acrshort{slam} s'inspirant des features \acrshort{orb} (Oriented \acrshort{fast} and Rotated Brief).
-  Le module de segmentation sémantique est une adaptation de SegNet, un réseau de neurones léger qui permet un traitement en temps réel.
-  La segmentation se concentre sur des objets dynamiques dont les caractéristiques ne seront pas utilisées dans la création de 
-  la carte locale. La segmentation est faite uniquement sur les images clés les plus récentes, accélérant grandement le processus.
-  La segmentation peut être très rapide, mais reconnaît principalement les objets qu'elle connaît déjà et est moins efficace dans des 
-  milieux inconnus avec des objets dynamiques nouveaux. Ce module essaye de résoudre ce problème.
-  Pour chaque nouvelle image l'idée est d'utiliser l'algorithme du K-means pour segmenter l'image de profondeur en N clusters.
-  Chaque cluster est considéré comme faisant partie du même objet. Pour chaque cluster, une erreur de reprojection est calculée. Si une 
-  des erreurs moyennes est relativement supérieure aux autres, le cluster est considéré comme un objet dynamique et les points caractéristiques
-  de l'objet seront supprimés du traitement. Cette manière de traiter les images permet de réduire le taux de faux positifs. 
-  Les comparaisons sont effectuées d'une image clé à une autre puisqu'elles se ressemblent beaucoup, mais aussi entre la première estimation
-  et les cartes locales obtenues.
-
-  \pagebreak
-
-  \subsubsection{ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM}
-
-  \acrshort{orb}-SLAM3 \cite{camposORBSLAM3AccurateOpenSource2021} est une amélioration d'\acrshort{orb}-\acrshort{slam}2, présenté en Figure \ref{fig:ORBSLAM2}, qui consistait à travailler sur trois tâches simultanément : 
-  le suivi, la cartographie locale et la fermeture de boucle. Dans sa partie de suivi, \acrshort{orb}-\acrshort{slam}2 fait correspondre les caractéristiques image 
-  par image et les compare avec une carte locale pour trouver l'emplacement exact de la caméra en temps réel. Il procède à un ajustement 
-  du faisceau en fonction du mouvement afin de minimiser l'erreur de reprojection. Vient ensuite la partie cartographie locale 
-  dans laquelle \acrshort{orb}-\acrshort{slam}2 
-  créer des cartes locales et les optimise en utilisant des algorithmes tels que Iterative Closest Point (\acrshort{icp}) et effectue un ajustement 
-  local du faisceau afin de calculer la position la plus probable de la caméra. Enfin, il utilise l'optimisation du graphe des positions 
-  pour corriger la dérive accumulée et effectuer une fermeture de boucle. Il est nécessaire d'effectuer un ajustement groupé
-  après la fermeture de la boucle, afin que le robot se trouve à l'emplacement le plus probable dans la carte corrigée. 
-  Après l'ajout d'une image clé à la carte ou l'exécution d'une fermeture de boucle, 
-  \acrshort{orb}-\acrshort{slam}2 peut démarrer un nouveau fil d'exécution qui effectue un ajustement de l'ensemble de la carte afin que 
-  l'emplacement de chaque image clé et des points dans celle-ci obtienne une valeur d'emplacement ajustée.
-
-  Pour traiter une image \acrshort{rgbd}, on calcule d'abord les caractéristiques \acrshort{orb} sur l'image RGB, ensuite on estime les coordonnées de l'image de 
-  gauche depuis une paire d'images. Un point est associé à "proche" ou "éloigné" en fonction de sa profondeur. Chaque dénomination a des
-  caractéristiques utiles, un point proche sera représentatif pour l'échelle, la translation, la rotation alors qu'un point éloigné
-  sera surtout utile pour la rotation et devra être supporté par un plus grand nombre d'images.
-  À l'initialisation, le système nécessite seulement les premières images clés pour estimer la première carte locale en utilisant les informations
-  de profondeur. 
-  L'insertion d'une nouvelle image clé est importante, car elle définit le nouvel environnement sur lequel se base l'estimation du mouvement 
-  de la caméra. Elle suit l'idée établie par la première version d'\acrshort{orb}-\acrshort{slam}, d'insérer régulièrement de nouvelles images clés, 
-  même si cela implique de devoir les retirer si elles sont redondantes. L'ajout de points clés proches et éloignés permet un nouveau seuil 
-  d'apparaître pour déterminer si une nouvelle image clé est nécessaire. 
-  Si le nombre de points proches devient inférieur à un seuil, il sera nécessaire d'insérer une nouvelle image clé comportant au moins un certain
-  nombre de points proches supérieur à un autre seuil.
-
-  \begin{figure}[hbt]  
-    \includegraphics[width=\textwidth]{ORB_SLAM2.png}    
-    \caption{Schéma présentant le fonctionnement d'\acrshort{orb}-SLAM2.}
-    \label{fig:ORBSLAM2}
-  \end{figure} 
-
-  \acrshort{orb}-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme. En se servant des données que l'on a déjà vues, on peut retrouver
-  facilement les boucles et ainsi réduire les erreurs de dérive. Ce système est présenté en Figure \ref{fig:ORBSLAM3}
-
-  \begin{figure}[hbt]  
-    \includegraphics[width=\textwidth]{ORB_SLAM3.png}    
-    \caption{Schéma présentant le fonctionnement d'\acrshort{orb}-SLAM3.}
-    \label{fig:ORBSLAM3}
-  \end{figure} 
-
-  Le thread de tracking traite chaque nouvelle image afin de vérifier si elle représente une nouvelle image clé afin de la localiser
-  dans la carte active de l'atlas. Si le tracking est perdu, le système essaye de se relocaliser en cherchant des repères visuels 
-  qu'il a déjà rencontrés par le passé. Si cela ne fonctionne pas, il créera une nouvelle carte qui sera la nouvelle carte active dans l'atlas.
-  On dispose donc d'un atlas de cartes locales, un ensemble de cartes déconnectées qui seront peut-être combinées avec le temps grâce au 
-  système de fermeture de boucles.
-
-  \pagebreak
-
-  \subsection{Synthèse}
-
-  L'article "Wearable Travel Aid for Environment Perception and Navigation of Visually Impaired People" est très détaillé et demande beaucoup 
-  de temps pour saisir chaque subtilité.
-  Au début de l'article, les auteurs listent les solutions qui existent déjà et expliquent leurs limitations respectives. 
-  Chaque partie de la solution est expliquée et peut être trouvé dans leur travaux précédents. Cette solution prendrait beaucoup de temps
-  à implémenter puisque les auteurs font surtout une description de leur travail sans mettre à disposition de code source. 
-  Il faudrait parcourir tous leurs travaux précédents pour comprendre l'intégralité de leur solution. De plus il faudrait adapter les travaux
-  proposés afin de créer la carte locale en temps-réel plutôt qu'avant, puisque c'est une des contraintes imposées par nos superviseurs. 
-
-  L'article "CDSFusion : Dense Semantic \acrshort{slam} for Indoor Environment Using \acrshort{cpu} Computing" est très prometeur mais n'est pas assez détaillé 
-  pour nous permettre de reproduire leur solution à partir de rien. De plus ils utilisent des capteurs \acrshort{imu}, que nous avons convenu de ne pas 
-  utiliser dans le cadre de ce projet.
-
-  L'article "Towards Real-time Semantic \acrshort{rgbd} \acrshort{slam} in Dynamic Environments" apporte une solution de tracking de la localisation 
-  d'un module en temps réel, ce qui correspond à ce que l'on recherche dans le cadre de ce projet. Cette solution aide à garder en 
-  mémoire les directions prises jusqu'à arriver à un point donné. Cependant les auteurs ne parlent que peu d'\acrshort{orb}-\acrshort{slam} et se focalisent 
-  surtout sur leur valeur ajouté permettant d'améliorer les résultats de ce dernier.
-
-  Enfin, l'article "\acrshort{orb}-\acrshort{slam}3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map \acrshort{slam}" semble être le plus abouti
-  que nous aillons pu lire, il est à l'état de l'art et obtient de meilleurs performances que ses concurants. L'article est assez bien expliqué
-  et fourni un code source disponible sur Github. Leur solution semble réutilisable pour notre problème, cela apporterait un bon moyen
-  de traquer une personne malvoyante dans une pièce. Certains aspects de la publication semblent compliqués à comprendre mais la méthode en 
-  elle même nous semble accessible. Il faudrait passer du temps sur leur code source afin de l'appréhender et se rendre compte de la faisabilité
-  de sa mise en place.
-
-  \pagebreak
-
-  \subsection{Conclusion}
-  Pour conclure sur cet état de l'art, nous avons découvert plusieurs méthodes permettant de traquer le mouvement d'une caméra dans un
-  milieu intérieur, chacune avec son niveau de complexité et de faisabilité par rapport à nos contraintes qui étaient de n'utiliser aucun
-  autre capteur qu'une camera. Notre but final était de fournir un module permettant de guider une personne d'un point A à un point B, 
-  s'emboîtant avec les modules de traîtement du langage naturel, et le module de détection d'objets. L'article "\acrshort{orb}-\acrshort{slam}3 : An Accurate 
-  Open-Source Library for Visual, Visual-Inertial and Multi-Map \acrshort{slam}" nous as emblé être le plus pertinent pour arriver à notre but. 
-  En effet nous pourrions nous baser sur leur solution de tracking et construire pas dessus pour répondre au besoin fonctionnel de ce projet.
-  De plus le fait que les auteurs mettent à disposition leur code source donne une première vision de ce qui pourrait être réalisé en terme de 
-  performances avec notre propre environnement.
-
-  \pagebreak
   \section{Les dimensions techniques du projet (8 à 12 p)}
-  Description des objectifs/tâches qui vous ont été confiés, vous exposerez les difficultés rencontrées et la manière dont vous
-  les avez abordées.  Vous mettrez également en valeur l’originalité éventuelle de votre approche, les
-  choix et décisions que vous aurez prises. Vous mettrez vos travaux et réalisations en perspective par
-  rapport à l’ensemble du projet et son historique.
-  % TODO: Compléter avec SLAM_POC.pdf.
+    Description des objectifs/tâches qui vous ont été confiés, vous exposerez les difficultés rencontrées et la manière dont vous
+    les avez abordées.  Vous mettrez également en valeur l’originalité éventuelle de votre approche, les
+    choix et décisions que vous aurez prises. Vous mettrez vos travaux et réalisations en perspective par
+    rapport à l’ensemble du projet et son historique.
+    % TODO: Compléter avec SLAM_POC.pdf.
 
   POC: 
   Installation du repo git
@@ -483,6 +482,7 @@
   Réalisation des liens entre Frontend et Backend
 
   \pagebreak
+  
   \section{Les dimensions humaines et managériales (3 à 5 p)}
   Les dimensions humaines et managériales internes à l’organisme d’accueil. Cette partie consiste en
   une présentation analytique des processus d’entreprise. Selon les cas, elle portera sur la conduite de
@@ -493,6 +493,7 @@
   des conditions du travail réalisé.  
 
   \pagebreak
+  
   \section{Conclusion (2 à 3 p)}
   La conclusion générale, de quelques pages, porte sur l’ensemble de votre expérience technique et
   humaine. Une première partie correspond au bilan et une deuxième partie expose les possibilités
@@ -501,15 +502,16 @@
   école d’ingénieurs et durant votre mission de fin d’études et préciserez vos axes d’amélioration.
 
   \pagebreak
+  
   \section{Bibliographie}
 
-  \printbibliography[heading=none]
+    \printbibliography[heading=none]
 
   \pagebreak
+  
   \section{Annexes}
  
-  \printnoidxglossary[type=acronym]
-  \printacronyms
+    \printnoidxglossary[type=acronym]
+    \printacronyms
  
-
 \end{document}
