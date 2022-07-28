@@ -41,6 +41,7 @@
 \newacronym{vm}{VM}{Virtual Machine}
 \newacronym{wsl2}{WSL2}{Windows Subsystem for Linux 2}
 \newacronym{poi}{POI}{Point of Interest}
+\newacronym{poc}{POC}{Proof of Concept}
 
 % Used to manage hyperlinks and make a clickable table of contents.
 \usepackage{hyperref}
@@ -465,61 +466,148 @@
     choix et décisions que vous aurez prises. Vous mettrez vos travaux et réalisations en perspective par
     rapport à l’ensemble du projet et son historique.
     % TODO: Compléter avec SLAM_POC.pdf.
+    \subsection{Phase de preuve de concept}
+      Le projet \acrshort{fyw} vise à aider les personnes malvoyantes à se repérer en milieu intérieur. 
+      La preuve de concept (\acrshort{poc}) sur laquelle j'ai travaillée avec mon équipe se concentrait sur la création d'une carte locale
+      de l'environnement en nous basant sur des points d'intérêts (\acrshort{poi}) entre les images vues successivement, c'est la méthode
+      \acrshort{slam}.
+      \subsubsection{Installation}
+        Il a d'abord fallu se pencher sur l'installation de la solution que nous avions retenue, afin de construire notre module par dessus.
+        Nous avons été capable de produire une documentation d'installation de ORB-SLAM3 sur le Windows sub-system for Linux (\acrshort{wsl2})
+        et sur une machine virtuelle (\acrshort{vm}). Ces documentations d'installation appartiennent à Aubay et ne peuvent être divulguées dans
+        ce document.
+        Ensuite il a fallu calibrer la caméra que nous utilisions pour fonctionner avec \acrshort{orb}-\acrshort{slam}3. 
+        La calibration de la caméra assure que l'estimation de la position de la caméra est la plus proche de la position réelle de la caméra.
+        Enfin, l'idée était de développer un algorithme de recherche du plus court chemin entre deux points donnés, par exemple entre la position
+        de l'utilisateur et une destination précédemment sauvegardée.      
+            
+        \paragraph{General}
+          Notre méthode se base sur ORB-SLAM3, une solution open-source crée dans une université en Espagne. L'idée était simple, nous voulions
+          l'installer et la faire fonctionner puis ajouter les fonctionnalitées nécéssaires à notre \acrshort{poc}. Ce projet open-source a été
+          développé en C++ et se base sur de nombreuses bibliothèques de code telles que Eigen, Pangolin, Sophus, DBoW2, g2o, Kalibr et ROS.
+          Avant d'installer ORB-SLAM3 nous avons dû installer Eigen et Pangolin. Sophus, DBoW2 et g2o étant déjà inclus dans leur dépôt Github.
 
-    \subsection{Installation}
+          Nous avons essayé d'installer \acrshort{orb}-\acrshort{slam}3 sur Windows 10, Mac OSX, Ubuntu 20.04 sur VirtualBox et enfin 
+          \acrshort{wsl2}. L'installation sous Windows 10 a rapidement été déclarée impossible puisqu'\acrshort{orb}-\acrshort{slam}3
+          a été développé pour un système Linux en grande majorité. L'installation sur Mac OSX n'a été que temporaire, le temps que l'on 
+          obtienne l'autorisation de travailler avec \acrshort{wsl2}.
+          Nous avons donc réalisé l'installation d'\acrshort{orb}-\acrshort{slam}3 sur \acrshort{wsl2} et réussi à lancer le \acrshort{slam}
+          sur la vidéo d'exemple fournie. Cependant notre \acrshort{poc} devait fonctionner avec un flux vidéo en temps réel provenant
+          d'une caméra, et non une vidéo préenregistrée. Le problème était que bien que wsl2 ai accès aux appareils USB (en prenant en compte 
+          que pour cela il était nécéssaire de créer un noveau noyau Linux contenant les bons pilotes) et que la caméra soit visible dans les
+          pilotes USB, le sous-système n'était pas capable de créer la vidéo dans /dev/video, rendant le flux vidéo innaccessible à notre
+          application. Nous avons choisi de basculer sur un sysème Ubuntu 20.04 sur VM afin de disposer des fonctionnalités de base
+          nécéssaires à notre avancée.     
+
+        \paragraph{Eigen}
+          Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers,
+          and related algorithms. It is required to have an efficient ORB-SLAM3.
+          To install Eigen, we had to search for the right version of this library. We have tried several
+          versions which did not work for our installation of ORB-SLAM3. We eventually got to the
+          3.3.1 version. It suited all our needs.
+
+        \paragraph{Pangolin}
+          Pangolin is a set of lightweight and portable utility libraries for prototyping 3D, numeric or
+          video-based programs and algorithms. It is used to remove platform-specific boilerplate
+          and make it easy to visualize data.
+          To install Pangolin, we had to look around on their GitHub. As a matter of fact, their latest
+          version didn’t suit the installation of ORB-SLAM3. We have tried several versions which did
+          not work for our installation of ORB-SLAM3. We eventually got to the version 0.6 on their
+          GitHub.
+
+
+        \paragraph{ORB-SLAM3}
+          To install ORB-SLAM3, we have first cloned the repository coming with the v1.0 of the
+          software. It came along with some requirements that did not fit our environment. At least
+          the requirements seemed to conflict. We managed to get around by telling the software to
+          look for our versions of all the softwares.
+          The install of ORB-SLAM3 starts first with the thirdparties available in their repository.
+          DBoW2, g2o and Sophus. The versions asked for OpenCV could not be satisfied, so we
+          changed the file so as the libraries would be looking for the version 4.2
+
+        \paragraph{ROS}
+          ROS stands for Robot Operating System. It is through this package that ORB-SLAM3 is
+          able to access the camera stream and process it on the run.
+          It was quite difficult to understand fully the installation procedure of this package. It was
+          supposed to be very straight forward. Requiring only a sudo apt install of all different parts
+          of the package. However, it so happened to be difficult for some versions of the package
+          on the Virtual Machine, telling us there were some broken packages and attempting to fix
+          it ended in a loop of broken files. We tried it on WSL2 and it worked like a charm. Eventually
+          we got the installation to work on the Virtual Machine by creating a whole new machine
+
+      \subsubsection{Calibration}
+        Comme dit précédemment, la calibration de la caméra était une phase importante afin d'obtenir une bonne estimation de la position
+        de la caméra utilisée.
+
+      \subsubsection{Recherche de chemin}
+
+        \paragraph{Matrice de coordonnées}
+
+        \paragraph{Structures de données définies}
+
+          \subparagraph{Coord}
+
+          \subparagraph{AbsoluteCoord}
+
+          \subparagraph{Path}        
+
+        \paragraph{Instances utilisées}
+
+          \subparagraph{LocalPath}     
           
-      \subsubsection{General}
+          \subparagraph{Absolute2DCoordinates}   
 
-      \subsubsection{Eigen}
+          \subparagraph{PoiList}   
 
-      \subsubsection{Pangolin}
+        \paragraph{L'algorithme A*}
 
-      \subsubsection{ORB-SLAM3}
+        \paragraph{Retourner à un point d'intérêt}
 
-      \subsubsection{ROS}
+        \paragraph{FYWBack}
+      
+      \subsubsection{Test et résultats}
 
-    \subsection{Calibration}
+      \subsubsection{Difficultés rencontrées}
+        problèmes d'installation sur Windows
+        Switch sur VM 
+        Switch sur WSL2
 
-    \subsection{Recherche de chemin}
+        We have spent a major part of the time given for the POC trying to figure out an installation
+        procedure for ORB-SLAM3. We have attempted multiple installations on multiple Operating
+        Systems (OS), such as Windows, Mac, The Windows Subsystem for Linux (WSL2) and a
+        virtual machine (VM).
 
-      \subsubsection{Matrice de coordonnées}
+        The tricky part of the installation is the fact that the versions required seemed to conflict
+        with each other. We had to investigate which version would suit all the libraries. For
+        OpenCV for instance we had to install the version 4.2.
+        Having done this, we had to change parts of all the CMakeLists.txt, so as to allow the
+        software to find the needed third parties.
 
-      \subsubsection{Structures de données définies}
+        We eventually turned our faces towards a Linux virtual machine. Ubuntu 20.04 on
+        VirtualBox. This virtual Machine has enabled us to work on a complete Linux distribution
+        without any problems with the installation, but rather problems with the virtual machine
+        itself. It is a very nice technology but it comes with its share of troubles, whether that be
+        the latency, the links with keyboards, the mouse that does not work sometimes, and even
+        a corrupted system emerging out of nowhere. But it is the best solution we have found.
 
-        \paragraph{Coord}
 
-        \paragraph{AbsoluteCoord}
 
-        \paragraph{Path}        
-
-      \subsubsection{Instances utilisées}
-
-        \paragraph{LocalPath}     
-        
-        \paragraph{Absolute2DCoordinates}   
-
-        \paragraph{PoiList}   
-
-      \subsubsection{L'algorithme A*}
-
-      \subsubsection{Retourner à un point d'intérêt}
-
-      \subsubsection{FYWBack}
-    
-    \subsection{Test et résultats}
-
-    \subsection{Difficultés rencontrées}
-      problèmes d'installation sur Windows
-      Switch sur VM 
-      Switch sur WSL2
-
-    \subsection{Conclusion}
+      \subsubsection{Conclusion}
 
     \subsection{Phase projet}
-      Développement du Frontend en Flutter
-      Se rendre compte de l'impossibilité technique, beau mais pas possible
-      Passage à PyQt5
-      Réalisation des liens entre Frontend et Backend 
+      Une fois la phase de \acrshort{poc} terminée, nous devions ensuite passer à la phase projet, nécéssitant d'associer nos \acrshort{poc}
+      afin de créer une application de démonstration pour la \acrshort{jds} du 7 juillet 2022. Nous avons réfléchis à la création d'Une
+      interface graphique.
+
+      % TODO: Parler de Figma, maquette du site etc...
+
+      \subsubsection{Développement de l'application}
+        Développement du Frontend en Flutter
+        Se rendre compte de l'impossibilité technique, beau mais pas possible
+        Passage à PyQt5
+        Protocole de communication entre les POC
+        Réalisation des liens entre Frontend et Backend avec un objet partagé
+        
 
   \pagebreak
   
