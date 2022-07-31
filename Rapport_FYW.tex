@@ -32,7 +32,7 @@
 \newacronym{cnn}{CNN}{Convolutional Neural Network}
 \newacronym{vio}{VIO}{Visual-Inertial Odometry}
 \newacronym{fast}{FAST}{Features from accelerated segment test}
-\newacronym{orb}{ORB}{Oriented \acrshort{fast} and Rotated BRIEF}
+\newacronym{orb}{ORB}{Oriented FAST and Rotated BRIEF}
 \newacronym{cpu}{CPU}{Central Processing Unit}
 \newacronym{gpu}{GPU}{Graphical Processing Unit}
 \newacronym{tsdf}{TSDF}{Truncated Signed Distance Fields}
@@ -258,12 +258,12 @@
     qui devait être réalisée entre mi-février et mi-mars en parallèle du Design Thinking qui nous a permis de cadrer et définir le projet par 
     rapport aux besoins de l'application et les tâches à accomplir. La phase de preuve de concept qui a suivi a duré jusqu'à mi-mai. 
     Une fois ces étapes réalisées nous avons pu passer à la phase projet afin de réunir toutes les preuves de concept et concevoir l'application 
-    de démonstration nécessaire à la journée des stagiaires (\acrshort{jds}) du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
+    de démonstration nécessaire à la journée des stagiaires (JDS) du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
     les stagiaires présentent leurs projets lors d'une démonstration auprès des directeurs généraux et directeurs commerciaux de l'entreprise.
 
     \begin{figure}[hbt]  
       \includegraphics[width=\textwidth]{Planning.png}    
-      \caption{Planning prévisionnel du projet \acrshort{fyw}.}
+      \caption{Planning prévisionnel du projet FYW.}
       \label{fig:Planning}
     \end{figure}  
     
@@ -305,30 +305,30 @@
           \end{figure} 
 
           Le système de navigation contient un module de localisation intérieur qui va nous intéresser: un algorithme V\acrshort{slam} (Visual Simultaneous 
-          Localization and Mapping) est utilisé. \acrshort{slam} est un problème de computer vision visant à traquer les mouvements d'un module en se basant
+          Localization and Mapping) est utilisé. SLAM est un problème de computer vision visant à traquer les mouvements d'un module en se basant
           sur ce qu'il voit. Il faut traiter les objets dynamiques qui entrent et sortent du champ de vision pour ne pas les prendre en computer
-          dans l'estimation de la position du module. L'estimation se fait en trouvant des points clés sur les images successives.  Visual \acrshort{slam}
+          dans l'estimation de la position du module. L'estimation se fait en trouvant des points clés sur les images successives.  Visual SLAM
           se sert des informations récuperées pour trianguler la position 3D du module. 
     
         \pagebreak
 
         \subsubsection{CDSFusion: Dense Semantic SLAM for Indoor Environment Using CPU Computing}
-          La solution CDSFusion \cite{wangCDSFusionDenseSemantic2022} se sert d'images RGB comme l'article précédent ainsi qu'un capteur \acrshort{imu} comme paramètres d'entrée et est composée de 
+          La solution CDSFusion \cite{wangCDSFusionDenseSemantic2022} se sert d'images RGB comme l'article précédent ainsi qu'un capteur IMU comme paramètres d'entrée et est composée de 
           3 modules imagés dans la Figure \ref{fig:PipelineP2}:
 
           \paragraph{Le module VIO}
             Le module d'odométrie visuelle-innertielle (\acrshort{vio} pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
-            afin de proposer une trajectoire. Ce module \acrshort{vio} est basé sur VINS-Mono. VINS-Mono est un framework \acrshort{slam} en temps réel pour les 
+            afin de proposer une trajectoire. Ce module VIO est basé sur VINS-Mono. VINS-Mono est un framework SLAM en temps réel pour les 
             systèmes visuo-inertiels monoculaires. Il utilise une méthode de fenêtre glissante basée sur des optimisations pour fournir une odométrie 
             visuelle-inertielle de haute précision.
-            Les features \acrshort{fast} (Features from accelerated segment test) ont été adaptées pour accélérer le \acrshort{vio} à 
+            Les features \acrshort{fast} (Features from accelerated segment test) ont été adaptées pour accélérer le VIO à 
             la place des feature Shi-Thomas (une manière de détecter les coins sur une image) et la profondeur a été introduite afin d'obtenir une échelle 
-            plus précise. Les résultats expérimentaux montrent que les features \acrshort{fast} augmentent la rapidité du système d'une manière plus conséquente 
+            plus précise. Les résultats expérimentaux montrent que les features FAST augmentent la rapidité du système d'une manière plus conséquente 
             que les features Shi-Tomas et \acrshort{orb} avec la même précision et robustesse. Ce module est composé de 3 parties:
 
           \underline{Visual-Inertial Frontend: }
-            prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur \acrshort{imu}
-            sont préintégrées entre deux images consécutives, le frontend de vision détecte les \acrshort{fast}
+            prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur IMU
+            sont préintégrées entre deux images consécutives, le frontend de vision détecte les FAST
             et les traque entre les images consécutives en utilisant l'algorithme KLT optical flow.
 
           \underline{Back-End:} est utilisé pour fusionner les mesures traitées afin d'obtenir l'estimation de la position. Une optimisation non linéaire
@@ -349,9 +349,9 @@
 
           \paragraph{Le module de reconstruction 3D}
             Le nuage sémantique local est généré en utilisant une image sémantique (générée par le module précédent) et une carte de profondeur. 
-            Ce nuage local servira à produire un nuage global une fois qu'il sera combiné avec les estimations de position de la caméra depuis le module \acrshort{vio}.
+            Ce nuage local servira à produire un nuage global une fois qu'il sera combiné avec les estimations de position de la caméra depuis le module VIO.
             Pour construire une carte 3D globale qui soit précise, un modèle basé sur des voxels est utilisé pour filtrer le bruit et extraire un mesh global.
-            À chaque image importante (Keyframe), la carte de profondeur courante est transformée en nuage de points 3D, ensuite les options Voxblox et \acrshort{fast}
+            À chaque image importante (Keyframe), la carte de profondeur courante est transformée en nuage de points 3D, ensuite les options Voxblox et FAST
             sont adaptées, le nuage local de points 3D est transformé en mesh local et ensuite ce mesh local est intégré dans le mesh global. L'ensemble de 
             cette procédure est réalisée en temps réel sur \acrshort{cpu}. Voxblox est une bibliothèque de cartographie volumétrique basée principalement 
             sur les \acrshort{tsdf} (Truncated Signed Distance Fields).
@@ -365,7 +365,7 @@
         \pagebreak  
 
         \subsubsection{Towards Real-time Semantic RGB-D SLAM in Dynamic Environments} 
-          Cet article \cite{jiRealtimeSemanticRGBD2021} présente une méthode de \acrshort{slam} s'inspirant des features \acrshort{orb} (Oriented \acrshort{fast} and Rotated \acrshort{brief}).
+          Cet article \cite{jiRealtimeSemanticRGBD2021} présente une méthode de SLAM s'inspirant des features ORB (Oriented FAST and Rotated \acrshort{brief}).
           Le module de segmentation sémantique est une adaptation de SegNet, un réseau de neurones léger qui permet un traitement en temps réel.
           La segmentation se concentre sur des objets dynamiques dont les caractéristiques ne seront pas utilisées dans la création de 
           la carte locale. La segmentation est faite uniquement sur les images clés les plus récentes, accélérant grandement le processus.
@@ -381,28 +381,28 @@
         \pagebreak
 
         \subsubsection{ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM}
-          \acrshort{orb}-SLAM3 \cite{camposORBSLAM3AccurateOpenSource2021} est une amélioration d'\acrshort{orb}-\acrshort{slam}2, présenté 
+          ORB-SLAM3 \cite{camposORBSLAM3AccurateOpenSource2021} est une amélioration d'ORB-SLAM2, présenté 
           en Figure \ref{fig:ORBSLAM2}, qui consistait à travailler sur trois tâches simultanément : 
-          le suivi, la cartographie locale et la fermeture de boucle. Dans sa partie de suivi, \acrshort{orb}-\acrshort{slam}2 fait correspondre les caractéristiques image 
+          le suivi, la cartographie locale et la fermeture de boucle. Dans sa partie de suivi, ORB-SLAM2 fait correspondre les caractéristiques image 
           par image et les compare avec une carte locale pour trouver l'emplacement exact de la caméra en temps réel. Il procède à un ajustement 
           en fonction du mouvement afin de minimiser l'erreur de reprojection. Vient ensuite la partie cartographie locale 
-          dans laquelle \acrshort{orb}-\acrshort{slam}2 
+          dans laquelle ORB-SLAM2 
           créer des cartes locales et les optimise en utilisant des algorithmes tels que Iterative Closest Point (\acrshort{icp}) et effectue un ajustement 
           local afin de calculer la position la plus probable de la caméra. Enfin, il utilise l'optimisation du graphe des positions 
           pour corriger la dérive accumulée et effectuer une fermeture de boucle. Il est nécessaire d'effectuer un ajustement groupé
           après la fermeture de la boucle, afin que l'utilisateur se trouve à l'emplacement le plus probable dans la carte corrigée. 
           Après l'ajout d'une image clé à la carte ou l'exécution d'une fermeture de boucle, 
-          \acrshort{orb}-\acrshort{slam}2 peut démarrer un nouveau fil d'exécution qui effectue un ajustement de l'ensemble de la carte afin que 
+          ORB-SLAM2 peut démarrer un nouveau fil d'exécution qui effectue un ajustement de l'ensemble de la carte afin que 
           l'emplacement de chaque image clé et des points dans celle-ci obtienne une valeur d'emplacement ajustée.
 
-          Pour traiter une image \acrshort{rgbd}, on calcule d'abord les caractéristiques \acrshort{orb} sur l'image RGB, ensuite on estime les coordonnées de l'image de 
+          Pour traiter une image RGBD, on calcule d'abord les caractéristiques ORB sur l'image RGB, ensuite on estime les coordonnées de l'image de 
           gauche depuis une paire d'images. Un point est associé à "proche" ou "éloigné" en fonction de sa profondeur. Chaque dénomination a des
           caractéristiques utiles, un point proche sera représentatif pour le changement d'échelle, la translation, la rotation alors qu'un point éloigné
           sera surtout utile pour la rotation et devra être supporté par un plus grand nombre d'images.
           À l'initialisation, le système nécessite seulement les premières images clés pour estimer la première carte locale en utilisant les informations
           de profondeur. 
           L'insertion d'une nouvelle image clé est importante, car elle définit le nouvel environnement sur lequel se base l'estimation du mouvement 
-          de la caméra. Elle suit l'idée établie par la première version d'\acrshort{orb}-\acrshort{slam}, d'insérer régulièrement de nouvelles images clés, 
+          de la caméra. Elle suit l'idée établie par la première version d'ORB-SLAM, d'insérer régulièrement de nouvelles images clés, 
           même si cela implique de devoir les retirer si elles sont redondantes. L'ajout de points clés proches et éloignés permet un nouveau seuil 
           d'apparaître pour déterminer si une nouvelle image clé est nécessaire. 
           Si le nombre de points proches devient inférieur à un seuil, il sera nécessaire d'insérer une nouvelle image clé comportant au moins un certain
@@ -410,18 +410,18 @@
 
           \begin{figure}[hbt]  
             \includegraphics[width=\textwidth]{ORB_SLAM2.png}    
-            \caption{Schéma présentant le fonctionnement d'\acrshort{orb}-SLAM2.}
+            \caption{Schéma présentant le fonctionnement d'ORB-SLAM2.}
             \label{fig:ORBSLAM2}
           \end{figure} 
 
-          \acrshort{orb}-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme regroupées dans un Atlas.
+          ORB-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme regroupées dans un Atlas.
           En se servant des données que l'on a déjà vues, on peut retrouver
           facilement les boucles et ainsi réduire les erreurs de dérive. Une représentation en sac de mot dynamique (DBoW2) est utilisée.
           Ce système est présenté en Figure \ref{fig:ORBSLAM3}
 
           \begin{figure}[hbt]  
             \includegraphics[width=\textwidth]{ORB_SLAM3.png}    
-            \caption{Schéma présentant le fonctionnement d'\acrshort{orb}-SLAM3.}
+            \caption{Schéma présentant le fonctionnement d'ORB-SLAM3.}
             \label{fig:ORBSLAM3}
           \end{figure} 
 
@@ -442,16 +442,16 @@
       Il faudrait parcourir tous leurs travaux précédents pour comprendre l'intégralité de leur solution. De plus il faudrait adapter les travaux
       proposés afin de créer la carte locale en temps-réel plutôt qu'avant, puisque c'est une des contraintes imposées par nos superviseurs. 
 
-      L'article "CDSFusion : Dense Semantic \acrshort{slam} for Indoor Environment Using \acrshort{cpu} Computing" est très prometeur mais n'est pas assez détaillé 
-      pour nous permettre de reproduire leur solution à partir de rien. De plus ils utilisent des capteurs \acrshort{imu}, que nous avons convenu de ne pas 
+      L'article "CDSFusion : Dense Semantic SLAM for Indoor Environment Using CPU Computing" est très prometeur mais n'est pas assez détaillé 
+      pour nous permettre de reproduire leur solution à partir de rien. De plus ils utilisent des capteurs IMU, que nous avons convenu de ne pas 
       utiliser dans le cadre de ce projet.
 
-      L'article "Towards Real-time Semantic \acrshort{rgbd} \acrshort{slam} in Dynamic Environments" apporte une solution de tracking de la localisation 
+      L'article "Towards Real-time Semantic RGBD SLAM in Dynamic Environments" apporte une solution de tracking de la localisation 
       d'un module en temps réel, ce qui correspond à ce que l'on recherche dans le cadre de ce projet. Cette solution aide à garder en 
-      mémoire les directions prises jusqu'à arriver à un point donné. Cependant les auteurs ne parlent que peu d'\acrshort{orb}-\acrshort{slam} et se focalisent 
+      mémoire les directions prises jusqu'à arriver à un point donné. Cependant les auteurs ne parlent que peu d'ORB-SLAM et se focalisent 
       surtout sur leur valeur ajouté permettant d'améliorer les résultats de ce dernier.
 
-      Enfin, l'article "\acrshort{orb}-\acrshort{slam}3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map \acrshort{slam}" semble être le plus abouti
+      Enfin, l'article "ORB-SLAM3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM" semble être le plus abouti
       que nous aillons pu lire, il est à l'état de l'art et obtient de meilleurs performances que ses concurants. L'article est assez bien expliqué
       et fourni un code source disponible sur Github. Leur solution semble réutilisable pour notre problème, cela apporterait un bon moyen
       de traquer une personne malvoyante dans une pièce. Certains aspects de la publication semblent compliqués à comprendre mais la méthode en 
@@ -466,14 +466,14 @@
       autre capteur qu'une camera. Notre but final était de fournir un module permettant de guider une personne d'un point A à un point B avec 
       l'aide de notre module créant une carte locale de l'environnement en se basant sur des points et des lieux d'intérêt, 
       s'emboîtant avec les modules de traîtement du langage naturel, et le module de détection d'objets. 
-      L'article "\acrshort{orb}-\acrshort{slam}3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map \acrshort{slam}" 
+      L'article "ORB-SLAM3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM" 
       nous a semblé être le plus pertinent pour arriver à notre but. En effet nous pourrions nous baser sur leur solution de tracking et construire 
       par dessus pour répondre au besoin fonctionnel de ce projet.
       De plus le fait que les auteurs mettent à disposition leur code source donne une première vision de ce qui pourrait être réalisé en terme de 
       performances avec notre propre environnement.
 
     \pagebreak
-  
+  % TODO: Supprimer la consigne + indication de pages.
   \section{Les dimensions techniques du projet (8 à 12 p)}
     Description des objectifs/tâches qui vous ont été confiés, vous exposerez les difficultés rencontrées et la manière dont vous
     les avez abordées.  Vous mettrez également en valeur l’originalité éventuelle de votre approche, les
@@ -481,32 +481,32 @@
     rapport à l’ensemble du projet et son historique.
 
     \subsection{Phase de preuve de concept}
-      Le projet \acrshort{fyw} vise à aider les personnes malvoyantes à se repérer en milieu intérieur. 
+      Le projet FYW vise à aider les personnes malvoyantes à se repérer en milieu intérieur. 
       La preuve de concept (\acrshort{poc}) sur laquelle j'ai travaillée avec mon équipe se concentrait sur la création d'une carte locale
       de l'environnement en nous basant sur des points d'intérêts (\acrshort{poi}) entre les images vues successivement, c'est la méthode
-      \acrshort{slam}.
+      SLAM.
       \subsubsection{Installation}
         Il a d'abord fallu se pencher sur l'installation de la solution que nous avions retenue, afin de construire notre module par dessus.
         Nous avons été capable de produire une documentation d'installation de ORB-SLAM3 sur le Windows sub-system for Linux (\acrshort{wsl2})
         et sur une machine virtuelle (\acrshort{vm}). Ces documentations d'installation appartiennent à Aubay et ne peuvent être divulguées dans
         ce document.
-        Ensuite il a fallu calibrer la caméra que nous utilisions pour fonctionner avec \acrshort{orb}-\acrshort{slam}3. 
+        Ensuite il a fallu calibrer la caméra que nous utilisions pour fonctionner avec ORB-SLAM3. 
         La calibration de la caméra assure que l'estimation de la position de la caméra est la plus proche de la position réelle de la caméra.
         Enfin, l'idée était de développer un algorithme de recherche du plus court chemin entre deux points donnés, par exemple entre la position
         de l'utilisateur et une destination précédemment sauvegardée.      
             
         \paragraph{General}
           Notre méthode se base sur ORB-SLAM3, une solution open-source crée dans une université en Espagne. L'idée était simple, nous voulions
-          l'installer et la faire fonctionner puis ajouter les fonctionnalitées nécéssaires à notre \acrshort{poc}. Ce projet open-source a été
+          l'installer et la faire fonctionner puis ajouter les fonctionnalitées nécéssaires à notre POC. Ce projet open-source a été
           développé en C++ et se base sur de nombreuses bibliothèques de code telles que Eigen, Pangolin, Sophus, DBoW2, g2o, Kalibr et ROS.
           Avant d'installer ORB-SLAM3 nous avons dû installer Eigen et Pangolin. Sophus, DBoW2 et g2o étant déjà inclus dans leur dépôt Github.
 
-          Nous avons essayé d'installer \acrshort{orb}-\acrshort{slam}3 sur Windows 10, Mac OSX, Ubuntu 20.04 sur VirtualBox et enfin 
-          \acrshort{wsl2}. L'installation sous Windows 10 a rapidement été déclarée impossible puisqu'\acrshort{orb}-\acrshort{slam}3
+          Nous avons essayé d'installer ORB-SLAM3 sur Windows 10, Mac OSX, Ubuntu 20.04 sur VirtualBox et enfin 
+          WSL2. L'installation sous Windows 10 a rapidement été déclarée impossible puisqu'ORB-SLAM3
           a été développé pour un système Linux en grande majorité. L'installation sur Mac OSX n'a été que temporaire, le temps que l'on 
-          obtienne l'autorisation de travailler avec \acrshort{wsl2}.
-          Nous avons donc réalisé l'installation d'\acrshort{orb}-\acrshort{slam}3 sur \acrshort{wsl2} et réussi à lancer le \acrshort{slam}
-          sur la vidéo d'exemple fournie. Cependant notre \acrshort{poc} devait fonctionner avec un flux vidéo en temps réel provenant
+          obtienne l'autorisation de travailler avec WSL2.
+          Nous avons donc réalisé l'installation d'ORB-SLAM3 sur WSL2 et réussi à lancer le SLAM
+          sur la vidéo d'exemple fournie. Cependant notre POC devait fonctionner avec un flux vidéo en temps réel provenant
           d'une caméra, et non une vidéo préenregistrée. Le problème était que bien que wsl2 ai accès aux appareils USB (en prenant en compte 
           que pour cela il était nécéssaire de créer un noveau noyau Linux contenant les bons pilotes) et que la caméra soit visible dans les
           pilotes USB, le sous-système n'était pas capable de créer la vidéo dans /dev/video, rendant le flux vidéo innaccessible à notre
@@ -692,31 +692,29 @@
         pour atteindre notre but et avoir un module prêt à intégrer la phase projet pour venir se lier aux autres POC de notre projet.
 % TODO: Relire la phase projet.
     \subsection{Phase projet}
-      Une fois la phase de \acrshort{poc} terminée, nous devions ensuite passer à la phase projet, nécéssitant d'associer nos \acrshort{poc}
-      afin de créer une application de démonstration pour la \acrshort{jds} du 7 juillet 2022. Cette journée est un jalon très important
+      Une fois la phase de POC terminée, nous devions passer à la phase projet nécéssitant d'associer nos POCs
+      afin de créer une application de démonstration pour la JDS du 7 juillet 2022. Cette journée est un jalon très important
       pour tout stagiaire au sein de la cellule Innov' de chez Aubay. Elle sert à présenter le projet sur lequel chaque équipe a travaillé
-      afin de montrer à la direction générale ainsi qu'aux directeur commerciaux de dont les stagiaires sont capable, et ce qu'Aubay pourrait
+      afin de montrer à la direction générale ainsi qu'aux directeurs commerciaux ce dont les stagiaires sont capable et ce qu'Aubay pourrait
       proposer à ses clients dans le futur. Nous avons donc réfléchis à la création d'une application et d'une
-      interface graphique nous permettant de démontrer
-      le fonctionnement de notre application, bien que l'application finale soit destinée à des personnes malvoyantes, ne nécessitant pas 
-      d'autre interface qu'une interface vocale.
+      interface graphique nous permettant de démontrer le fonctionnement de notre application, bien que l'application finale soit destinée 
+      à des personnes malvoyantes, ne nécessitant qu'une interface vocale.
 
       \subsubsection{Protocole de communication}
         Il est important de noter que nos 3 POCs ne fonctionnent pas sur les mêmes systèmes, en effet, le POC SLAM développé en C++
-        fonctionne uniquement sur WSL2, tandis que les POC Computer Vision (\acrshort{cv}) et Natural Language Processing (\acrshort{nlp}) sont développés en Python 
-        sur Windows. Le problème étant que WSL2 ne nous permettait pas d'accéder au flux vidéo de la caméra nécéssaire aux POCs SLAM et CV, 
-        qu'une VM nous le permettait mais ne donnait pas accès aux GPU nécéssaires aux POCs CV et NLP. Nous avons optés pour trouver une 
-        solution
-        concernant le problème de flux vidéo sur WSL2. Étant donné que les 3 POCs devaient fonctionner sur le même réseau local, l'idée de 
-        mettre
-        en place un serveur Flask afin d'établir une communication entre Windows et WSL2 pour transmettre le flux vidéo de Windows à WSL2. 
-        Cette solution a nécéssité d'adapter la manière dont ORB-SLAM3 récuperait le flux vidéo avant de l'incorporer à son 
-        fonctionnement normal.
+        fonctionne uniquement sur WSL2, tandis que les POC Computer Vision (\acrshort{cv}) et Natural Language Processing (\acrshort{nlp}) 
+        sont développés en Python sur Windows. Le problème étant que WSL2 ne nous permettait pas d'accéder au flux vidéo de la caméra nécéssaire 
+        aux POCs SLAM et CV, qu'une VM nous le permettait mais ne donnait pas accès aux unitées de traitement graphiques (GPU) nécéssaires aux 
+        POCs CV et NLP. Nous avons optés pour 
+        trouver une solution concernant le problème de flux vidéo sur WSL2. Étant donné que les 3 POCs devaient fonctionner sur le même réseau 
+        local, nous avons eu m'idée de mettre en place un serveur afin d'établir une communication entre Windows et WSL2 pour transmettre le flux 
+        vidéo de Windows à WSL2. Cette solution a nécéssité d'adapter la manière dont ORB-SLAM3 récuperait le flux vidéo avant de l'incorporer à 
+        son fonctionnement normal.
 
-        L'application est composée d'un backend et d'un frontend. Le backend se charge des fonctionnalités, le frontend s'occupe du rendu
+        L'application est composée d'un backend se chargeant des fonctionnalités tandis que le frontend s'occupe du rendu
         graphique afin de présenter les résultats à l'utilisateur. La structure de l'application est simple: Les 3 POCs communiquent à un 
         chef d'orchestre pour envoyer leur requête ou récupérer le résultat d'une requête précédemment effectuée et le frontend récupère
-        les résultats à afficher après avoir sélectionner le mode de démonstration adapté. Ce fonctionnement est illustré dans la 
+        les résultats à afficher après avoir sélectionné le mode de démonstration adapté. Ce fonctionnement est illustré dans la 
         Figure \ref{fig:Structure}.
 
         \begin{figure}[hbt]  
@@ -730,9 +728,10 @@
         communications au niveau du proxy et du par-feu en ouvrant les bons ports, cette communication par socket a pu être réalisée.
         Une fois la communication rendue possible, il a fallu ajouter des threads au code d'ORB-SLAM3 permettant des interruptions
         pour envoyer les données nécéssaires après leur traîtement ou recevoir les instructions du chef d'orchestre
-        afin d'executer les fonctions utiles au bon moment.
+        afin d'executer les fonctions utiles au bon moment. Un schéma global des communications établies au sein du projet est disponible en 
+        annexe.
 
-        % TODO: Mettre le schéma de Victor concernant la communication.
+        % TODO: Mettre le schéma de Victor concernant la communication en annexe.
 
       \subsubsection{Développement de l'application}         
         L'application fonctionne avec une caméra branchée pour transmettre le flux vidéo aux différents modules s'en servant ainsi qu'avec
@@ -758,7 +757,7 @@
         \end{figure}     
 
   \pagebreak
-  
+  % TODO: Supprimer la consigne + indication de pages.
   \section{Les dimensions humaines et managériales (3 à 5 p)}
   Les dimensions humaines et managériales internes à l’organisme d’accueil. Cette partie consiste en
   une présentation analytique des processus d’entreprise. Selon les cas, elle portera sur la conduite de
@@ -768,7 +767,7 @@
   effectuée doivent être abordées de façon professionnelle pour que le jury ait une appréciation réaliste
   des conditions du travail réalisé. 
   
-  % TODO: Dimension humaine et managéiales.
+  % TODO: Dimension humaine et managériales.
 
   Méthode agile 
   Daily
@@ -778,7 +777,7 @@
   3 groupes de 3, 3 et 4 indépendants puis mise en commun lors de la phase projet
 
   \pagebreak
-  
+  % TODO: Supprimer la consigne + indication de pages.
   \section{Conclusion (2 à 3 p)}
   La conclusion générale, de quelques pages, porte sur l’ensemble de votre expérience technique et
   humaine. Une première partie correspond au bilan et une deuxième partie expose les possibilités
@@ -808,12 +807,13 @@
       variation de l'intensité lumineuse.
       L'idée est donc de trouver des points caractéristiques sur les images récupérées de manière à ce que ces points décrivent au mieux 
       l'objet en cours de traîtement. En regroupant ces points caractéristiques, appellés "points d'intérêt", on est capable de déterminer 
-      si deux objets avec un point de vue différent sont les même ou non. Les méthodes d'extractions de \acrshort{poi} les plus populaires 
+      si deux objets avec un point de vue différent sont les même ou non. Les méthodes d'extractions de POI les plus populaires 
       sont les méthodes SIFT et ORB par exemple.
       Une fois un point d'intérêt détecté, on veut être capable de résumer son information d'une manière simple afin de pouvoir le comparer
       à d'autres points d'intérêts. On peut utiliser l'intensité lumineuse ou le gradient des pixels environnants le point d'intéret pour 
       former un descripteur correcte, tout en respectant les règles de discrimination et d'invariance. Les descripteurs sont en général 
       stockés dans des vecteurs de 128 bits, ce qui permet une comparaison rapide.
+      Un exemple d'appariement des POI est présenté dans la Figure \ref{fig:Appariement}. 
 
       La comparaison entre deux descripteurs se fait généralement par des calculs booléens tels que présenté dans la 
       Figure \ref{fig:Descripteur}.
@@ -825,7 +825,7 @@
       \end{figure} 
 
     \subsection{FAST}
-      Cette méthode d'extraction de \acrshort{poi} vérifie pour chaque pixel de l'image d'intensité $I_p$ si au moins 12 des pixels
+      Cette méthode d'extraction de POI vérifie pour chaque pixel de l'image d'intensité $I_p$ si au moins 12 des pixels
       du cercle autour du pixel ont une intensité supérieure ou inférieure à une proportion de $I_p$. Autrement dit on regarde si il y a une 
       grosse démarquation d'intensité entre le pixel et ses voisins comme le montre la Figure \ref{fig:CercleSuperiorite}.
 
@@ -844,17 +844,16 @@
         \includegraphics[width=\textwidth]{Paires.png}    
         \caption{Exemple de paires de pixels à tester.}
         \label{fig:Paires}
-      \end{figure}   
-
-      Un exemple d'appariement des POI est présenté dans la Figure \ref{fig:Appariement}. 
+      \end{figure}    
 
       \begin{figure}[hbt]  
-        \includegraphics[width=\textwidth]{AssociationPOI.png}    
+        \centering
+        \includegraphics[width=80mm]{AssociationPOI.png}    
         \caption{Exemple d'association de POI.}
         \label{fig:Appariement}
       \end{figure}   
     
-    \pagebreak
+    \clearpage
     \printnoidxglossary[type=acronym, nonumberlist]
     \printacronyms
  
