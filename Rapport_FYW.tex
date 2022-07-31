@@ -44,6 +44,8 @@
 \newacronym{poc}{POC}{Proof of Concept}
 \newacronym{dbow2}{DBoW2}{Dynamic Bag of Words}
 \newacronym{ros}{ROS}{Robot Operating System}
+\newacronym{cv}{CV}{Computer Vision}
+\newacronym{nlp}{NLP}{Natural Language Processing}
 
 % Used to manage hyperlinks and make a clickable table of contents.
 \usepackage{hyperref}
@@ -383,10 +385,10 @@
           en Figure \ref{fig:ORBSLAM2}, qui consistait à travailler sur trois tâches simultanément : 
           le suivi, la cartographie locale et la fermeture de boucle. Dans sa partie de suivi, \acrshort{orb}-\acrshort{slam}2 fait correspondre les caractéristiques image 
           par image et les compare avec une carte locale pour trouver l'emplacement exact de la caméra en temps réel. Il procède à un ajustement 
-          du faisceau en fonction du mouvement afin de minimiser l'erreur de reprojection. Vient ensuite la partie cartographie locale 
+          en fonction du mouvement afin de minimiser l'erreur de reprojection. Vient ensuite la partie cartographie locale 
           dans laquelle \acrshort{orb}-\acrshort{slam}2 
           créer des cartes locales et les optimise en utilisant des algorithmes tels que Iterative Closest Point (\acrshort{icp}) et effectue un ajustement 
-          local du faisceau afin de calculer la position la plus probable de la caméra. Enfin, il utilise l'optimisation du graphe des positions 
+          local afin de calculer la position la plus probable de la caméra. Enfin, il utilise l'optimisation du graphe des positions 
           pour corriger la dérive accumulée et effectuer une fermeture de boucle. Il est nécessaire d'effectuer un ajustement groupé
           après la fermeture de la boucle, afin que l'utilisateur se trouve à l'emplacement le plus probable dans la carte corrigée. 
           Après l'ajout d'une image clé à la carte ou l'exécution d'une fermeture de boucle, 
@@ -412,8 +414,10 @@
             \label{fig:ORBSLAM2}
           \end{figure} 
 
-          \acrshort{orb}-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme. En se servant des données que l'on a déjà vues, on peut retrouver
-          facilement les boucles et ainsi réduire les erreurs de dérive. Ce système est présenté en Figure \ref{fig:ORBSLAM3}
+          \acrshort{orb}-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme regroupées dans un Atlas.
+          En se servant des données que l'on a déjà vues, on peut retrouver
+          facilement les boucles et ainsi réduire les erreurs de dérive. Une représentation en sac de mot dynamique (DBoW2) est utilisée.
+          Ce système est présenté en Figure \ref{fig:ORBSLAM3}
 
           \begin{figure}[hbt]  
             \includegraphics[width=\textwidth]{ORB_SLAM3.png}    
@@ -699,7 +703,7 @@
 
       \subsubsection{Protocole de communication}
         Il est important de noter que nos 3 POCs ne fonctionnent pas sur les mêmes systèmes, en effet, le POC SLAM développé en C++
-        fonctionne uniquement sur WSL2, tandis que les POC Computer Vision (CV) et Natural Language Processing (NLP) sont développés en Python 
+        fonctionne uniquement sur WSL2, tandis que les POC Computer Vision (\acrshort{cv}) et Natural Language Processing (\acrshort{nlp}) sont développés en Python 
         sur Windows. Le problème étant que WSL2 ne nous permettait pas d'accéder au flux vidéo de la caméra nécéssaire aux POCs SLAM et CV, 
         qu'une VM nous le permettait mais ne donnait pas accès aux GPU nécéssaires aux POCs CV et NLP. Nous avons optés pour trouver une 
         solution
@@ -840,6 +844,14 @@
         \includegraphics[width=\textwidth]{Paires.png}    
         \caption{Exemple de paires de pixels à tester.}
         \label{fig:Paires}
+      \end{figure}   
+
+      Un exemple d'appariement des POI est présenté dans la Figure \ref{fig:Appariement}. 
+
+      \begin{figure}[hbt]  
+        \includegraphics[width=\textwidth]{AssociationPOI.png}    
+        \caption{Exemple d'association de POI.}
+        \label{fig:Appariement}
       \end{figure}   
     
     \pagebreak
