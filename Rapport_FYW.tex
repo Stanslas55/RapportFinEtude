@@ -150,10 +150,17 @@
   % Used to write the abstract in french.
   \selectlanguage{french} 
   \begin{abstract}
-    % TODO: Abstract à écrire.
-    Vous donnerez une description du
-    sujet et des grandes parties de l’ouvrage. Il s’agit ici de motiver un lecteur potentiel en lui
-    décrivant le contenu du document et les implications que l’on peut en tirer,
+    % TODO: Abstract à terminer.
+
+    Le projet Find Your Way a pour but de guider des personnes malvoyantes en milieu intérieur. Ce document relate le travail éffectué autour
+    de cette thématique dans le cadre de mon stage de fin d'études, en se focalisant sur la partie localisation et guidage de l'utilisateur.
+    Un état de l'art concernant le sujet de la localisation et de la cartographie locale en temps réel est présenté. Ensuite une preuve de
+    concept se basant sur une méthode en sources libres, contenant les améliorations que mon groupe et moi avons pu ajouter est expliquée 
+    dans ce document. Enfin ce document explique le déroulement de la phase projet au sein de la cellule Innov' de l'entreprise Aubay
+    pour démontrer le résultat d'une collaboration entre 11 stagiaires. Le lecteur pourra y trouver des informations concernant ORB-SLAM3,
+    FAST, les points d'intérets, la création d'un protocole de communication, le développement de l'interface graphique et les problèmes 
+    que l'on peut rencontrer sur ce genre de projet multidisciplinaire.
+
   \end{abstract}
   \pagebreak
 
@@ -372,7 +379,8 @@
         \pagebreak
 
         \subsubsection{ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM}
-          \acrshort{orb}-SLAM3 \cite{camposORBSLAM3AccurateOpenSource2021} est une amélioration d'\acrshort{orb}-\acrshort{slam}2, présenté en Figure \ref{fig:ORBSLAM2}, qui consistait à travailler sur trois tâches simultanément : 
+          \acrshort{orb}-SLAM3 \cite{camposORBSLAM3AccurateOpenSource2021} est une amélioration d'\acrshort{orb}-\acrshort{slam}2, présenté 
+          en Figure \ref{fig:ORBSLAM2}, qui consistait à travailler sur trois tâches simultanément : 
           le suivi, la cartographie locale et la fermeture de boucle. Dans sa partie de suivi, \acrshort{orb}-\acrshort{slam}2 fait correspondre les caractéristiques image 
           par image et les compare avec une carte locale pour trouver l'emplacement exact de la caméra en temps réel. Il procède à un ajustement 
           du faisceau en fonction du mouvement afin de minimiser l'erreur de reprojection. Vient ensuite la partie cartographie locale 
@@ -380,7 +388,7 @@
           créer des cartes locales et les optimise en utilisant des algorithmes tels que Iterative Closest Point (\acrshort{icp}) et effectue un ajustement 
           local du faisceau afin de calculer la position la plus probable de la caméra. Enfin, il utilise l'optimisation du graphe des positions 
           pour corriger la dérive accumulée et effectuer une fermeture de boucle. Il est nécessaire d'effectuer un ajustement groupé
-          après la fermeture de la boucle, afin que le robot se trouve à l'emplacement le plus probable dans la carte corrigée. 
+          après la fermeture de la boucle, afin que l'utilisateur se trouve à l'emplacement le plus probable dans la carte corrigée. 
           Après l'ajout d'une image clé à la carte ou l'exécution d'une fermeture de boucle, 
           \acrshort{orb}-\acrshort{slam}2 peut démarrer un nouveau fil d'exécution qui effectue un ajustement de l'ensemble de la carte afin que 
           l'emplacement de chaque image clé et des points dans celle-ci obtienne une valeur d'emplacement ajustée.
@@ -678,36 +686,72 @@
         Pour conclure sur la phase de POC, nous avons réussi à faire fonctionner un système SLAM pour la première fois chez Aubay, d'autres
         équipe ayant essayé sans succès par le passé. En plus de réussir l'installation, nous avons ajouté les fonctionnalités nécéssaires
         pour atteindre notre but et avoir un module prêt à intégrer la phase projet pour venir se lier aux autres POC de notre projet.
-
+% TODO: Relire la phase projet.
     \subsection{Phase projet}
       Une fois la phase de \acrshort{poc} terminée, nous devions ensuite passer à la phase projet, nécéssitant d'associer nos \acrshort{poc}
-      afin de créer une application de démonstration pour la \acrshort{jds} du 7 juillet 2022. Nous avons réfléchis à la création d'Une
-      interface graphique.
+      afin de créer une application de démonstration pour la \acrshort{jds} du 7 juillet 2022. Cette journée est un jalon très important
+      pour tout stagiaire au sein de la cellule Innov' de chez Aubay. Elle sert à présenter le projet sur lequel chaque équipe a travaillé
+      afin de montrer à la direction générale ainsi qu'aux directeur commerciaux de dont les stagiaires sont capable, et ce qu'Aubay pourrait
+      proposer à ses clients dans le futur. Nous avons donc réfléchis à la création d'une application et d'une
+      interface graphique nous permettant de démontrer
+      le fonctionnement de notre application, bien que l'application finale soit destinée à des personnes malvoyantes, ne nécessitant pas 
+      d'autre interface qu'une interface vocale.
 
-      % TODO: Parler de Figma, maquette du site etc...
+      \subsubsection{Protocole de communication}
+        Il est important de noter que nos 3 POCs ne fonctionnent pas sur les mêmes systèmes, en effet, le POC SLAM développé en C++
+        fonctionne uniquement sur WSL2, tandis que les POC Computer Vision (CV) et Natural Language Processing (NLP) sont développés en Python 
+        sur Windows. Le problème étant que WSL2 ne nous permettait pas d'accéder au flux vidéo de la caméra nécéssaire aux POCs SLAM et CV, 
+        qu'une VM nous le permettait mais ne donnait pas accès aux GPU nécéssaires aux POCs CV et NLP. Nous avons optés pour trouver une 
+        solution
+        concernant le problème de flux vidéo sur WSL2. Étant donné que les 3 POCs devaient fonctionner sur le même réseau local, l'idée de 
+        mettre
+        en place un serveur Flask afin d'établir une communication entre Windows et WSL2 pour transmettre le flux vidéo de Windows à WSL2. 
+        Cette solution a nécéssité d'adapter la manière dont ORB-SLAM3 récuperait le flux vidéo avant de l'incorporer à son 
+        fonctionnement normal.
 
-      \subsubsection{Développement de l'application}
-        Création d'une maquête de l'application
+        L'application est composée d'un backend et d'un frontend. Le backend se charge des fonctionnalités, le frontend s'occupe du rendu
+        graphique afin de présenter les résultats à l'utilisateur. La structure de l'application est simple: Les 3 POCs communiquent à un 
+        chef d'orchestre pour envoyer leur requête ou récupérer le résultat d'une requête précédemment effectuée et le frontend récupère
+        les résultats à afficher après avoir sélectionner le mode de démonstration adapté. Ce fonctionnement est illustré dans la 
+        Figure \ref{fig:Structure}.
 
-        Décision du framework à utiliser: Aubay nous a proposé de choisir entre Angular et Flutter mais l'idée était aussi de découvrir 
-        une nouvelle technologies. Nous avons opté pour le Flutter puisque j'avais déjà été confronté à cette technologie lors d'un projet
-        personnel.   
+        \begin{figure}[hbt]  
+          \includegraphics[width=\textwidth]{StructureApp.png}    
+          \caption{Schéma présentant l'architecture de l'application.}
+          \label{fig:Structure}
+        \end{figure} 
 
+        Le POC SLAM se situant sur un système différent et utilisant un langage de programmation différent des POCs CV et NLP, il a fallu
+        recourir aux sockets qui sont disponible dans beaucoup de langages de programmation dont C++ et Python. Après avoir autorisé les 
+        communications au niveau du proxy et du par-feu en ouvrant les bons ports, cette communication par socket a pu être réalisée.
+        Une fois la communication rendue possible, il a fallu ajouter des threads au code d'ORB-SLAM3 permettant des interruptions
+        pour envoyer les données nécéssaires après leur traîtement ou recevoir les instructions du chef d'orchestre
+        afin d'executer les fonctions utiles au bon moment.
 
+        % TODO: Mettre le schéma de Victor concernant la communication.
 
-        
-        Après 2 semaines de travail, nous nous sommes rendu compte que Flutter ne répondait pas à certains de nos besoin techniques
-        tels que l'affichage d'images successivement en temps réel, les temps de communications étaient trop long et il était compliqué 
-        d'executer des scripts python depuis l'application développée en Flutter.
+      \subsubsection{Développement de l'application}         
+        L'application fonctionne avec une caméra branchée pour transmettre le flux vidéo aux différents modules s'en servant ainsi qu'avec
+        un micro et un haut-parleur.  
+        L'interface graphique donne la possibilité de lancer une démonstration et de démarrer les parties SLAM, CV et NLP via le serveur Flask 
+        et des sockets. Cette interface a été développée avec Python grace à la bibliothèque PyQt5. La page principale de l'application est
+        montrée en Figure \ref{fig:Application}, on y voit les résultats des POCs CV et SLAM ainsi que les différents boutons permettant
+        à l'utilisateur d'intéragir pour tester l'application. Ces boutons servent à: 
 
+        \begin{itemize}
+          \item Lancer une vidéo de démonstration.
+          \item Lancer l'application en temps réel.
+          \item Utiliser le microphone pour exprimer une commande vocale lorsque l'application s'exécute en temps réel.
+          \item Sauvegarder la postion courante comme un lieu favoris afin de pouvoir s'y faire guider plus tard.
+          \item Demander à se faire guider à un lieu précédemment sauvegardé.
+          \item Afficher l'historique des commandes utilisées et réponses reçues.   
+        \end{itemize} 
 
-        Passage à PyQt5 afin de développer une interface rapidement et facilement, le but était de faciliter la communication avec le 
-        backend pour permettre du temps réel.
-        Réalisation des liens entre Frontend et Backend avec un objet partagé
-
-        Protocole de communication entre les POC
-        
-        
+        \begin{figure}[hbt]  
+          \includegraphics[width=\textwidth]{Application.png}    
+          \caption{Page principale de l'application.}
+          \label{fig:Application}
+        \end{figure}     
 
   \pagebreak
   
