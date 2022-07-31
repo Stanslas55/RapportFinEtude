@@ -152,13 +152,11 @@
   % Used to write the abstract in french.
   \selectlanguage{french} 
   \begin{abstract}
-    % TODO: Abstract à terminer.
-
     Le projet Find Your Way a pour but de guider des personnes malvoyantes en milieu intérieur. Ce document relate le travail effectué autour
-    de cette thématique dans le cadre de mon stage de fin d'études, en se focalisant sur la partie localisation et guidage de l'utilisateur.
+    de cette thématique dans le cadre de mon stage de fin d'études chez Aubay, en se focalisant sur la partie localisation et guidage de l'utilisateur.
     Un état de l'art concernant le sujet de la localisation et de la cartographie locale en temps réel est présenté. Ensuite une preuve de
-    concept se basant sur une méthode en sources libres, contenant les améliorations que mon groupe et moi avons pu ajouter est expliquée 
-    dans ce document. Enfin ce document explique le déroulement de la phase projet au sein de la cellule Innov' de l'entreprise Aubay
+    concept se basant sur une méthode en sources libres, contenant les améliorations que nous avons pu ajouter avec mon groupe est expliquée. 
+    Enfin ce document explique le déroulement de la phase projet au sein de la cellule Innov' de l'entreprise Aubay
     pour démontrer le résultat d'une collaboration entre 11 stagiaires. Le lecteur pourra y trouver des informations concernant ORB-SLAM3,
     FAST, les points d'intérêts, la création d'un protocole de communication, le développement de l'interface graphique et les problèmes 
     que l'on peut rencontrer sur ce genre de projet multidisciplinaire.
@@ -169,8 +167,15 @@
   % Used to write the abstract in english.
   \selectlanguage{english} 
   \begin{abstract}
-  % TODO: Abstract en anglais à écrire.
-    Abstract in English
+    The Find Your Way project aims to guide visually impaired people in indoor environments. 
+    This document relates the work done on this topic during my internship at Aubay, focusing on the localization and user guidance part.
+    A state of the art concerning the subject of localization and real-time mapping is presented. Then a proof of
+    concept based on an open source method, containing the improvements that we could add with my group is explained. 
+    Finally this document explains the project phase within the Innov' cell of Aubay
+    to show the result of a collaboration between 11 trainees. The reader can find information about ORB-SLAM3,
+    FAST, the points of interest, the creation of a communication protocol, the development of the graphic interface and the problems 
+    that can be encountered on this kind of multidisciplinary project.
+
   \end{abstract}
   \pagebreak
 
@@ -209,8 +214,7 @@
 
   \pagebreak
 
-  \section{Introduction et contexte}    
-  
+  \section{Introduction et contexte}      
     Mon stage s'est déroulé dans une entreprise appelée Aubay, pour une durée de 6 mois (du 28 février 2022 au 31 août 2022). 
     En détail, Aubay est une entreprise de services numériques (\acrshort{esn}) qui a été fondée par Christian Aubert en 1998 et 
     dont le siège social est situé au 13 rue Louis Pasteur à Boulogne-Billancourt. L'entreprise est spécialisée dans les domaines 
@@ -271,6 +275,7 @@
     à savoir la détection d'objets, la localisation de l'utilisateur et la gestion des interactions vocales, nous avons dû nous séparer en 3 
     groupes afin de réaliser les états de l'art et les preuves de concept. J'ai personnellement travaillé sur la partie s'intéressant à la 
     localisation et le guidage de l'utilisateur dans son environnement. 
+    
     \pagebreak
   
   \section{État de l'art}  
@@ -473,13 +478,8 @@
       performances avec notre propre environnement.
 
     \pagebreak
-  % TODO: Supprimer la consigne + indication de pages.
-  \section{Les dimensions techniques du projet (8 à 12 p)}
-    Description des objectifs/tâches qui vous ont été confiés, vous exposerez les difficultés rencontrées et la manière dont vous
-    les avez abordées.  Vous mettrez également en valeur l’originalité éventuelle de votre approche, les
-    choix et décisions que vous aurez prises. Vous mettrez vos travaux et réalisations en perspective par
-    rapport à l’ensemble du projet et son historique.
 
+  \section{Les dimensions techniques du projet}
     \subsection{Phase de preuve de concept}
       Le projet FYW vise à aider les personnes malvoyantes à se repérer en milieu intérieur. 
       La preuve de concept (\acrshort{poc}) sur laquelle j'ai travaillée avec mon équipe se concentrait sur la création d'une carte locale
@@ -673,10 +673,10 @@
           \includegraphics[width=80mm]{Test4.png}    
           \caption{Retour à un point d'intérêt.}
           \label{fig:Test4}
-        \end{figure}    
-        
+        \end{figure}           
         
       \pagebreak
+
       \subsubsection{Difficultés rencontrées}
         Nous avons passé la majeure partie du temps qui nous était imparti pour le POC à essayer d'installer ORB-SLAM3. La recherche des bonnes
         versions pour chaque bibliothèque nous a beaucoup retardés. Certaines parties du code source ont dû être éditées, notamment au niveau
@@ -690,7 +690,7 @@
         Pour conclure sur la phase de POC, nous avons réussi à faire fonctionner un système SLAM pour la première fois chez Aubay, d'autres
         équipe ayant essayé sans succès par le passé. En plus de réussir l'installation, nous avons ajouté les fonctionnalités nécessaires
         pour atteindre notre but et avoir un module prêt à intégrer la phase projet pour venir se lier aux autres POC de notre projet.
-% TODO: Relire la phase projet.
+
     \subsection{Phase projet}
       Une fois la phase de POC terminée, nous devions passer à la phase projet nécessitant d'associer nos POCs
       afin de créer une application de démonstration pour la JDS du 7 juillet 2022. Cette journée est un jalon très important
@@ -763,24 +763,53 @@
         Nous avons appris à faire communiquer nos applications grâce à Flask et les sockets en établissant un protocole de communication.
 
   \pagebreak
-  % TODO: Supprimer la consigne + indication de pages.
-  \section{Les dimensions humaines et managériales (3 à 5 p)}
-  Les dimensions humaines et managériales internes à l’organisme d’accueil. Cette partie consiste en
-  une présentation analytique des processus d’entreprise. Selon les cas, elle portera sur la conduite de
-  projet, les aspects organisationnels, la gestion du changement, le travail en groupe, l’énoncé des
-  objectifs individuels et de l’équipe, la contribution à l’atteinte des objectifs, les difficultés rencontrées,
-  les aides reçues, etc. Les difficultés propres à l’entreprise ou au service dans lequel la mission a été
-  effectuée doivent être abordées de façon professionnelle pour que le jury ait une appréciation réaliste
-  des conditions du travail réalisé. 
-  
-  % TODO: Dimension humaine et managériales.
 
-  Méthode agile 
-  Daily
-  Comité le mardi à 14h45
-  Jira pour suivre le projet et ses avancées, sprint de 2 semaines
-  Scrum Master élu chaque semaine
-  3 groupes de 3, 3 et 4 indépendants puis mise en commun lors de la phase projet
+  \section{Les dimensions humaines et managériales} 
+    \subsection{Le plan humain}
+      Le côté humain chez Aubay est beaucoup mis en avant. Dans le cadre de ce projet, cet aspect s'est 
+      matérialisé sous la forme d'un open space dans lequel plusieurs équipes travaillant sur des projets 
+      différents, ce qui permettait sur les temps de pause de créer du lien autour des différents endroits 
+      sociaux tels que la machine à café, la cafétéria ou encore le baby-foot. La crise sanitaire a empêché
+      l'organisation d'événements pendant un certain temps, et c'est justement au moment de ce stage qu'Aubay 
+      a pu recommencer à organiser des évènements de rencontres après les heures de travail. Ces évènements 
+      ont grandement participé au côté humain tel que j'ai pu le vivre durant cette expérience.
+
+      Nous étions assez proches de nos encadrants et pouvions leur parler librement, leurs bureaux étant très 
+      proches de l'open space dans lequel nous travaillions. Nous pouvions aussi les contacter sur teams ou 
+      par mail, mais la plupart de nos échanges se faisaient de vive voix.
+
+    \subsection{Le plan managérial}
+      Chez Aubay les projets sont réalisés avec une méthode agile afin de fixer les objectifs et vérifier qu'ils
+      ont été atteints de manière régulière. Ainsi nous participions chaque matin à un Daily, une réunion
+      composée de l'équipe de stagiaires et de l'encadrant technique si besoin, 
+      visant à remonter les points bloquants que nous rencontrions ainsi que d'échanger sur l'avancée du projet.
+      Le travail était organisé en sprints de 2 semaines pendant lesquels nous devions résoudre les tickets
+      correspondant aux tâches à accomplir que nous nous étions fixées. Chaque semaine un scrum master était
+      choisi parmi les membres de l'équipe afin qu'il anime les Daily. Un comité était organisé chaque mardi
+      à 14h45 pour faire le point sur les avancées de la semaine passée et les objectifs encore à atteindre
+      durant la fin du sprint. C'est aussi lors de ces réunions que nous pouvions être amenés à montrer des 
+      démonstrations à nos encadrants. 
+
+      Pendant les sprints, les membres de l'équipe travaillaient en 3 groupes, un groupe par POC pour avancer 
+      sur leur partie du projet. Ces 3 groupes n'interagissaient professionnellement qu'au moment des Daily
+      et des comités. C'est au moment de la phase projet que les groupes ont été remaniés en fonction des
+      affinités de chacun sur les tâches à effectuer.
+
+      Concernant nos encadrants, nous avions un encadrant présent pour répondre à nos questions 
+      techniques si nous en avions et un encadrant agile qui s'assurait que le suivi du projet était réalisé 
+      de la bonne manière. C'est pendant les comités que nous regardions tous ensemble le Jira du projet pour nous
+      rendre compte de l'avancée du projet, si nous documentions bien les tâches à effectuer afin que par la suite, 
+      il soit facile de reprendre le projet et de comprendre ce qui a été réalisé et pour quelles raisons.
+
+      Les personnes se portant volontaires pour être encadrants techniques sont généralement des personnes en
+      intercontrat, attendant de trouver une mission les intéressant chez un client. C'est pourquoi il est 
+      arrivé à deux reprises que notre encadrant technique change. Heureusement, Aubay a correctement géré 
+      ce changement en organisant une réunion de passation durant laquelle le futur encadrant était mis au 
+      courant de l'état courant du projet qu'il devait désormais superviser.
+
+      Il nous est arrivé à de nombreuses reprises d'avoir des problèmes techniques pendant le projet, cependant 
+      nous avons pu recevoir de l'aide sous forme de pistes et d'indications afin d'essayer des options que 
+      nous n'avions pas envisagées.
 
   \pagebreak
   % TODO: Supprimer la consigne + indication de pages.
@@ -790,12 +819,39 @@
   d’évolution du projet, du produit. Enfin, vous présenterez vos perspectives d’évolution par rapport à
   votre projet professionnel initial. Vous préciserez les compétences que vous avez développées en
   école d’ingénieurs et durant votre mission de fin d’études et préciserez vos axes d’amélioration.
-
   % TODO: Conclusion.
 
-  Bilan technique sur le projet
+  \subsection{Bilan technique sur le projet}
+    SLAM pour la première fois chez Aubay
+    Très long mais nous avons réussi
+    Réalisation d'un protocole de communication entre plusieurs applications sur le même réseau 
+    Développement d'une application graphique pour la première fois, Flutter, PyQT5
 
-  Possibles évolutions
+  \subsection{Possibilités d'évolution du projet}
+    D'autres méthodes peuvent être explorées
+    Une meilleure caméra, possiblement grand angle serait utile
+    Envisager DGS avec le SegNet qui enlève les objets dynamiques
+
+  \subsection{Perspectives d'évolution professionnelles}
+   Le projet m'a permis de prendre conscience que j'aimais beaucoup le développement, en plus de ma forte 
+   afinité pour la data et l'intelligence artificielle. Les différentes rencontres que j'ai pu faire au 
+   cours du projet, les discussions avec des personnes déjà en CDI m'ont fait comprendre que je manquais
+   encore de certaines compétences techniques avant de pouvoir atteindre les postes que je vise.
+   Le but va être de se former sur AWS qui devient nécéssaire dans énormément d'entreprises.
+
+   Pendant ce stage j'ai développé des compétences dans le domaine Agile et DevOps, notamment au niveau du 
+   suivi de projet avec Jira, du versionning avec Git, mais aussi en développement puisque j'ai pu renforcer 
+   mes connaissances en C++ et Python. J'ai également eu une première approche du développement fullstack 
+   étant donné que j'ai pu participer à la création d'une application ou il fallait gérer un affichage 
+   graphique en plus des fonctions contenues dans le back. Lors de mes études j'ai surtout eu l'occasion de 
+   développer des fonctions en back, alors cette nouveauté du stage est venu compléter mon expérience pour me 
+   donner un point de vu neuf sur les différents métiers possibles autour de la programmation.
+   J'ai également amélioré ma capacité de synthèse en lisant des articles scientifiques très techniques et en 
+   les résumant.
+   J'ai amélioré et développé mes compétences humaines, vu la taille de mon équipe, il fallait être capable 
+   d'écouter le point de vue des autres mais aussi de réussir à s'exprimer parmis la quantité de personnalités 
+   différentes que j'ai pu rencontrer.
+
 
   \pagebreak
   
@@ -821,7 +877,7 @@
       stockés dans des vecteurs de 128 bits, ce qui permet une comparaison rapide.
       Un exemple d'appariement des POI est présenté dans la Figure \ref{fig:Appariement}. 
 
-      La comparaison entre deux descripteurs se fait généralement par des calculs booléens tels que présenté dans la 
+      La comparaison entre deux descripteurs se fait généralement par des calculs booléens tels que le montre la 
       Figure \ref{fig:Descripteur}.
       
       \begin{figure}[hbt]  
