@@ -154,13 +154,13 @@
   \begin{abstract}
     % TODO: Abstract à terminer.
 
-    Le projet Find Your Way a pour but de guider des personnes malvoyantes en milieu intérieur. Ce document relate le travail éffectué autour
+    Le projet Find Your Way a pour but de guider des personnes malvoyantes en milieu intérieur. Ce document relate le travail effectué autour
     de cette thématique dans le cadre de mon stage de fin d'études, en se focalisant sur la partie localisation et guidage de l'utilisateur.
     Un état de l'art concernant le sujet de la localisation et de la cartographie locale en temps réel est présenté. Ensuite une preuve de
     concept se basant sur une méthode en sources libres, contenant les améliorations que mon groupe et moi avons pu ajouter est expliquée 
     dans ce document. Enfin ce document explique le déroulement de la phase projet au sein de la cellule Innov' de l'entreprise Aubay
     pour démontrer le résultat d'une collaboration entre 11 stagiaires. Le lecteur pourra y trouver des informations concernant ORB-SLAM3,
-    FAST, les points d'intérets, la création d'un protocole de communication, le développement de l'interface graphique et les problèmes 
+    FAST, les points d'intérêts, la création d'un protocole de communication, le développement de l'interface graphique et les problèmes 
     que l'on peut rencontrer sur ce genre de projet multidisciplinaire.
 
   \end{abstract}
@@ -414,9 +414,9 @@
             \label{fig:ORBSLAM2}
           \end{figure} 
 
-          ORB-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme regroupées dans un Atlas.
+          ORB-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme.
           En se servant des données que l'on a déjà vues, on peut retrouver
-          facilement les boucles et ainsi réduire les erreurs de dérive. Une représentation en sac de mot dynamique (DBoW2) est utilisée.
+          facilement les boucles et ainsi réduire les erreurs de dérive. Une représentation en sac de mots dynamique (DBoW2) est utilisée.
           Ce système est présenté en Figure \ref{fig:ORBSLAM3}
 
           \begin{figure}[hbt]  
@@ -437,25 +437,25 @@
       L'article "Wearable Travel Aid for Environment Perception and Navigation of Visually Impaired People" est très détaillé et demande beaucoup 
       de temps pour saisir chaque subtilité.
       Au début de l'article, les auteurs listent les solutions qui existent déjà et expliquent leurs limitations respectives. 
-      Chaque partie de la solution est expliquée et peut être trouvé dans leur travaux précédents. Cette solution prendrait beaucoup de temps
+      Chaque partie de la solution est expliquée et peut être trouvée dans leurs travaux précédents. Cette solution prendrait beaucoup de temps
       à implémenter puisque les auteurs font surtout une description de leur travail sans mettre à disposition de code source. 
       Il faudrait parcourir tous leurs travaux précédents pour comprendre l'intégralité de leur solution. De plus il faudrait adapter les travaux
-      proposés afin de créer la carte locale en temps-réel plutôt qu'avant, puisque c'est une des contraintes imposées par nos superviseurs. 
+      proposés afin de créer la carte locale en temps réel plutôt qu'avant, puisque c'est une des contraintes imposées par nos superviseurs. 
 
-      L'article "CDSFusion : Dense Semantic SLAM for Indoor Environment Using CPU Computing" est très prometeur mais n'est pas assez détaillé 
+      L'article "CDSFusion : Dense Semantic SLAM for Indoor Environment Using CPU Computing" est très prometteur, mais n'est pas assez détaillé 
       pour nous permettre de reproduire leur solution à partir de rien. De plus ils utilisent des capteurs IMU, que nous avons convenu de ne pas 
       utiliser dans le cadre de ce projet.
 
       L'article "Towards Real-time Semantic RGBD SLAM in Dynamic Environments" apporte une solution de tracking de la localisation 
       d'un module en temps réel, ce qui correspond à ce que l'on recherche dans le cadre de ce projet. Cette solution aide à garder en 
       mémoire les directions prises jusqu'à arriver à un point donné. Cependant les auteurs ne parlent que peu d'ORB-SLAM et se focalisent 
-      surtout sur leur valeur ajouté permettant d'améliorer les résultats de ce dernier.
+      surtout sur leur valeur ajoutée permettant d'améliorer les résultats de ce dernier.
 
       Enfin, l'article "ORB-SLAM3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM" semble être le plus abouti
-      que nous aillons pu lire, il est à l'état de l'art et obtient de meilleurs performances que ses concurants. L'article est assez bien expliqué
-      et fourni un code source disponible sur Github. Leur solution semble réutilisable pour notre problème, cela apporterait un bon moyen
-      de traquer une personne malvoyante dans une pièce. Certains aspects de la publication semblent compliqués à comprendre mais la méthode en 
-      elle même nous semble accessible. Il faudrait passer du temps sur leur code source afin de l'appréhender et se rendre compte de la faisabilité
+      que nous aillons pu lire, il est à l'état de l'art et obtient de meilleures performances que ses concurrents. L'article est assez bien expliqué
+      et fournit un code source disponible sur Github. Leur solution semble réutilisable pour notre problème, cela apporterait un bon moyen
+      de traquer une personne malvoyante dans une pièce. Certains aspects de la publication semblent compliqués à comprendre, mais la méthode en 
+      elle-même nous semble accessible. Il faudrait passer du temps sur leur code source afin de l'appréhender et se rendre compte de la faisabilité
       de sa mise en place.
 
     \pagebreak
@@ -463,13 +463,13 @@
     \subsection{Conclusion}
       Pour conclure sur cet état de l'art, nous avons découvert plusieurs méthodes permettant de traquer le mouvement d'une caméra dans un
       milieu intérieur, chacune avec son niveau de complexité et de faisabilité par rapport à nos contraintes qui étaient de n'utiliser aucun
-      autre capteur qu'une camera. Notre but final était de fournir un module permettant de guider une personne d'un point A à un point B avec 
+      autre capteur qu'une caméra. Notre but était de fournir un module permettant de guider une personne d'un point A à un point B avec 
       l'aide de notre module créant une carte locale de l'environnement en se basant sur des points et des lieux d'intérêt, 
-      s'emboîtant avec les modules de traîtement du langage naturel, et le module de détection d'objets. 
+      s'emboîtant avec les modules de traitement du langage naturel, et le module de détection d'objets. 
       L'article "ORB-SLAM3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM" 
       nous a semblé être le plus pertinent pour arriver à notre but. En effet nous pourrions nous baser sur leur solution de tracking et construire 
-      par dessus pour répondre au besoin fonctionnel de ce projet.
-      De plus le fait que les auteurs mettent à disposition leur code source donne une première vision de ce qui pourrait être réalisé en terme de 
+      par-dessus pour répondre au besoin fonctionnel de ce projet.
+      De plus le fait que les auteurs mettent à disposition leur code source donne une première vision de ce qui pourrait être réalisé en termes de 
       performances avec notre propre environnement.
 
     \pagebreak
@@ -486,8 +486,8 @@
       de l'environnement en nous basant sur des points d'intérêts (\acrshort{poi}) entre les images vues successivement, c'est la méthode
       SLAM.
       \subsubsection{Installation}
-        Il a d'abord fallu se pencher sur l'installation de la solution que nous avions retenue, afin de construire notre module par dessus.
-        Nous avons été capable de produire une documentation d'installation de ORB-SLAM3 sur le Windows sub-system for Linux (\acrshort{wsl2})
+        Il a d'abord fallu se pencher sur l'installation de la solution que nous avions retenue, afin de construire notre module par-dessus.
+        Nous avons été capables de produire une documentation d'installation de ORB-SLAM3 sur le Windows sub-system for Linux (\acrshort{wsl2})
         et sur une machine virtuelle (\acrshort{vm}). Ces documentations d'installation appartiennent à Aubay et ne peuvent être divulguées dans
         ce document.
         Ensuite il a fallu calibrer la caméra que nous utilisions pour fonctionner avec ORB-SLAM3. 
@@ -496,10 +496,10 @@
         de l'utilisateur et une destination précédemment sauvegardée.      
             
         \paragraph{General}
-          Notre méthode se base sur ORB-SLAM3, une solution open-source crée dans une université en Espagne. L'idée était simple, nous voulions
-          l'installer et la faire fonctionner puis ajouter les fonctionnalitées nécéssaires à notre POC. Ce projet open-source a été
+          Notre méthode se base sur ORB-SLAM3, une solution open source crée dans une université en Espagne. L'idée était simple, nous voulions
+          l'installer et la faire fonctionner puis ajouter les fonctionnalités nécessaires à notre POC. Ce projet open source a été
           développé en C++ et se base sur de nombreuses bibliothèques de code telles que Eigen, Pangolin, Sophus, DBoW2, g2o, Kalibr et ROS.
-          Avant d'installer ORB-SLAM3 nous avons dû installer Eigen et Pangolin. Sophus, DBoW2 et g2o étant déjà inclus dans leur dépôt Github.
+          Avant d'installer ORB-SLAM3, nous avons dû installer Eigen et Pangolin. Sophus, DBoW2 et g2o étant déjà inclus dans leur dépôt Github.
 
           Nous avons essayé d'installer ORB-SLAM3 sur Windows 10, Mac OSX, Ubuntu 20.04 sur VirtualBox et enfin 
           WSL2. L'installation sous Windows 10 a rapidement été déclarée impossible puisqu'ORB-SLAM3
@@ -508,20 +508,20 @@
           Nous avons donc réalisé l'installation d'ORB-SLAM3 sur WSL2 et réussi à lancer le SLAM
           sur la vidéo d'exemple fournie. Cependant notre POC devait fonctionner avec un flux vidéo en temps réel provenant
           d'une caméra, et non une vidéo préenregistrée. Le problème était que bien que wsl2 ai accès aux appareils USB (en prenant en compte 
-          que pour cela il était nécéssaire de créer un noveau noyau Linux contenant les bons pilotes) et que la caméra soit visible dans les
-          pilotes USB, le sous-système n'était pas capable de créer la vidéo dans /dev/video, rendant le flux vidéo innaccessible à notre
-          application. Nous avons choisi de basculer sur un sysème Ubuntu 20.04 sur VM afin de disposer des fonctionnalités de base
-          nécéssaires à notre avancée.     
+          que pour cela il était nécessaire de créer un nouveau noyau Linux contenant les bons pilotes) et que la caméra soit visible dans les
+          pilotes USB, le sous-système n'était pas capable de créer la vidéo dans /dev/video, rendant le flux vidéo inaccessible à notre
+          application. Nous avons choisi de basculer sur un système Ubuntu 20.04 sur VM afin de disposer des fonctionnalités de base
+          nécessaires à notre avancée.     
 
         \paragraph{Eigen}
-          Eigen est une bibliothèque d'algèbre linéaire, elle traîte les vecteurs, matrices, solveurs numériques et les algorithmes
-          associés. Cette bibliothèque est nécéssaire au bon fonctionnement d'ORB-SLAM3. Pour l'installer, nous avons dû chercher la version 
-          adaptée puisque la bibliothèque a évolué depuis la publication du dépot Github d'ORB-SLAM3, rendant les versions les plus récentes
-          de Eigen incompatibles avec le projet. Nous avons essayé plusieurs versions qui n'ont pas fonctionnées jusqu'à déterminer que la version 
+          Eigen est une bibliothèque d'algèbre linéaire, elle traite les vecteurs, matrices, solveurs numériques et les algorithmes
+          associés. Cette bibliothèque est nécessaire au bon fonctionnement d'ORB-SLAM3. Pour l'installer, nous avons dû chercher la version 
+          adaptée puisque la bibliothèque a évolué depuis la publication du dépôt Github d'ORB-SLAM3, rendant les versions les plus récentes
+          de Eigen incompatible avec le projet. Nous avons essayé plusieurs versions qui n'ont pas fonctionné jusqu'à déterminer que la version 
           3.3.1 était la version utilisée au moment du développement d'ORB-SLAM3.
 
         \paragraph{Pangolin}
-          Pangolin est un ensemble de bibliothèques utilitaires légères traîtant de prototypage 3D et d'algorithmes numériques 
+          Pangolin est un ensemble de bibliothèques utilitaires légères traitant de prototypage 3D et d'algorithmes numériques 
           ou basés sur de la vidéo. Elles sont utilisées pour s'affranchir des contraintes d'environnement et rendre facile la visualisation des 
           données. Pour l'installation, de même que pour Eigen, la version la plus récente ne correspondait pas alors il a fallu chercher dans 
           l'historique des versions et tester jusqu'à trouver la version 0.6 sur leur Github qui nous a permis de lancer le projet.
@@ -529,25 +529,25 @@
         \paragraph{ORB-SLAM3}
           Pour installer ORB-SLAM3, il a d'abord fallu cloner le dépôt Github de la version 1.0. 
           Il y avait des prérequis qui ne correspondaient pas à notre environnement tels que la version d'OpenCV qu'il a fallu adapter,
-          nous avons déterminé que la version 4.2 était la bonne. Pour chaque bibliothèque nécéssaire nous avons du trouver la version
-          adaptée à notre projet. Ensuite nous avons pu installer les bibliothèques tierces déjà contenue dans le dossier du projet.        
+          nous avons déterminé que la version 4.2 était la bonne. Pour chaque bibliothèque nécessaire, nous avons dû trouver la version
+          adaptée à notre projet. Ensuite nous avons pu installer les bibliothèques tierces déjà contenues dans le dossier du projet.        
 
         \paragraph{ROS}
           Robot Operation System (\acrshort{ros}) est utile au moment de l'accès à la caméra par ORB-SLAM3 pour traiter le flux vidéo.
-          Ce package sensé être rapide à installer nous a posé beaucoup de soucis de packages cassés dans les dépots en ligne. Nous avons 
-          essayé diverses solution sans succès sur la VM, sans succès, pour finalement réussir à faire fonctionner le tout sur WSL2. 
+          Ce package censé être rapide à installer nous a posés beaucoup de soucis de packages cassés dans les dépôts en ligne. Nous avons 
+          essayé diverses solutions sans succès sur la VM, sans succès, pour finalement réussir à faire fonctionner le tout sur WSL2. 
 
       \subsubsection{Calibration}
         Comme dit précédemment, la calibration de la caméra était une phase importante afin d'obtenir une bonne estimation de la position
-        de la caméra utilisée. En effet, les paramètres intrinsèques et les distortions de la caméra sont ce qui défini la manière dont 
-        un objet dans le monde réel va être projeté dans l'espace image. C'est la première étape nécéssaire à obtenir une méthode de 
-        SLAM performante. Ces paramètres varient d'une marque à une autre mais aussi entre les différents modèles d'une même marque.
+        de la caméra utilisée. En effet, les paramètres intrinsèques et les distorsions de la caméra sont ce qui définit la manière dont 
+        un objet dans le monde réel va être projeté dans l'espace image. C'est la première étape nécessaire à obtenir une méthode de 
+        SLAM performante. Ces paramètres varient d'une marque à une autre, mais aussi entre les différents modèles d'une même marque.
 
-        Ros et Kalibr sont deux packages qui permettent d'éffectuer une calibration. Le premier est pratique à utiliser puisqu'il donne un 
-        retour instantanné sur la calibration et indique quand celle-ci est finalisée. Le second est moins visuel mais c'est le module 
+        Ros et Kalibr sont deux packages qui permettent d'effectuer une calibration. Le premier est pratique à utiliser puisqu'il donne un 
+        retour instantané sur la calibration et indique quand celle-ci est finalisée. Le second est moins visuel, mais c'est le module 
         conseillé par les développeurs d'ORB-SLAM3.
 
-        Le processus de calibration est le même pour chaque package. Le principe est d'utiliser un modèle de dimension connues comme
+        Le processus de calibration est le même pour chaque package. Le principe est d'utiliser un modèle de dimension connue comme
         un plateau d'échec contenant des cases blanches et noires de taille fixe. L'idée est donc d'estimer la déformation de la caméra
         sur ces dimensions connues en montrant plusieurs plans de vue du plateau à la caméra.           
 
@@ -566,11 +566,11 @@
         \paragraph{Matrice de coordonnées}
           Les coordonnées résultantes d'ORB-SLAM3 sont des nombres flottants généralement compris dans l'intervalle $[0,1]$ pour les vidéos
           courtes. Nous avions besoin d'un moyen de projeter ces coordonnées sur une grille afin de déterminer le chemin à parcourir
-          et de donner des indications de direction alors il a fallu adapter le résultat fournis par ORB-SLAM3.
+          et de donner des indications de direction alors il a fallu adapter le résultat fourni par ORB-SLAM3.
 
-         La projection est assez simple, nous multiplions la coordonnée flottante de la caméra par 10, on arrondi au supérieur afin d'obtenir
+         La projection est assez simple, nous multiplions la coordonnée flottante de la caméra par 10, on arrondit au supérieur afin d'obtenir
          un nombre entier puis un divise le résultat par 10. Cela nous a permis d'obtenir une grille de coordonnées discrétisées qui ne soit
-         pas trop petite (une grille trop petite correspondrait à des espacements plus petit qu'un pas dans le monde réel), ce qui nous permet
+         pas trop petite (une grille trop petite correspondrait à des espacements plus petits qu'un pas dans le monde réel), ce qui nous permet
          de ne pas guider l'utilisateur trop souvent. Un exemple de cette méthode de discrétisation est présenté dans la Figure 
          \ref{fig:Coordonnees}.
 
@@ -599,7 +599,7 @@
             \begin{itemize}
               \item $Coord$ $start$: la position courante sur la carte quand le chemin est sauvegardé, celle qui sera fournie à l'algorithme
               A* pour la recherche de chemin.
-              \item $vector$<$vector<int>>$ $Map2D$: La matrice représentant les chemins explorés par l'utilisateur. Cette carte 2D est crée 
+              \item $vector$<$vector<int>>$ $Map2D$: La matrice représentant les chemins explorés par l'utilisateur. Cette carte 2D est créée 
               depuis les coordonnées absolues.     
             \end{itemize} 
 
@@ -609,7 +609,7 @@
 
         \paragraph{L'algorithme A*}
           L'algorithme A* est un algorithme de recherche dont le but est de trouver le plus court chemin entre 2 positions dans une matrice.
-          Imaginons une grille carré contenant des obstacles répartis aléatoirement, on fourni la position de départ $A$ et la destination $B$.
+          Imaginons une grille carrée contenant des obstacles répartis aléatoirement, on fournit la position de départ $A$ et la destination $B$.
           Le but est de rejoindre la destination le plus rapidement possible.
           L'algorithme A* prend 3 paramètres:
 
@@ -617,7 +617,7 @@
             \item G: Le coût de déplacement de la cellule initiale jusqu'à la cellule courante. Cela correspond à la somme de toutes les 
             cellules qui ont été visitées depuis le départ de la première cellule.
             \item H: La valeur heuristique, c'est une estimation du coût de déplacement depuis la cellule courante jusqu'à la destination. 
-            Il faut faire attention à ne pas surrestimer cette valeur.
+            Il faut faire attention à ne pas surestimer cette valeur.
             \item F = G + H            
           \end{itemize} 
           A* base se décision sur la valeur de F, il cherche toujours à minimiser cette valeur jusqu'à atteindre sa destination,
@@ -633,18 +633,18 @@
         \paragraph{Retourner à un point d'intérêt}
           Dans cette partie nous avons ajouté un bouton à l'interface graphique fournie avec ORB-SLAM3 qui affiche la liste des POI et 
           demande à l'utilisateur de choisir sa destination. La coordonnée associée à la destination choisie est donnée à A* pour trouver
-          le plus court chemin pratiquable. Le chemin trouvé est ensuite donné à la fonction $FYWBack()$.          
+          le plus court chemin praticable. Le chemin trouvé est ensuite donné à la fonction $FYWBack()$.          
 
         \paragraph{FYWBack}
             Après avoir récupéré la sortie de l'algorithme A* sous la forme d'une liste de coordonnées, $FYWBack()$ fourni des indications
-            de directions en se basant sur la normale au plan de la caméra et calcule l'angle avec la section de chemin la plus proche
-            afin guider l'utilisateur. Le chemin à parcourir est regénéré section par section.            
+            de directions en se basant sur la normale sur le plan de la caméra et calcule l'angle avec la section de chemin le plus proche
+            afin guider l'utilisateur. Le chemin à parcourir est régénéré section par section.            
       
       \subsubsection{Test et résultats}
         Nous avons testé notre travail sur plusieurs vidéos prises dans l'openSpace. Nous avons d'abord essayé de créer une grille 2D de la 
-        carte locale comme présenté dans la Figure \ref{fig:Test1}. Ensuite, nous avons calculé les normales des images clés en temps réel 
-        comme présenté dans la Figure \ref{fig:Test2}. Nous avons ensuite réussi à sauvegarder une position, appellée POI, et la nommer comme
-        présenté en Figure \ref{fig:Test3}. Enfin nous avons créé une fonction de retour à un POI depuis la position courante, montré dans la 
+        carte locale comme présentée dans la Figure \ref{fig:Test1}. Ensuite, nous avons calculé les normales des images clés en temps réel 
+        comme présenté dans la Figure \ref{fig:Test2}. Nous avons ensuite réussi à sauvegarder une position, appelée POI, et la nommer comme
+        présenté en Figure \ref{fig:Test3}. Enfin nous avons créé une fonction de retour à un POI depuis la position courante, montrée dans la 
         Figure \ref{fig:Test4}.
 
         \begin{figure}[hbt]  
@@ -664,51 +664,51 @@
         \begin{figure}[hbt]  
           \centering
           \includegraphics[width=90mm]{Test3.png}    
-          \caption{Sauvegarde d'un point d'intéret.}
+          \caption{Sauvegarde d'un point d'intérêt.}
           \label{fig:Test3}
         \end{figure} 
 
         \begin{figure}[hbt]  
           \centering
           \includegraphics[width=80mm]{Test4.png}    
-          \caption{Retour à un point d'intéret.}
+          \caption{Retour à un point d'intérêt.}
           \label{fig:Test4}
         \end{figure}    
         
         
       \pagebreak
       \subsubsection{Difficultés rencontrées}
-        Nous avons passé la majeur partie du temps qui nous était imparti pour le POC à essayer d'installer ORB-SLAM3. La recherche des bonnes
-        versions pour chaque bibliothèque nous a beaucoup retardé. Certaines parties du code source ont dû être éditées, notament au niveau
+        Nous avons passé la majeure partie du temps qui nous était imparti pour le POC à essayer d'installer ORB-SLAM3. La recherche des bonnes
+        versions pour chaque bibliothèque nous a beaucoup retardés. Certaines parties du code source ont dû être éditées, notamment au niveau
         de CMakeLists.txt pour faire fonctionner le tout.
         De nombreux problèmes sont survenus concernant quasiment chaque package qu'il fallait installer, la plupart du temps à cause de
-        problèmes de compatibilité ou de documentation manquante. La seule solution que nous ayons trouvé à été de chercher sans relâche jusqu'à
+        problèmes de compatibilité ou de documentation manquante. La seule solution que nous ayons trouvée a été de chercher sans relâche jusqu'à
         trouver une solution.
-        Lorsque nous travaillions sur la VM, des latences et des crash innatendus nous ont également fortement ralentis.       
+        Lorsque nous travaillions sur la VM, des latences et des crashs inattendus nous ont également fortement ralentis.       
  
       \subsubsection{Conclusion}
         Pour conclure sur la phase de POC, nous avons réussi à faire fonctionner un système SLAM pour la première fois chez Aubay, d'autres
-        équipe ayant essayé sans succès par le passé. En plus de réussir l'installation, nous avons ajouté les fonctionnalités nécéssaires
+        équipe ayant essayé sans succès par le passé. En plus de réussir l'installation, nous avons ajouté les fonctionnalités nécessaires
         pour atteindre notre but et avoir un module prêt à intégrer la phase projet pour venir se lier aux autres POC de notre projet.
 % TODO: Relire la phase projet.
     \subsection{Phase projet}
-      Une fois la phase de POC terminée, nous devions passer à la phase projet nécéssitant d'associer nos POCs
+      Une fois la phase de POC terminée, nous devions passer à la phase projet nécessitant d'associer nos POCs
       afin de créer une application de démonstration pour la JDS du 7 juillet 2022. Cette journée est un jalon très important
       pour tout stagiaire au sein de la cellule Innov' de chez Aubay. Elle sert à présenter le projet sur lequel chaque équipe a travaillé
-      afin de montrer à la direction générale ainsi qu'aux directeurs commerciaux ce dont les stagiaires sont capable et ce qu'Aubay pourrait
-      proposer à ses clients dans le futur. Nous avons donc réfléchis à la création d'une application et d'une
+      afin de montrer à la direction générale ainsi qu'aux directeurs commerciaux ce dont les stagiaires sont capables et ce qu'Aubay pourrait
+      proposer à ses clients dans le futur. Nous avons donc réfléchi à la création d'une application et d'une
       interface graphique nous permettant de démontrer le fonctionnement de notre application, bien que l'application finale soit destinée 
       à des personnes malvoyantes, ne nécessitant qu'une interface vocale.
 
       \subsubsection{Protocole de communication}
         Il est important de noter que nos 3 POCs ne fonctionnent pas sur les mêmes systèmes, en effet, le POC SLAM développé en C++
         fonctionne uniquement sur WSL2, tandis que les POC Computer Vision (\acrshort{cv}) et Natural Language Processing (\acrshort{nlp}) 
-        sont développés en Python sur Windows. Le problème étant que WSL2 ne nous permettait pas d'accéder au flux vidéo de la caméra nécéssaire 
-        aux POCs SLAM et CV, qu'une VM nous le permettait mais ne donnait pas accès aux unitées de traitement graphiques (GPU) nécéssaires aux 
-        POCs CV et NLP. Nous avons optés pour 
+        sont développés en Python sur Windows. Le problème étant que WSL2 ne nous permettait pas d'accéder au flux vidéo de la caméra nécessaire 
+        aux POCs SLAM et CV, qu'une VM nous le permettait, mais ne donnait pas accès aux unités de traitement graphiques (GPU) nécessaires aux 
+        POCs CV et NLP. Nous avons opté pour 
         trouver une solution concernant le problème de flux vidéo sur WSL2. Étant donné que les 3 POCs devaient fonctionner sur le même réseau 
         local, nous avons eu m'idée de mettre en place un serveur afin d'établir une communication entre Windows et WSL2 pour transmettre le flux 
-        vidéo de Windows à WSL2. Cette solution a nécéssité d'adapter la manière dont ORB-SLAM3 récuperait le flux vidéo avant de l'incorporer à 
+        vidéo de Windows à WSL2. Cette solution a nécessité d'adapter la manière dont ORB-SLAM3 récupérait le flux vidéo avant de l'incorporer à 
         son fonctionnement normal.
 
         L'application est composée d'un backend se chargeant des fonctionnalités tandis que le frontend s'occupe du rendu
@@ -724,11 +724,11 @@
         \end{figure} 
 
         Le POC SLAM se situant sur un système différent et utilisant un langage de programmation différent des POCs CV et NLP, il a fallu
-        recourir aux sockets qui sont disponible dans beaucoup de langages de programmation dont C++ et Python. Après avoir autorisé les 
+        recourir aux sockets qui sont disponibles dans beaucoup de langages de programmation dont C++ et Python. Après avoir autorisé les 
         communications au niveau du proxy et du par-feu en ouvrant les bons ports, cette communication par socket a pu être réalisée.
         Une fois la communication rendue possible, il a fallu ajouter des threads au code d'ORB-SLAM3 permettant des interruptions
-        pour envoyer les données nécéssaires après leur traîtement ou recevoir les instructions du chef d'orchestre
-        afin d'executer les fonctions utiles au bon moment. Un schéma global des communications établies au sein du projet est disponible en 
+        pour envoyer les données nécessaires après leur traitement ou recevoir les instructions du chef d'orchestre
+        afin d'exécuter les fonctions utiles au bon moment. Un schéma global des communications établies au sein du projet est disponible en 
         annexe.
 
         % TODO: Mettre le schéma de Victor concernant la communication en annexe.
@@ -737,15 +737,15 @@
         L'application fonctionne avec une caméra branchée pour transmettre le flux vidéo aux différents modules s'en servant ainsi qu'avec
         un micro et un haut-parleur.  
         L'interface graphique donne la possibilité de lancer une démonstration et de démarrer les parties SLAM, CV et NLP via le serveur Flask 
-        et des sockets. Cette interface a été développée avec Python grace à la bibliothèque PyQt5. La page principale de l'application est
+        et des sockets. Cette interface a été développée avec Python grâce à la bibliothèque PyQt5. La page principale de l'application est
         montrée en Figure \ref{fig:Application}, on y voit les résultats des POCs CV et SLAM ainsi que les différents boutons permettant
-        à l'utilisateur d'intéragir pour tester l'application. Ces boutons servent à: 
+        à l'utilisateur d'interagir pour tester l'application. Ces boutons servent à: 
 
         \begin{itemize}
           \item Lancer une vidéo de démonstration.
           \item Lancer l'application en temps réel.
           \item Utiliser le microphone pour exprimer une commande vocale lorsque l'application s'exécute en temps réel.
-          \item Sauvegarder la postion courante comme un lieu favoris afin de pouvoir s'y faire guider plus tard.
+          \item Sauvegarder la position courante comme un lieu favori afin de pouvoir s'y faire guider plus tard.
           \item Demander à se faire guider à un lieu précédemment sauvegardé.
           \item Afficher l'historique des commandes utilisées et réponses reçues.   
         \end{itemize} 
@@ -755,6 +755,12 @@
           \caption{Page principale de l'application.}
           \label{fig:Application}
         \end{figure}     
+
+      \subsubsection{Conclusion}
+        Pour conclure sur la phase projet, nous avons travaillé ensemble sur la construction d'une application complète liant nos POCs afin de
+        fournir une démonstration le jour de la JDS. Cette journée s'est parfaitement déroulée et nous avons pu échanger avec différentes
+        personnes de la direction d'Aubay ainsi que des directeurs commerciaux pour leur expliquer le fonctionnement de notre application.
+        Nous avons appris à faire communiquer nos applications grâce à Flask et les sockets en établissant un protocole de communication.
 
   \pagebreak
   % TODO: Supprimer la consigne + indication de pages.
@@ -801,17 +807,17 @@
   
   \section{Annexes}
 
-    \subsection{Point d'intéret}
+    \subsection{Point d'intérêt}
       Le but d'un point d'intérêt est de permettre à un algorithme de déterminer que deux objets sont bien les mêmes sur deux images 
       différentes en ayant appliqué des modifications telles qu'un changement d'échelle, une rotation, une translation ou même une 
       variation de l'intensité lumineuse.
       L'idée est donc de trouver des points caractéristiques sur les images récupérées de manière à ce que ces points décrivent au mieux 
-      l'objet en cours de traîtement. En regroupant ces points caractéristiques, appellés "points d'intérêt", on est capable de déterminer 
-      si deux objets avec un point de vue différent sont les même ou non. Les méthodes d'extractions de POI les plus populaires 
+      l'objet en cours de traitement. En regroupant ces points caractéristiques, appelés "points d'intérêts", on est capable de déterminer 
+      si deux objets avec un point de vue différent sont les mêmes ou non. Les méthodes d'extractions de POI les plus populaires 
       sont les méthodes SIFT et ORB par exemple.
       Une fois un point d'intérêt détecté, on veut être capable de résumer son information d'une manière simple afin de pouvoir le comparer
-      à d'autres points d'intérêts. On peut utiliser l'intensité lumineuse ou le gradient des pixels environnants le point d'intéret pour 
-      former un descripteur correcte, tout en respectant les règles de discrimination et d'invariance. Les descripteurs sont en général 
+      à d'autres points d'intérêts. On peut utiliser l'intensité lumineuse ou le gradient des pixels environnant le point d'intérêt pour 
+      former un descripteur correct, tout en respectant les règles de discrimination et d'invariance. Les descripteurs sont en général 
       stockés dans des vecteurs de 128 bits, ce qui permet une comparaison rapide.
       Un exemple d'appariement des POI est présenté dans la Figure \ref{fig:Appariement}. 
 
@@ -826,8 +832,8 @@
 
     \subsection{FAST}
       Cette méthode d'extraction de POI vérifie pour chaque pixel de l'image d'intensité $I_p$ si au moins 12 des pixels
-      du cercle autour du pixel ont une intensité supérieure ou inférieure à une proportion de $I_p$. Autrement dit on regarde si il y a une 
-      grosse démarquation d'intensité entre le pixel et ses voisins comme le montre la Figure \ref{fig:CercleSuperiorite}.
+      du cercle autour du pixel ont une intensité supérieure ou inférieure à une proportion de $I_p$. Autrement dit on regarde s’il y a une 
+      grosse démarcation d'intensité entre le pixel et ses voisins comme le montre la Figure \ref{fig:CercleSuperiorite}.
 
       \begin{figure}[hbt]  
         \includegraphics[width=\textwidth]{CercleSuperiorite.png}    
