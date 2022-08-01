@@ -171,7 +171,7 @@
     This document relates the work done on this topic during my internship at Aubay, focusing on the localization and user guidance part.
     A state of the art concerning the subject of localization and real-time mapping is presented. Then a proof of
     concept based on an open source method, containing the improvements that we could add with my group is explained. 
-    Finally this document explains the project phase within the Innov' cell of Aubay
+    Finally, this document explains the project phase within the Innov's cell of Aubay
     to show the result of a collaboration between 11 trainees. The reader can find information about ORB-SLAM3,
     FAST, the points of interest, the creation of a communication protocol, the development of the graphic interface and the problems 
     that can be encountered on this kind of multidisciplinary project.
@@ -187,9 +187,8 @@
 
   \section{Remerciements}    
     Je remercie Éric REMILLERET et Nathan CANTAT, mes maîtres de stage, 
-    ainsi que Wael NASR, pour m'avoir donné l'opportunité de rejoindre 
-    Aubay Innov', qui s'est avérée être une expérience intéressante 
-    et instructive, ainsi que pour l'aide à la relecture de ce rapport.    
+    pour m'avoir donné l'opportunité de rejoindre 
+    Aubay Innov' ainsi que pour l'aide à la relecture de ce rapport.    
     
     Je remercie Anne-France GALLAND, qui a largement contribué à la phase de suivi et d'organisation du projet, par ses interventions 
     lors des réunions hebdomadaires et pour le temps qu'elle a pris pour la relecture de ce rapport.    
@@ -245,13 +244,11 @@
     innovantes disponibles dans les domaines de la recherche. Par ailleurs, l'unité "Aubay Innov'" est largement considérée comme 
     une source de recrutement pour l'entreprise, qui a souhaité cette année engager environ 800 nouveaux collaborateurs en France. 
     
-    C'est dans ce cadre que ma mission de fin d'études a débuté. Le projet "Find Your Way" (\acrshort{fyw}), qui représente l'expérience que je 
-    vais détailler dans ce document, a été lancé en février 2022 et a pour objectif de créer une application embarquée sur des lunettes, 
-    basée sur des algorithmes capables de reconnaître les éléments de l'environnement immédiat d'un utilisateur malvoyant pour le guider 
-    vers des lieux ou l'avertir d'obstacles présents sur son chemin tels que des chaises ou une personne par exemple. Un objectif majeur 
-    de ce projet est également de localiser l'utilisateur dans son environnement afin de lui permettre de retrouver son chemin jusqu'à
-    un endroit précédemment enregistré et de le guider avec des indications de direction et d'orientation dans ses déplacements en intérieur
-    en temps réel, le tout répondant à un système de commandes vocales.  
+    C'est dans ce cadre que ma mission de fin d'études a débuté. Le projet "Find Your Way" (\acrshort{fyw}) représente l'expérience que je 
+    vais détailler dans ce document. Il a été lancé en février 2022 avec pour objectif de créer une application
+    basée sur des algorithmes reconnaissant l'environnement immédiat d'un utilisateur malvoyant pour le guider. 
+    Ce guidage doit pouvoir se faire vers des lieux enregistrés et l'avertir d'obstacles présents sur son chemin avec un système de commandes 
+    vocales.     
     
     Les systèmes d'aide automatisés au déplacement de personnes malvoyantes existent déjà sur le marché et nécessitent de fournir une 
     carte du bâtiment avec les lieux importants préalablement renseignés afin de rendre le guidage possible. Ce projet vise à s'affranchir 
@@ -261,9 +258,9 @@
     La prise en main du projet a démarée début février, s'en est suivi la partie concernant les états de l'art (\acrshort{ea} sur la Figure \ref{fig:Planning}) 
     qui devait être réalisée entre mi-février et mi-mars en parallèle du Design Thinking qui nous a permis de cadrer et définir le projet par 
     rapport aux besoins de l'application et les tâches à accomplir. La phase de preuve de concept qui a suivi a duré jusqu'à mi-mai. 
-    Une fois ces étapes réalisées nous avons pu passer à la phase projet afin de réunir toutes les preuves de concept et concevoir l'application 
-    de démonstration nécessaire à la journée des stagiaires (JDS) du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
-    les stagiaires présentent leurs projets lors d'une démonstration auprès des directeurs généraux et directeurs commerciaux de l'entreprise.
+    Nous sommes ensuite passés à la phase projet afin de concevoir l'application de démonstration nécessaire à la journée des stagiaires (JDS) 
+    du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
+    les stagiaires présentent leurs projets lors d'une démonstration auprès des directeurs généraux et équpes commerciales de l'entreprise.
 
     \begin{figure}[hbt]  
       \includegraphics[width=\textwidth]{Planning.png}    
@@ -400,8 +397,8 @@
           ORB-SLAM2 peut démarrer un nouveau fil d'exécution qui effectue un ajustement de l'ensemble de la carte afin que 
           l'emplacement de chaque image clé et des points dans celle-ci obtienne une valeur d'emplacement ajustée.
 
-          Pour traiter une image RGBD, on calcule d'abord les caractéristiques ORB sur l'image RGB, ensuite on estime les coordonnées de l'image de 
-          gauche depuis une paire d'images. Un point est associé à "proche" ou "éloigné" en fonction de sa profondeur. Chaque dénomination a des
+          Pour traiter une image RGBD, on calcule d'abord dessus les caractéristiques ORB, ensuite depuis une paire d’images on estime les coordonnées de l'image de 
+          gauche . Un point est associé à "proche" ou "éloigné" en fonction de sa profondeur. Chaque dénomination a des
           caractéristiques utiles, un point proche sera représentatif pour le changement d'échelle, la translation, la rotation alors qu'un point éloigné
           sera surtout utile pour la rotation et devra être supporté par un plus grand nombre d'images.
           À l'initialisation, le système nécessite seulement les premières images clés pour estimer la première carte locale en utilisant les informations
@@ -678,26 +675,27 @@
       \pagebreak
 
       \subsubsection{Difficultés rencontrées}
-        Nous avons passé la majeure partie du temps qui nous était imparti pour le POC à essayer d'installer ORB-SLAM3. La recherche des bonnes
-        versions pour chaque bibliothèque nous a beaucoup retardés. Certaines parties du code source ont dû être éditées, notamment au niveau
-        de CMakeLists.txt pour faire fonctionner le tout.
-        De nombreux problèmes sont survenus concernant quasiment chaque package qu'il fallait installer, la plupart du temps à cause de
+        Nous avons passé la majeure partie du temps que nous avions à disposition pour le POC à essayer d'installer ORB-SLAM3. 
+        La recherche des bonnes
+        versions pour chaque bibliothèque nous a beaucoup retardés. Nous avons dû éditer certaines parties du code source, 
+        notamment au niveau de CMakeLists.txt pour faire fonctionner le tout.
+        De nombreux problèmes sont survenus concernant quasiment chaque package que nous devions installer, la plupart du temps à cause de
         problèmes de compatibilité ou de documentation manquante. La seule solution que nous ayons trouvée a été de chercher sans relâche jusqu'à
         trouver une solution.
         Lorsque nous travaillions sur la VM, des latences et des crashs inattendus nous ont également fortement ralentis.       
  
       \subsubsection{Conclusion}
         Pour conclure sur la phase de POC, nous avons réussi à faire fonctionner un système SLAM pour la première fois chez Aubay, d'autres
-        équipe ayant essayé sans succès par le passé. En plus de réussir l'installation, nous avons ajouté les fonctionnalités nécessaires
+        équipes ayant essayé sans succès par le passé. En plus de réussir l'installation, nous avons ajouté les fonctionnalités nécessaires
         pour atteindre notre but et avoir un module prêt à intégrer la phase projet pour venir se lier aux autres POC de notre projet.
 
     \subsection{Phase projet}
-      Une fois la phase de POC terminée, nous devions passer à la phase projet nécessitant d'associer nos POCs
+      Une fois la phase de POC terminée, nous devions passer à la phase projet associant nos POCs
       afin de créer une application de démonstration pour la JDS du 7 juillet 2022. Cette journée est un jalon très important
       pour tout stagiaire au sein de la cellule Innov' de chez Aubay. Elle sert à présenter le projet sur lequel chaque équipe a travaillé
       afin de montrer à la direction générale ainsi qu'aux directeurs commerciaux ce dont les stagiaires sont capables et ce qu'Aubay pourrait
       proposer à ses clients dans le futur. Nous avons donc réfléchi à la création d'une application et d'une
-      interface graphique nous permettant de démontrer le fonctionnement de notre application, bien que l'application finale soit destinée 
+      interface graphique afin de démontrer le fonctionnement de notre application, bien que l'application finale soit destinée 
       à des personnes malvoyantes, ne nécessitant qu'une interface vocale.
 
       \subsubsection{Protocole de communication}
@@ -723,19 +721,19 @@
           \label{fig:Structure}
         \end{figure} 
 
-        Le POC SLAM se situant sur un système différent et utilisant un langage de programmation différent des POCs CV et NLP, il a fallu
+        Le POC SLAM se situe sur un système différent et utilise un langage de programmation différent des POCs CV et NLP, nous avons dû
         recourir aux sockets qui sont disponibles dans beaucoup de langages de programmation dont C++ et Python. Après avoir autorisé les 
         communications au niveau du proxy et du par-feu en ouvrant les bons ports, cette communication par socket a pu être réalisée.
-        Une fois la communication rendue possible, il a fallu ajouter des threads au code d'ORB-SLAM3 permettant des interruptions
+        Une fois la communication rendue possible, nous avons ajouté des threads au code d'ORB-SLAM3 pour permettre des interruptions
         pour envoyer les données nécessaires après leur traitement ou recevoir les instructions du chef d'orchestre
         afin d'exécuter les fonctions utiles au bon moment. Un schéma global des communications établies au sein du projet est disponible en 
         annexes \ref{fig:Schema1} et \ref{fig:Schema2}.      
 
       \subsubsection{Développement de l'application}         
         L'application fonctionne avec une caméra branchée pour transmettre le flux vidéo aux différents modules s'en servant ainsi qu'avec
-        un micro et un haut-parleur.  
+        un microphone et un haut-parleur.  
         L'interface graphique donne la possibilité de lancer une démonstration et de démarrer les parties SLAM, CV et NLP via le serveur Flask 
-        et des sockets. Cette interface a été développée avec Python grâce à la bibliothèque PyQt5. La page principale de l'application est
+        et des sockets. J'ai développé cette interface en Python avec mon équipe grâce à la bibliothèque PyQt5. La page principale de l'application est
         montrée en Figure \ref{fig:Application}, on y voit les résultats des POCs CV et SLAM ainsi que les différents boutons permettant
         à l'utilisateur d'interagir pour tester l'application. Ces boutons servent à: 
 
@@ -777,8 +775,8 @@
       par mail, mais la plupart de nos échanges se faisaient de vive voix.
 
     \subsection{Le plan managérial}
-      Chez Aubay les projets sont réalisés avec une méthode agile afin de fixer les objectifs et vérifier qu'ils
-      ont été atteints de manière régulière. Ainsi nous participions chaque matin à un Daily, une réunion
+      Chez Aubay les projets sont réalisés avec une méthode agile afin de fixer les objectifs et vérifier que nous les avions bien atteints
+      de manière régulière. Ainsi nous participions chaque matin à un Daily, une réunion
       composée de l'équipe de stagiaires et de l'encadrant technique si besoin, 
       visant à remonter les points bloquants que nous rencontrions ainsi que d'échanger sur l'avancée du projet.
       Le travail était organisé en sprints de 2 semaines pendant lesquels nous devions résoudre les tickets
@@ -820,36 +818,36 @@
       sujet de la vision par ordinateur, les mathématiques associées à ces domaines techniques ainsi que les problématiques 
       liées au traitement de l'image en temps réel.
 
-      J'ai renforcées mes connaissances sur la créations de scripts shell sur Linux afin d'automatiser l'installation d'un ensemble de 
-      fichiers nécéssaires au lancement d'un projet, mais aussi sur le debbugage d'erreurs d'installations multiples.
+      J'ai renforcé mes connaissances sur la création de scripts shell sur Linux afin d'automatiser l'installation d'un ensemble de 
+      fichiers nécessaires au lancement d'un projet, mais aussi sur le debbugage d'erreurs d'installations multiples.
     
       J'ai pu participer à la réalisation d'un protocole de communication entre plusieurs applications sur le même réseau local, me 
       sensibilisant sur les problématiques liées aux sockets et aux serveurs de manière plus générale.
-      nous permettant de nous affranchir des différences de système d'exploitation et de langages de programmation. 
+      Cela nous a permis de nous affranchir des différences de système d'exploitation et de langages de programmation. 
       
       J'ai également développé une application graphique pour la première fois, ce qui m'a beaucoup appris sur des framework de 
-      developpement d'applications tels que Flutter et PyQt5, ce développement m'a beaucoup appris sur les notions liées 
+      développement d'applications tels que Flutter et PyQt5, ce développement m'a beaucoup appris sur les notions liées 
       à la communication entre l'affichage graphique et les fonctions sous-jacentes d'une application web ou bureau.
 
-      Cette expérience est venu compléter les compétences en développement que j'ai pu acquérir lors de mon cursus à l'ESIEA. En
-      effet, c'est lors de divers projets d'école que j'ai appris le développement en C++ et Python qui m'ont servis lors de cette 
+      Cette expérience est venue compléter les compétences en développement que j'ai pu acquérir lors de mon cursus à l'ESIEA. En
+      effet, c'est lors de divers projets d'école que j'ai appris le développement en C++ et Python qui m'ont servi lors de cette 
       mission de fin d'études.
 
     \subsection{Le bilan humain}
       Humainement parlant, j'ai beaucoup apprécié travailler sur cette mission avec cette équipe au sein de l'open space des
       stagiaires. Cela m'a permis de me rendre compte des différences et des similarités dans les formations proposées par les 
-      autres écoles. J'ai eu des échanges très riches avec mes collègues stagiaires direct et aussi avec les stgiaires travaillant 
+      autres écoles. J'ai eu des échanges très riches avec mes collègues stagiaires directs et aussi avec les stagiaires travaillant 
       sur d'autres projets, notamment le jour de la JDS.    
       J'ai amélioré et développé mes compétences humaines, vu la taille de mon équipe, il fallait être capable 
-      d'écouter le point de vue des autres mais aussi de réussir à s'exprimer parmis la quantité de personnalités 
+      d'écouter le point de vue des autres, mais aussi de réussir à s'exprimer parmi la quantité de personnalités 
       différentes que j'ai pu rencontrer.
 
     \subsection{Possibilités d'évolution du projet}
       Concernant les possibilités d'évolution du projet, d'autres méthodes de localisation pourraient être envisagées ou venir
-      compléter la notre (comme la publication parlant de DGS avec le SegNet qui enlève les objets dynamiques du traîtement).
-      Le module SLAM pourrait être développé sur Windows également mais cela prendrait un temps considérable. 
+      compléter la nôtre (comme la publication parlant de DGS avec le SegNet qui enlève les objets dynamiques du traitement).
+      Le module SLAM pourrait être développé sur Windows également, mais cela prendrait un temps considérable. 
       En se basant sur ce que nous avons produit, une possibilité d'évolution serait d'utiliser une caméra d'une meilleure qualité, 
-      possiblement une caméra grand angle.  
+      possiblement une caméra grand-angle.  
 
     \subsection{Perspectives d'évolution professionnelles}
 
@@ -857,17 +855,17 @@
       suivi de projet avec Jira, du versionning avec Git, mais aussi en développement puisque j'ai pu renforcer 
       mes compétences en C++ et Python. J'ai également eu une première approche du développement fullstack 
       étant donné que j'ai pu participer à la création d'une application ou il fallait gérer un affichage 
-      graphique en plus des fonctions contenues dans le back. Lors de mes études j'ai surtout eu l'occasion de 
-      développer des fonctions en back, alors cette nouveauté du stage est venu compléter mon expérience pour me 
-      donner un point de vu neuf sur les différents métiers possibles autour de la programmation.
+      graphique en plus des fonctions contenues dans le back. Lors de mes études, j'ai surtout eu l'occasion de 
+      développer des fonctions en back, alors cette nouveauté du stage est venue compléter mon expérience pour me 
+      donner un point de vue neuf sur les différents métiers possibles autour de la programmation.
       J'ai également amélioré ma capacité de synthèse en lisant des articles scientifiques très techniques et en 
       les résumant.
 
       Le projet m'a permis de prendre conscience que j'aimais beaucoup le développement, en plus de ma forte 
-      afinité pour la data et l'intelligence artificielle. Les différentes rencontres que j'ai pu faire au 
+      affinité pour la data et l'intelligence artificielle. Les différentes rencontres que j'ai pu faire au 
       cours du projet, les discussions avec des personnes déjà en CDI m'ont fait comprendre que je manquais
       encore de certaines compétences techniques avant de pouvoir atteindre les postes que je vise.
-      Le but va être de me former et de monter en compétences en Cloud (AWS) qui devient nécéssaire dans 
+      Le but va être de me former et de monter en compétences en Cloud (AWS) qui devient nécessaire dans 
       énormément d'entreprises aujourd'hui.
 
      
@@ -945,7 +943,7 @@
       
       \begin{figure}[hbt]  
         \includegraphics[width=\textwidth]{Schéma2.png}    
-        \caption{Schéma d'intéractions du projet.}
+        \caption{Schéma d'interactions du projet.}
         \label{fig:Schema2}
       \end{figure}
 
