@@ -6,6 +6,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 
+%\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[hmargin={3.0cm,3.0cm}, top=3.0cm,bottom=3.0cm]{geometry} 
+% Tester les ! dans les figures.
 % Used to format pars, specify the indent size and jump after par ending
 \usepackage[skip=10pt plus1pt, indent=25pt]{parskip}
 
@@ -260,7 +263,7 @@
     rapport aux besoins de l'application et les tâches à accomplir. La phase de preuve de concept qui a suivi a duré jusqu'à mi-mai. 
     Nous sommes ensuite passés à la phase projet afin de concevoir l'application de démonstration nécessaire à la journée des stagiaires (JDS) 
     du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
-    les stagiaires présentent leurs projets lors d'une démonstration auprès des directeurs généraux et équpes commerciales de l'entreprise.
+    les stagiaires présentent leurs projets lors d'une démonstration auprès des directeurs généraux et équipes commerciales de l'entreprise.
 
     \begin{figure}[hbt]  
       \includegraphics[width=\textwidth]{Planning.png}    
@@ -316,7 +319,7 @@
 
         \subsubsection{CDSFusion: Dense Semantic SLAM for Indoor Environment Using CPU Computing}
           La solution CDSFusion \cite{wangCDSFusionDenseSemantic2022} se sert d'images RGB comme l'article précédent ainsi qu'un capteur IMU comme paramètres d'entrée et est composée de 
-          3 modules imagés dans la Figure \ref{fig:PipelineP2}:
+          3 modules imagés dans la Figure \ref{fig:PipelineP2}.
 
           \paragraph{Le module VIO}
             Le module d'odométrie visuelle-innertielle (\acrshort{vio} pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
@@ -576,6 +579,8 @@
           \caption{Exemple de discrétisation.}
           \label{fig:Coordonnees}
         \end{figure}  
+        
+        \pagebreak
 
         \paragraph{Structures de données définies}
 
@@ -642,35 +647,39 @@
         carte locale comme présentée dans la Figure \ref{fig:Test1}. Ensuite, nous avons calculé les normales des images clés en temps réel 
         comme présenté dans la Figure \ref{fig:Test2}. Nous avons ensuite réussi à sauvegarder une position, appelée POI, et la nommer comme
         présenté en Figure \ref{fig:Test3}. Enfin nous avons créé une fonction de retour à un POI depuis la position courante, montrée dans la 
-        Figure \ref{fig:Test4}.
+        Figure \ref{fig:Test4}.      
 
-        \begin{figure}[hbt]  
+        \begin{figure}[!tbp]
           \centering
-          \includegraphics[width=50mm]{Test1.png}    
-          \caption{Grille 2D de la carte locale.}
-          \label{fig:Test1}
-        \end{figure} 
+          \begin{minipage}[t]{0.4\textwidth}
+            \includegraphics[width=\textwidth]{Test1.png}    
+            \caption{Grille 2D de la carte locale.}
+            \label{fig:Test1}
+          \end{minipage}
+          % \hfill is used to evenly distribute the logos
+          \hfill 
+          \begin{minipage}[t]{0.4\textwidth}
+            \includegraphics[width=\textwidth]{Test2.png}    
+            \caption{Normales des images clés en temps réel.}
+            \label{fig:Test2}
+          \end{minipage}
+        \end{figure}
 
-        \begin{figure}[hbt]  
+        \begin{figure}[!tbp]
           \centering
-          \includegraphics[width=50mm]{Test2.png}    
-          \caption{Normales des images clés en temps réel.}
-          \label{fig:Test2}
-        \end{figure} 
-
-        \begin{figure}[hbt]  
-          \centering
-          \includegraphics[width=90mm]{Test3.png}    
-          \caption{Sauvegarde d'un point d'intérêt.}
-          \label{fig:Test3}
-        \end{figure} 
-
-        \begin{figure}[hbt]  
-          \centering
-          \includegraphics[width=80mm]{Test4.png}    
-          \caption{Retour à un point d'intérêt.}
-          \label{fig:Test4}
-        \end{figure}           
+          \begin{minipage}[t]{0.4\textwidth}            
+            \includegraphics[width=90mm]{Test3.png}    
+            \caption{Sauvegarde d'un point d'intérêt.}
+            \label{fig:Test3}
+          \end{minipage}
+          % \hfill is used to evenly distribute the logos
+          \hfill 
+          \begin{minipage}[t]{0.4\textwidth}            
+            \includegraphics[width=80mm]{Test4.png}    
+            \caption{Retour à un point d'intérêt.}
+            \label{fig:Test4}
+          \end{minipage}
+        \end{figure}     
         
       \pagebreak
 
@@ -700,7 +709,7 @@
 
       \subsubsection{Protocole de communication}
         Il est important de noter que nos 3 POCs ne fonctionnent pas sur les mêmes systèmes, en effet, le POC SLAM développé en C++
-        fonctionne uniquement sur WSL2, tandis que les POC Computer Vision (\acrshort{cv}) et Natural Language Processing (\acrshort{nlp}) 
+        fonctionne uniquement sur WSL2, tandis que les POCs Computer Vision (\acrshort{cv}) et Natural Language Processing (\acrshort{nlp}) 
         sont développés en Python sur Windows. Le problème étant que WSL2 ne nous permettait pas d'accéder au flux vidéo de la caméra nécessaire 
         aux POCs SLAM et CV, qu'une VM nous le permettait, mais ne donnait pas accès aux unités de traitement graphiques (GPU) nécessaires aux 
         POCs CV et NLP. Nous avons opté pour 
@@ -880,7 +889,7 @@
   
   \section{Annexes}
 
-    \subsection{Point d'intérêt}
+    \subsection*{Point d'intérêt}
       Le but d'un point d'intérêt est de permettre à un algorithme de déterminer que deux objets sont bien les mêmes sur deux images 
       différentes en ayant appliqué des modifications telles qu'un changement d'échelle, une rotation, une translation ou même une 
       variation de l'intensité lumineuse.
@@ -896,6 +905,13 @@
 
       La comparaison entre deux descripteurs se fait généralement par des calculs booléens tels que le montre la 
       Figure \ref{fig:Descripteur}.
+
+      \begin{figure}[hbt]  
+        \centering
+        \includegraphics[width=80mm]{AssociationPOI.png}    
+        \caption{Exemple d'association de POI.}
+        \label{fig:Appariement}
+      \end{figure} 
       
       \begin{figure}[hbt]  
         \includegraphics[width=\textwidth]{CalculsDescripteurs.png}    
@@ -903,7 +919,7 @@
         \label{fig:Descripteur}
       \end{figure} 
 
-    \subsection{FAST}
+    \subsection*{FAST}
       Cette méthode d'extraction de POI vérifie pour chaque pixel de l'image d'intensité $I_p$ si au moins 12 des pixels
       du cercle autour du pixel ont une intensité supérieure ou inférieure à une proportion de $I_p$. Autrement dit on regarde s’il y a une 
       grosse démarcation d'intensité entre le pixel et ses voisins comme le montre la Figure \ref{fig:CercleSuperiorite}.
@@ -914,7 +930,7 @@
         \label{fig:CercleSuperiorite}
       \end{figure}
 
-    \subsection{BRIEF}
+    \subsection*{BRIEF}
       Des paires de pixels autour du POI sont générées aléatoirement et des tests de supériorités sont effectués dessus. 
       Un vecteur descripteur issu de la concaténation des résultats de ces tests de supériorité est créé. Un exemple est présenté 
       dans la Figure \ref{fig:Paires}.
@@ -923,18 +939,11 @@
         \includegraphics[width=\textwidth]{Paires.png}    
         \caption{Exemple de paires de pixels à tester.}
         \label{fig:Paires}
-      \end{figure}    
-
-      \begin{figure}[hbt]  
-        \centering
-        \includegraphics[width=80mm]{AssociationPOI.png}    
-        \caption{Exemple d'association de POI.}
-        \label{fig:Appariement}
-      \end{figure} 
+      \end{figure}          
       
     \clearpage
 
-    \subsection{Communication}    
+    \subsection*{Communication}    
       \begin{figure}[hbt]  
         \includegraphics[width=\textwidth]{Schéma1.png}    
         \caption{Schéma de commandes du projet.}
