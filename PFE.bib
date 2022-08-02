@@ -1,4 +1,3 @@
-
 @article{baiWearableTravelAid2019,
   title = {Wearable {{Travel Aid}} for {{Environment Perception}} and {{Navigation}} of {{Visually Impaired People}}},
   author = {Bai, Jinqiang and Liu, Zhaoxiang and Lin, Yimin and Li, Ye and Lian, Shiguo and Liu, Dijun},
@@ -16,40 +15,6 @@
   langid = {english},
   keywords = {blind navigation,ground segmentation,object recognition,visually impaired people,wearable assistive device},
   file = {C\:\\Users\\nicol\\Zotero\\storage\\D5Z42TJJ\\Bai et al. - 2019 - Wearable Travel Aid for Environment Perception and.pdf}
-}
-
-@article{camposORBSLAM3AccurateOpenSource2021,
-  title = {{{ORB-SLAM3}}: {{An Accurate Open-Source Library}} for {{Visual}}, {{Visual}}\textendash{{Inertial}}, and {{Multimap SLAM}}},
-  shorttitle = {{{ORB-SLAM3}}},
-  author = {Campos, Carlos and Elvira, Richard and Rodr{\'i}guez, Juan J. G{\'o}mez and M. Montiel, Jos{\'e} M. and D. Tard{\'o}s, Juan},
-  year = {2021},
-  month = dec,
-  journal = {IEEE Transactions on Robotics},
-  volume = {37},
-  number = {6},
-  pages = {1874--1890},
-  issn = {1941-0468},
-  doi = {10.1109/TRO.2021.3075644},
-  abstract = {This article presents ORB-SLAM3, the first system able to perform visual, visual-inertial and multimap SLAM with monocular, stereo and RGB-D cameras, using pin-hole and fisheye lens models. The first main novelty is a tightly integrated visual-inertial SLAM system that fully relies on maximum a posteriori (MAP) estimation, even during IMU initialization, resulting in real-time robust operation in small and large, indoor and outdoor environments, being two to ten times more accurate than previous approaches. The second main novelty is a multiple map system relying on a new place recognition method with improved recall that lets ORB-SLAM3 survive to long periods of poor visual information: when it gets lost, it starts a new map that will be seamlessly merged with previous maps when revisiting them. Compared with visual odometry systems that only use information from the last few seconds, ORB-SLAM3 is the first system able to reuse in all the algorithm stages all previous information from high parallax co-visible keyframes, even if they are widely separated in time or come from previous mapping sessions, boosting accuracy. Our experiments show that, in all sensor configurations, ORB-SLAM3 is as robust as the best systems available in the literature and significantly more accurate. Notably, our stereo-inertial SLAM achieves an average accuracy of 3.5 cm in the EuRoC drone and 9 mm under quick hand-held motions in the room of TUM-VI dataset, representative of AR/VR scenarios. For the benefit of the community we make public the source code.},
-  keywords = {Computer vision,Feature extraction,inertial navigation,Inertial navigation,Optimization,Robustness,simult- aneous localization and mapping,Simultaneous localization and mapping},
-  file = {C\:\\Users\\nicol\\Zotero\\storage\\JD4Z49JH\\Campos et al. - 2021 - ORB-SLAM3 An Accurate Open-Source Library for Vis.pdf}
-}
-
-@inproceedings{jiRealtimeSemanticRGBD2021,
-  title = {Towards {{Real-time Semantic RGB-D SLAM}} in {{Dynamic Environments}}},
-  booktitle = {2021 {{IEEE International Conference}} on {{Robotics}} and {{Automation}} ({{ICRA}})},
-  author = {Ji, Tete and Wang, Chen and Xie, Lihua},
-  year = {2021},
-  month = may,
-  eprint = {2104.01316},
-  eprinttype = {arxiv},
-  primaryclass = {cs},
-  pages = {11175--11181},
-  doi = {10.1109/ICRA48506.2021.9561743},
-  abstract = {Most of the existing visual SLAM methods heavily rely on a static world assumption and easily fail in dynamic environments. Some recent works eliminate the influence of dynamic objects by introducing deep learning-based semantic information to SLAM systems. However such methods suffer from high computational cost and cannot handle unknown objects. In this paper, we propose a real-time semantic RGB-D SLAM system for dynamic environments that is capable of detecting both known and unknown moving objects. To reduce the computational cost, we only perform semantic segmentation on keyframes to remove known dynamic objects, and maintain a static map for robust camera tracking. Furthermore, we propose an efficient geometry module to detect unknown moving objects by clustering the depth image into a few regions and identifying the dynamic regions via their reprojection errors. The proposed method is evaluated on public datasets and real-world conditions. To the best of our knowledge, it is one of the first semantic RGB-D SLAM systems that run in real-time on a low-power embedded platform and provide high localization accuracy in dynamic environments.},
-  archiveprefix = {arXiv},
-  keywords = {Computer Science - Robotics},
-  file = {C\:\\Users\\nicol\\Zotero\\storage\\HIE7JZ48\\Ji et al. - 2021 - Towards Real-time Semantic RGB-D SLAM in Dynamic E.pdf;C\:\\Users\\nicol\\Zotero\\storage\\CNPICKTZ\\2104.html}
 }
 
 @article{wangCDSFusionDenseSemantic2022,
@@ -72,4 +37,72 @@
   file = {C\:\\Users\\nicol\\Zotero\\storage\\9M8SHI4V\\Wang et al. - 2022 - CDSFusion Dense Semantic SLAM for Indoor Environm.pdf;C\:\\Users\\nicol\\Zotero\\storage\\ASXPZYIM\\979.html}
 }
 
+@article{lucasIterativeImageRegistration,
+  title = {An {{Iterative Image Registration Technique}} with an {{Application}} to {{Stereo Vision}}},
+  author = {Lucas, Bruce D and Kanade, Takeo},
+  pages = {10},
+  abstract = {Image registration finds a variety of applications in computer vision. Unfortunately, traditional image registration techniques tend to be costly. We present a new image registration technique that makes use of the spatial intensity gradient of the images to find a good match using a type of Newton-Raphson iteration. Our technique is faster because it examines far fewer potential matches between the images than existing techniques. Furthermore, this registration technique can be generalized to handle rotation, scaling and shearing. We show show our technique can be adapted for use in a stereo vision system.},
+  langid = {english},
+  file = {C\:\\Users\\nicol\\Zotero\\storage\\2SYDFJCX\\Lucas et Kanade - An Iterative Image Registration Technique with an .pdf;C\:\\Users\\nicol\\Zotero\\storage\\GARG38RW\\lucas_bruce_d_1984_1.pdf}
+}
 
+@article{suhrKanadeLucasTomasiKLTFeature2009,
+  title = {Kanade-{{Lucas-Tomasi}} ({{KLT}}) {{Feature Tracker}}},
+  author = {Suhr, Jae Kyu},
+  year = {2009},
+  journal = {Computer Vision},
+  pages = {37},
+  langid = {english},
+  file = {C\:\\Users\\nicol\\Zotero\\storage\\YSYGRYAK\\Suhr - 2009 - Kanade-Lucas-Tomasi (KLT) Feature Tracker.pdf}
+}
+
+@misc{zhaoPyramidSceneParsing2017,
+  title = {Pyramid {{Scene Parsing Network}}},
+  author = {Zhao, Hengshuang and Shi, Jianping and Qi, Xiaojuan and Wang, Xiaogang and Jia, Jiaya},
+  year = {2017},
+  month = apr,
+  number = {arXiv:1612.01105},
+  eprint = {1612.01105},
+  eprinttype = {arxiv},
+  primaryclass = {cs},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.1612.01105},
+  abstract = {Scene parsing is challenging for unrestricted open vocabulary and diverse scenes. In this paper, we exploit the capability of global context information by different-region-based context aggregation through our pyramid pooling module together with the proposed pyramid scene parsing network (PSPNet). Our global prior representation is effective to produce good quality results on the scene parsing task, while PSPNet provides a superior framework for pixel-level prediction tasks. The proposed approach achieves state-of-the-art performance on various datasets. It came first in ImageNet scene parsing challenge 2016, PASCAL VOC 2012 benchmark and Cityscapes benchmark. A single PSPNet yields new record of mIoU accuracy 85.4\% on PASCAL VOC 2012 and accuracy 80.2\% on Cityscapes.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  file = {C\:\\Users\\nicol\\Zotero\\storage\\ZQXW7XAV\\Zhao et al. - 2017 - Pyramid Scene Parsing Network.pdf;C\:\\Users\\nicol\\Zotero\\storage\\GHFM9RWR\\1612.html}
+}
+
+@inproceedings{jiRealtimeSemanticRGBD2021,
+  title = {Towards {{Real-time Semantic RGB-D SLAM}} in {{Dynamic Environments}}},
+  booktitle = {2021 {{IEEE International Conference}} on {{Robotics}} and {{Automation}} ({{ICRA}})},
+  author = {Ji, Tete and Wang, Chen and Xie, Lihua},
+  year = {2021},
+  month = may,
+  eprint = {2104.01316},
+  eprinttype = {arxiv},
+  primaryclass = {cs},
+  pages = {11175--11181},
+  doi = {10.1109/ICRA48506.2021.9561743},
+  abstract = {Most of the existing visual SLAM methods heavily rely on a static world assumption and easily fail in dynamic environments. Some recent works eliminate the influence of dynamic objects by introducing deep learning-based semantic information to SLAM systems. However such methods suffer from high computational cost and cannot handle unknown objects. In this paper, we propose a real-time semantic RGB-D SLAM system for dynamic environments that is capable of detecting both known and unknown moving objects. To reduce the computational cost, we only perform semantic segmentation on keyframes to remove known dynamic objects, and maintain a static map for robust camera tracking. Furthermore, we propose an efficient geometry module to detect unknown moving objects by clustering the depth image into a few regions and identifying the dynamic regions via their reprojection errors. The proposed method is evaluated on public datasets and real-world conditions. To the best of our knowledge, it is one of the first semantic RGB-D SLAM systems that run in real-time on a low-power embedded platform and provide high localization accuracy in dynamic environments.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Robotics},
+  file = {C\:\\Users\\nicol\\Zotero\\storage\\HIE7JZ48\\Ji et al. - 2021 - Towards Real-time Semantic RGB-D SLAM in Dynamic E.pdf;C\:\\Users\\nicol\\Zotero\\storage\\CNPICKTZ\\2104.html}
+}
+
+@article{camposORBSLAM3AccurateOpenSource2021,
+  title = {{{ORB-SLAM3}}: {{An Accurate Open-Source Library}} for {{Visual}}, {{Visual}}\textendash{{Inertial}}, and {{Multimap SLAM}}},
+  shorttitle = {{{ORB-SLAM3}}},
+  author = {Campos, Carlos and Elvira, Richard and Rodr{\'i}guez, Juan J. G{\'o}mez and M. Montiel, Jos{\'e} M. and D. Tard{\'o}s, Juan},
+  year = {2021},
+  month = dec,
+  journal = {IEEE Transactions on Robotics},
+  volume = {37},
+  number = {6},
+  pages = {1874--1890},
+  issn = {1941-0468},
+  doi = {10.1109/TRO.2021.3075644},
+  abstract = {This article presents ORB-SLAM3, the first system able to perform visual, visual-inertial and multimap SLAM with monocular, stereo and RGB-D cameras, using pin-hole and fisheye lens models. The first main novelty is a tightly integrated visual-inertial SLAM system that fully relies on maximum a posteriori (MAP) estimation, even during IMU initialization, resulting in real-time robust operation in small and large, indoor and outdoor environments, being two to ten times more accurate than previous approaches. The second main novelty is a multiple map system relying on a new place recognition method with improved recall that lets ORB-SLAM3 survive to long periods of poor visual information: when it gets lost, it starts a new map that will be seamlessly merged with previous maps when revisiting them. Compared with visual odometry systems that only use information from the last few seconds, ORB-SLAM3 is the first system able to reuse in all the algorithm stages all previous information from high parallax co-visible keyframes, even if they are widely separated in time or come from previous mapping sessions, boosting accuracy. Our experiments show that, in all sensor configurations, ORB-SLAM3 is as robust as the best systems available in the literature and significantly more accurate. Notably, our stereo-inertial SLAM achieves an average accuracy of 3.5 cm in the EuRoC drone and 9 mm under quick hand-held motions in the room of TUM-VI dataset, representative of AR/VR scenarios. For the benefit of the community we make public the source code.},
+  keywords = {Computer vision,Feature extraction,inertial navigation,Inertial navigation,Optimization,Robustness,simult- aneous localization and mapping,Simultaneous localization and mapping},
+  file = {C\:\\Users\\nicol\\Zotero\\storage\\JD4Z49JH\\Campos et al. - 2021 - ORB-SLAM3 An Accurate Open-Source Library for Vis.pdf}
+}

@@ -291,7 +291,7 @@
           et une unité de mesure inertielle (\acrshort{imu} pour Inertial Measurement Unit), c'est un capteur qui consiste généralement en des gyroscopes 
           pour mesurer des vitesses angulaires et des accéléromètres pour mesurer la force \cite{baiWearableTravelAid2019}. Ces appareils sont montés sur une paire de lunettes
           et reliés à un téléphone. L'appareil proposé dans cette solution se sert de la continuité de la hauteur du sol entre les images 
-          adjacentes poursegmenter le sol avec précision et rapidité pour ensuite chercher la direction du mouvement en fonction du sol.
+          adjacentes pour segmenter le sol avec précision et rapidité pour ensuite chercher la direction du mouvement en fonction du sol.
           Un réseau de neurones à convolution (\acrshort{cnn} pour Convolutional Neural Network) léger est utilisé pour la reconnaissance d'objets 
           (PeelNet avec l'ensemble de données "MS COCO" contenant des images de dimensions 640 x 640). Son schéma de fonctionnement est présenté 
           dans la figure \ref{fig:ReconnaissanceP1}. Il permet de récupérer des informations concernant les endroits aux alentours et l'orientation 
@@ -329,12 +329,15 @@
             Les features \acrshort{fast} (Features from accelerated segment test) ont été adaptées pour accélérer le VIO à 
             la place des feature Shi-Thomas (une manière de détecter les coins sur une image) et la profondeur a été introduite afin d'obtenir une échelle 
             plus précise. Les résultats expérimentaux montrent que les features FAST augmentent la rapidité du système d'une manière plus conséquente 
-            que les features Shi-Tomas et \acrshort{orb} avec la même précision et robustesse. Ce module est composé de 3 parties:
+            que les features Shi-Tomas et \acrshort{orb} (Oriented FAST and Rotated \acrshort{brief}, expliqué en annexe) avec la même précision 
+            et robustesse. Ce module est composé de 3 parties:
 
           \underline{Visual-Inertial Frontend: }
             prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur IMU
             sont préintégrées entre deux images consécutives, le frontend de vision détecte les FAST
-            et les traque entre les images consécutives en utilisant l'algorithme KLT optical flow.
+            et les traque entre les images consécutives en utilisant l'algorithme KLT (Kanade–Lucas–Tomasi) optical flow. KLT optical flow est un 
+            algorithme d'estimation du mouvement basé sur l'extraction de caractéristique et utilise les informations d'intensité spatiale 
+            \cite{lucasIterativeImageRegistration} \cite{suhrKanadeLucasTomasiKLTFeature2009}.
 
           \underline{Back-End:} est utilisé pour fusionner les mesures traitées afin d'obtenir l'estimation de la position. Une optimisation non linéaire
             est utilisée pour relocaliser et optimiser le calcul de la position en fonction de la boucle détectée, en utilisant le solveur Ceres. 
@@ -347,7 +350,10 @@
             globale. Cette optimisation est similaire à la méthode VINS-Mono.
 
           \paragraph{Le module de segmentation sémantique}
-            La segmentation sémantique résulte d'images RGB en entrée qui sont acquises en temps réel en utilisant le module de segmentation PSPNet. 
+            La segmentation sémantique résulte d'images RGB en entrée qui sont acquises en temps réel en utilisant le module de segmentation PSPNet
+            (Pyramid Scene Parsing Network) \cite{zhaoPyramidSceneParsing2017}. PSPNet est un module qui exploite le contexte global de l'information en regardant le contexte de 
+            régions de l'image puis aggrège le tout. Les déductions locales accolées avec les déductions sur l'image globale produisent une prédiction
+            finale plus fiable.
             Le module de segmentation sémantique traite chaque image RGB et retourne des vecteurs indiquant la probabilité d'appartenance à une classe
             pour chaque pixel. Ils classifient et colorent chaque pixel en fonction de la plus haute probabilité d'appartenance à une classe. 
             L'image segmentée finale est composée des pixels colorés et est transmise au module de reconstruction 3D.
@@ -370,7 +376,7 @@
         \pagebreak  
 
         \subsubsection{Towards Real-time Semantic RGB-D SLAM in Dynamic Environments} 
-          Cet article \cite{jiRealtimeSemanticRGBD2021} présente une méthode de SLAM s'inspirant des features ORB (Oriented FAST and Rotated \acrshort{brief}).
+          Cet article \cite{jiRealtimeSemanticRGBD2021} présente une méthode de SLAM s'inspirant des features ORB.
           Le module de segmentation sémantique est une adaptation de SegNet, un réseau de neurones léger qui permet un traitement en temps réel.
           La segmentation se concentre sur des objets dynamiques dont les caractéristiques ne seront pas utilisées dans la création de 
           la carte locale. La segmentation est faite uniquement sur les images clés les plus récentes, accélérant grandement le processus.
@@ -444,11 +450,11 @@
       Au début de l'article, les auteurs listent les solutions qui existent déjà et expliquent leurs limitations respectives. 
       Chaque partie de la solution est expliquée et peut être trouvée dans leurs travaux précédents. Cette solution prendrait beaucoup de temps
       à implémenter puisque les auteurs font surtout une description de leur travail sans mettre à disposition de code source. 
-      Il faudrait parcourir tous leurs travaux précédents pour comprendre l'intégralité de leur solution. De plus il faudrait adapter les travaux
+      Il faudrait parcourir tous leurs travaux précédents pour comprendre l'intégralité de cette solution. De plus, il faudrait adapter les travaux
       proposés afin de créer la carte locale en temps réel plutôt qu'avant, puisque c'est une des contraintes imposées par nos superviseurs. 
 
       L'article "CDSFusion : Dense Semantic SLAM for Indoor Environment Using CPU Computing" est très prometteur, mais n'est pas assez détaillé 
-      pour nous permettre de reproduire leur solution à partir de rien. De plus ils utilisent des capteurs IMU, que nous avons convenu de ne pas 
+      pour nous permettre de reproduire cette solution à partir de rien. De plus, ils utilisent des capteurs IMU, que nous avons convenu de ne pas 
       utiliser dans le cadre de ce projet.
 
       L'article "Towards Real-time Semantic RGBD SLAM in Dynamic Environments" apporte une solution de tracking de la localisation 
@@ -458,7 +464,7 @@
 
       Enfin, l'article "ORB-SLAM3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM" semble être le plus abouti
       que nous aillons pu lire, il est à l'état de l'art et obtient de meilleures performances que ses concurrents. L'article est assez bien expliqué
-      et fournit un code source disponible sur Github. Leur solution semble réutilisable pour notre problème, cela apporterait un bon moyen
+      et fournit un code source disponible sur Github. Cette solution semble réutilisable pour notre problème, cela apporterait un bon moyen
       de traquer une personne malvoyante dans une pièce. Certains aspects de la publication semblent compliqués à comprendre, mais la méthode en 
       elle-même nous semble accessible. Il faudrait passer du temps sur leur code source afin de l'appréhender et se rendre compte de la faisabilité
       de sa mise en place.
@@ -469,12 +475,12 @@
       Pour conclure sur cet état de l'art, nous avons découvert plusieurs méthodes permettant de traquer le mouvement d'une caméra dans un
       milieu intérieur, chacune avec son niveau de complexité et de faisabilité par rapport à nos contraintes qui étaient de n'utiliser aucun
       autre capteur qu'une caméra. Notre but était de fournir un module permettant de guider une personne d'un point A à un point B avec 
-      l'aide de notre module créant une carte locale de l'environnement en se basant sur des points et des lieux d'intérêt, 
+      l'aide de notre module créant une carte locale de l'environnement, en nous basant sur des points et des lieux d'intérêt, 
       s'emboîtant avec les modules de traitement du langage naturel, et le module de détection d'objets. 
       L'article "ORB-SLAM3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM" 
       nous a semblé être le plus pertinent pour arriver à notre but. En effet nous pourrions nous baser sur leur solution de tracking et construire 
       par-dessus pour répondre au besoin fonctionnel de ce projet.
-      De plus le fait que les auteurs mettent à disposition leur code source donne une première vision de ce qui pourrait être réalisé en termes de 
+      De plus, le fait que les auteurs mettent à disposition leur code source donne une première vision de ce qui pourrait être réalisé en termes de 
       performances avec notre propre environnement.
 
     \pagebreak
@@ -482,8 +488,8 @@
   \section{Les dimensions techniques du projet}
     \subsection{Phase de preuve de concept}
       Le projet FYW vise à aider les personnes malvoyantes à se repérer en milieu intérieur. 
-      La preuve de concept (\acrshort{poc}) sur laquelle j'ai travaillée avec mon équipe se concentrait sur la création d'une carte locale
-      de l'environnement en nous basant sur des points d'intérêts (\acrshort{poi}) entre les images vues successivement, c'est la méthode
+      La preuve de concept (\acrshort{poc}) sur laquelle j'ai travaillé avec mon équipe, se concentrait sur la création d'une carte locale
+      de l'environnement, en nous basant sur des points d'intérêts (\acrshort{poi}) entre les images vues successivement, c'est la méthode
       SLAM.
       \subsubsection{Installation}
         Il a d'abord fallu se pencher sur l'installation de la solution que nous avions retenue, afin de construire notre module par-dessus.
@@ -496,7 +502,7 @@
         de l'utilisateur et une destination précédemment sauvegardée.      
             
         \paragraph{General}
-          Notre méthode se base sur ORB-SLAM3, une solution open source crée dans une université en Espagne. L'idée était simple, nous voulions
+          Notre méthode se base sur ORB-SLAM3, une solution open source créée dans une université en Espagne. L'idée était simple, nous voulions
           l'installer et la faire fonctionner puis ajouter les fonctionnalités nécessaires à notre POC. Ce projet open source a été
           développé en C++ et se base sur de nombreuses bibliothèques de code telles que Eigen, Pangolin, Sophus, DBoW2, g2o, Kalibr et ROS.
           Avant d'installer ORB-SLAM3, nous avons dû installer Eigen et Pangolin. Sophus, DBoW2 et g2o étant déjà inclus dans leur dépôt Github.
@@ -507,7 +513,7 @@
           obtienne l'autorisation de travailler avec WSL2.
           Nous avons donc réalisé l'installation d'ORB-SLAM3 sur WSL2 et réussi à lancer le SLAM
           sur la vidéo d'exemple fournie. Cependant notre POC devait fonctionner avec un flux vidéo en temps réel provenant
-          d'une caméra, et non une vidéo préenregistrée. Le problème était que bien que wsl2 ai accès aux appareils USB (en prenant en compte 
+          d'une caméra, et non une vidéo préenregistrée. Le problème était que bien que wsl2 ait accès aux appareils USB (en prenant en compte 
           que pour cela il était nécessaire de créer un nouveau noyau Linux contenant les bons pilotes) et que la caméra soit visible dans les
           pilotes USB, le sous-système n'était pas capable de créer la vidéo dans /dev/video, rendant le flux vidéo inaccessible à notre
           application. Nous avons choisi de basculer sur un système Ubuntu 20.04 sur VM afin de disposer des fonctionnalités de base
@@ -523,12 +529,12 @@
         \paragraph{Pangolin}
           Pangolin est un ensemble de bibliothèques utilitaires légères traitant de prototypage 3D et d'algorithmes numériques 
           ou basés sur de la vidéo. Elles sont utilisées pour s'affranchir des contraintes d'environnement et rendre facile la visualisation des 
-          données. Pour l'installation, de même que pour Eigen, la version la plus récente ne correspondait pas alors il a fallu chercher dans 
+          données. Pour l'installation, de même que pour Eigen, la version la plus récente ne correspondait pas, alors il a fallu chercher dans 
           l'historique des versions et tester jusqu'à trouver la version 0.6 sur leur Github qui nous a permis de lancer le projet.
 
         \paragraph{ORB-SLAM3}
           Pour installer ORB-SLAM3, il a d'abord fallu cloner le dépôt Github de la version 1.0. 
-          Il y avait des prérequis qui ne correspondaient pas à notre environnement tels que la version d'OpenCV qu'il a fallu adapter,
+          Il y avait des prérequis qui ne correspondaient pas à notre environnement, tels que la version d'OpenCV qu'il a fallu adapter,
           nous avons déterminé que la version 4.2 était la bonne. Pour chaque bibliothèque nécessaire, nous avons dû trouver la version
           adaptée à notre projet. Ensuite nous avons pu installer les bibliothèques tierces déjà contenues dans le dossier du projet.        
 
@@ -588,7 +594,7 @@
             Nous avons créé une structure $Coord$ en C++, équivalente à un vecteur 2D. Cette structure est utilisée par tous nos algorithmes.
             
           \subparagraph{AbsoluteCoord}
-            Les coordonnées absolues sont les coordonnées the la caméra qui ont été projetées sur une grille discrète. Nous avons créé une 
+            Les coordonnées absolues sont les coordonnées de la caméra qui ont été projetées sur une grille discrète. Nous avons créé une 
             structure $AbsoluteCoord$ contenant 5 champs:
 
             \begin{itemize}
@@ -689,14 +695,14 @@
         versions pour chaque bibliothèque nous a beaucoup retardés. Nous avons dû éditer certaines parties du code source, 
         notamment au niveau de CMakeLists.txt pour faire fonctionner le tout.
         De nombreux problèmes sont survenus concernant quasiment chaque package que nous devions installer, la plupart du temps à cause de
-        problèmes de compatibilité ou de documentation manquante. La seule solution que nous ayons trouvée a été de chercher sans relâche jusqu'à
+        problèmes de compatibilité ou de documentation manquante. La seule solution que nous ayons trouvé a été de chercher sans relâche jusqu'à
         trouver une solution.
         Lorsque nous travaillions sur la VM, des latences et des crashs inattendus nous ont également fortement ralentis.       
  
       \subsubsection{Conclusion}
         Pour conclure sur la phase de POC, nous avons réussi à faire fonctionner un système SLAM pour la première fois chez Aubay, d'autres
         équipes ayant essayé sans succès par le passé. En plus de réussir l'installation, nous avons ajouté les fonctionnalités nécessaires
-        pour atteindre notre but et avoir un module prêt à intégrer la phase projet pour venir se lier aux autres POC de notre projet.
+        pour atteindre notre but et avoir un module prêt à intégrer la phase projet pour venir se lier aux autres POCs de notre projet.
 
     \subsection{Phase projet}
       Une fois la phase de POC terminée, nous devions passer à la phase projet associant nos POCs
@@ -714,7 +720,7 @@
         aux POCs SLAM et CV, qu'une VM nous le permettait, mais ne donnait pas accès aux unités de traitement graphiques (GPU) nécessaires aux 
         POCs CV et NLP. Nous avons opté pour 
         trouver une solution concernant le problème de flux vidéo sur WSL2. Étant donné que les 3 POCs devaient fonctionner sur le même réseau 
-        local, nous avons eu m'idée de mettre en place un serveur afin d'établir une communication entre Windows et WSL2 pour transmettre le flux 
+        local, nous avons eu l'idée de mettre en place un serveur afin d'établir une communication entre Windows et WSL2 pour transmettre le flux 
         vidéo de Windows à WSL2. Cette solution a nécessité d'adapter la manière dont ORB-SLAM3 récupérait le flux vidéo avant de l'incorporer à 
         son fonctionnement normal.
 
