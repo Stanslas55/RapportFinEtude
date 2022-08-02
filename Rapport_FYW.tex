@@ -428,7 +428,7 @@
           ORB-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme.
           En se servant des données que l'on a déjà vues, on peut retrouver
           facilement les boucles et ainsi réduire les erreurs de dérive. Une représentation en sac de mots dynamique (DBoW2) est utilisée.
-          Ce système est présenté en Figure \ref{fig:ORBSLAM3}
+          Ce système est présenté en Figure \ref{fig:ORBSLAM3}.
 
           \begin{figure}[hbt]  
             \includegraphics[width=\textwidth]{ORB_SLAM3.png}    
@@ -572,7 +572,7 @@
         \paragraph{Matrice de coordonnées}
           Les coordonnées résultantes d'ORB-SLAM3 sont des nombres flottants généralement compris dans l'intervalle $[0,1]$ pour les vidéos
           courtes. Nous avions besoin d'un moyen de projeter ces coordonnées sur une grille afin de déterminer le chemin à parcourir
-          et de donner des indications de direction alors il a fallu adapter le résultat fourni par ORB-SLAM3.
+          et donner des indications de direction, il a alors fallu adapter le résultat fourni par ORB-SLAM3.
 
          La projection est assez simple, nous multiplions la coordonnée flottante de la caméra par 10, on arrondit au supérieur afin d'obtenir
          un nombre entier puis un divise le résultat par 10. Cela nous a permis d'obtenir une grille de coordonnées discrétisées qui ne soit
@@ -828,7 +828,7 @@
 
     \subsection{Le bilan technique}
       Pour la première fois chez Aubay, un système de SLAM a été fonctionnel. J'ai eu la chance de travailler sur la base d'un 
-      projet open source laissant entrevoir une technologie à la pointe de l'état de l'art sur laquelle j'ai pu contribuer et la 
+      projet open source, laissant entrevoir une technologie à la pointe de l'état de l'art, sur laquelle j'ai pu contribuer et la 
       mettre en place dans un projet concret au travers de la phase de POCs et de la phase projet. J'ai beaucoup appris sur le
       sujet de la vision par ordinateur, les mathématiques associées à ces domaines techniques ainsi que les problématiques 
       liées au traitement de l'image en temps réel.
@@ -878,12 +878,13 @@
 
       Le projet m'a permis de prendre conscience que j'aimais beaucoup le développement, en plus de ma forte 
       affinité pour la data et l'intelligence artificielle. Les différentes rencontres que j'ai pu faire au 
-      cours du projet, les discussions avec des personnes déjà en CDI m'ont fait comprendre que je manquais
+      cours du projet, les discussions avec des personnes déjà en CDI, m'ont fait comprendre que je manquais
       encore de certaines compétences techniques avant de pouvoir atteindre les postes que je vise.
-      Le but va être de me former et de monter en compétences en Cloud (AWS) qui devient nécessaire dans 
-      énormément d'entreprises aujourd'hui.
-
-     
+      Le but va être de me former et de monter en compétences dans le domaine du Cloud (AWS) qui devient nécessaire dans 
+      énormément d'entreprises. En effet, le Cloud donne la possibilité de déployer des architectures matérielles ou
+      des applications concrètes de la donnée à grande échelle, ce qui en fait un très bon complément des compétences en science des données.
+      Cela donne également une belle perspective d'apprentissage continue en accord avec ma formation d'ingénieur, qui veut 
+      faire de nous des personnes curieuses, toujours prêtes à apprendre de nouveaux concepts intéressants et évoluer avec la technologie.   
 
   \pagebreak
   
