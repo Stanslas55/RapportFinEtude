@@ -336,7 +336,7 @@
             prend en charge le traitement des données issues des capteurs. Les mesures effectuées par le capteur IMU
             sont préintégrées entre deux images consécutives, le frontend de vision détecte les FAST
             et les traque entre les images consécutives en utilisant l'algorithme KLT (Kanade–Lucas–Tomasi) optical flow. KLT optical flow est un 
-            algorithme d'estimation du mouvement basé sur l'extraction de caractéristique et utilise les informations d'intensité spatiale 
+            algorithme d'estimation du mouvement basé sur l'extraction de caractéristiques et utilise les informations d'intensité spatiale 
             \cite{lucasIterativeImageRegistration} \cite{suhrKanadeLucasTomasiKLTFeature2009}.
 
           \underline{Back-End:} est utilisé pour fusionner les mesures traitées afin d'obtenir l'estimation de la position. Une optimisation non linéaire
@@ -497,10 +497,10 @@
         et sur une machine virtuelle (\acrshort{vm}).
         Pour chaque module, nous avons vérifié qu'il pouvait bien s'installer avec les commandes d'acquisition de modules d'Ubuntu 20.04 
         (\textit{sudo apt-get install ...}), 
-        puis nous avons ajouté ces commandes à notre script d'installation. Il a souvent été nécéssaire de définir de nouvelles variables d'environnement
-        afin que les modules que nous installions puisse fonctionner correctement. Cette création de variable d'environnement se faisait depuis le script d'installation
+        puis nous avons ajouté ces commandes à notre script d'installation. Il a souvent été nécessaire de définir de nouvelles variables d'environnement
+        afin que les modules que nous installions puissent fonctionner correctement. Cette création de variables d'environnement se faisait depuis le script d'installation
         qui écrivait dans le fichier \textit{.bashrc} de notre système, fichier executé à chaque lancement du système. 
-        On a par exemple \textit{echo "export WORKDIR=`pwd`" >> ~/.bashrc}. Les bibliothèques de code utilisées décrites plus bas étaient installés avec \textit{cmake}.
+        On a par exemple \textit{echo "export WORKDIR=`pwd`" >> ~/.bashrc}. Les bibliothèques de code utilisées décrites plus bas étaient installées avec \textit{cmake}.
         Ces documentations d'installation appartiennent à Aubay et ne peuvent être divulguées dans
         ce document.
         Ensuite il a fallu calibrer la caméra que nous utilisions pour fonctionner avec ORB-SLAM3. 
@@ -738,7 +738,7 @@
         les résultats à afficher après avoir sélectionné le mode de démonstration adapté. Ce fonctionnement est illustré dans la 
         Figure \ref{fig:Structure}. C'est l'interface (en rouge) qui permet de lancer l'application et d'afficher les résultats.
         Une fois l'application lancée par l'interface, la communication entre le chef d'orchestre (Commander) et les différents modules est 
-        établie grace à un serveur Flask.      
+        établie grâce à un serveur Flask.      
 
         \begin{figure}[hbt]  
           \includegraphics[width=\textwidth]{StructureApp.png}    
@@ -755,33 +755,33 @@
         annexes \ref{fig:Schema1} et \ref{fig:Schema2}.   
 
         Une socket est un port ouvert sur une machine afin de recevoir ou d'envoyer de la donnée à d'autres ordinateurs sur un même réseau. 
-        Ce point d'entrée permet de gérer plusieurs types de protocoles de communication dont le transfert de fichiers locaux et de données 
+        Ce point d'entrée permet de gérer plusieurs types de protocoles de communication, dont le transfert de fichiers locaux et de données 
         qui nous intéresse ici. Dans la pratique, il faut toujours s'assurer que la socket est bien valide, que le port n'est pas déjà 
-        utilisé, que le port n'est pas endomagé à la suite d'une fermeture brutale. Il fallait également spécifier la taille de la donnée que 
+        utilisé, que le port n'est pas endommagé à la suite d'une fermeture brutale. Il fallait également spécifier la taille de la donnée que 
         l'on voulait envoyer, ici on mesurait simplement la taille de la chaîne de caractère à envoyer.     
 
-        Un thread quant à lui est un processus qui permet d'executer des instructions de langage machine au sein du processeur. Ce 
-        processus un peu spécial permet à deux instances d'un même programme programme de s'executer en "simultanné" (pas exactement en même-temps, 
-        mais à l'échelle de cette explication nous pouvons considérer que les deux processus s'executent en simultanné sans que cela n'altère 
+        Un thread quant à lui est un processus qui permet d'exécuter des instructions de langage machine au sein du processeur. Ce 
+        processus un peu spécial permet à deux instances d'un même programme de s'exécuter en "simultanné" (pas exactement en même temps, 
+        mais à l'échelle de cette explication nous pouvons considérer que les deux processus s'exécutent en simultané sans que cela n'altère 
         la compréhension du lecteur) au sein d'un même processeur. Dans la pratique, cela nous a permis de lancer le programme principal, 
-        pour qu'il execute ses tâches, et lorsque que cela était nécéssaire (notamment lors d'une interraction avec l'utilisateur), d'envoyer 
-        les données nécéssaires à l'interface via le serveur Flask et les socket, sans que cela ne bloque le programme. 
+        pour qu'il exécute ses tâches, et lorsque cela était nécessaire (notamment lors d'une interaction avec l'utilisateur), d'envoyer 
+        les données nécessaires à l'interface via le serveur Flask et les sockets, sans que cela ne bloque le programme. 
         Ceci n'aurait pas été possible sans l'utilisation de threads.    
 
       \subsubsection{Développement de l'application}      
         Aubay nous a proposé de choisir entre Angular et Flutter comme framework de 
         développement, avec une préférence pour Flutter qui était une technologie encore inconnue de l'entreprise. Ayant déjà travaillé 
         avec Flutter sur un petit projet personnel, j'ai orienté le développement sur ce framework. L'idée était de créer une page d'accueil 
-        contenant des boutons appelant les fonctionnalités de l'application. Nous devions donc être capable d'executer des scripts Python, 
-        afin de communiquer avec les composants de l'applications,  et de pouvoir recevoir des images à afficher pour constituer la vidéo de 
+        contenant des boutons appelant les fonctionnalités de l'application. Nous devions donc être capables d'exécuter des scripts Python, 
+        afin de communiquer avec les composants de l'application,  et de pouvoir recevoir des images à afficher pour constituer la vidéo de 
         retour, en notant qu'une succession d'images affichées rapidement constitue une vidéo.
 
         Flutter s'est avéré être très pratique à utiliser et à prendre en main, avec l'avantage de produire des pages sans avoir à se préoccuper 
-        des graphismes qui étaient déjà pris en charge. Cependant un certain nombres de problèmes sont survenus lorsque nous avons voulu récupérer 
-        des images depuis un serveur et les afficher en temps réel. En effet la récupération et la conversion au format adéquat pouvaient être lents
-        et ne pas permettre un affichage en temps réel. De plus l'execution de scripts Python était une option assez limité du framework que nous 
+        des graphismes qui étaient déjà pris en charge. Cependant un certain nombre de problèmes sont survenus lorsque nous avons voulu récupérer 
+        des images depuis un serveur et les afficher en temps réel. En effet la récupération et la conversion au format adéquat pouvaient être lentes
+        et ne pas permettre un affichage en temps réel. De plus l'exécution de scripts Python était une option assez limitée du framework que nous 
         n'avions pas envisagée au moment de le choisir pour développer l'application. Nous nous sommes en fait rendu compte des limites de Flutter 
-        pendant que nous essayions de l'employer pour développer notre application de démonstration. A la vue des multiples problèmes engendrés par 
+        pendant que nous essayions de l'employer pour développer notre application de démonstration. À la vue des multiples problèmes engendrés par 
         ce dernier, nous avons choisi de le laisser de côter pour partir sur une base connue. 
 
         Nous avons recommencé le développement avec Python en utilisant le package PyQt5, un module de création de fenêtres graphiques. Les pages 
@@ -789,8 +789,8 @@
         il nous était désormais facile d'appeler des scripts Python et de communiquer avec les autres parties du projet. Il a donc été assez rapide 
         de reproduire les pages que nous avions déjà créées avec Flutter.      
         
-        L'astuce a été de trouver comment afficher une vidéo récupérée image par image dans l'application. Après quelques tests et réféxions, 
-        il s'est trouvé qu'il fallait simplement procéder à l'affichage en continue d'une image récupérée avec le serveur Flask, et que 
+        L'astuce a été de trouver comment afficher une vidéo récupérée image par image dans l'application. Après quelques tests et réflexions, 
+        il s'est trouvé qu'il fallait simplement procéder à l'affichage en continu d'une image récupérée avec le serveur Flask, et que 
         l'image la plus récente remplace l'affichage courant, ce qui nous donne une vidéo de résultat.
 
         L'application fonctionne avec une caméra branchée pour transmettre le flux vidéo aux différents modules s'en servant ainsi qu'avec
@@ -888,7 +888,7 @@
       sensibilisant sur les problématiques liées aux sockets et aux serveurs de manière plus générale.
       Cela nous a permis de nous affranchir des différences de système d'exploitation et de langages de programmation. 
       
-      J'ai également développé une application graphique pour la première fois, ce qui m'a beaucoup appris sur des framework de 
+      J'ai également développé une application graphique pour la première fois, ce qui m'a beaucoup appris sur des frameworks de 
       développement d'applications tels que Flutter et PyQt5, ce développement m'a beaucoup appris sur les notions liées 
       à la communication entre l'affichage graphique et les fonctions sous-jacentes d'une application web ou bureau.
 
