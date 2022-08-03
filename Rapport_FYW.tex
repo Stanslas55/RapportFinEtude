@@ -7,7 +7,7 @@
 \usepackage{graphicx}
 
 %\usepackage[a4paper, total={6in, 8in}]{geometry}
-\usepackage[hmargin={3.0cm,3.0cm}, top=3.0cm,bottom=3.0cm]{geometry} 
+\usepackage[hmargin={3.3cm,3.3cm}, top=3.2cm,bottom=3.2cm]{geometry} 
 % Tester les ! dans les figures.
 % Used to format pars, specify the indent size and jump after par ending
 \usepackage[skip=10pt plus1pt, indent=25pt]{parskip}
@@ -322,7 +322,7 @@
           3 modules imagés dans la Figure \ref{fig:PipelineP2}.
 
           \paragraph{Le module VIO}
-            Le module d'odométrie visuelle-innertielle (\acrshort{vio} pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
+            Le module d'odométrie visuelle-inertielle (\acrshort{vio} pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
             afin de proposer une trajectoire. Ce module VIO est basé sur VINS-Mono. VINS-Mono est un framework SLAM en temps réel pour les 
             systèmes visuo-inertiels monoculaires. Il utilise une méthode de fenêtre glissante basée sur des optimisations pour fournir une odométrie 
             visuelle-inertielle de haute précision.
@@ -352,7 +352,7 @@
           \paragraph{Le module de segmentation sémantique}
             La segmentation sémantique résulte d'images RGB en entrée qui sont acquises en temps réel en utilisant le module de segmentation PSPNet
             (Pyramid Scene Parsing Network) \cite{zhaoPyramidSceneParsing2017}. PSPNet est un module qui exploite le contexte global de l'information en regardant le contexte de 
-            régions de l'image puis aggrège le tout. Les déductions locales accolées avec les déductions sur l'image globale produisent une prédiction
+            régions de l'image puis agrège le tout. Les déductions locales accolées avec les déductions sur l'image globale produisent une prédiction
             finale plus fiable.
             Le module de segmentation sémantique traite chaque image RGB et retourne des vecteurs indiquant la probabilité d'appartenance à une classe
             pour chaque pixel. Ils classifient et colorent chaque pixel en fonction de la plus haute probabilité d'appartenance à une classe. 
@@ -428,13 +428,13 @@
           ORB-SLAM3 introduit l'utilisation de mémoire à court, moyen et long terme.
           En se servant des données que l'on a déjà vues, on peut retrouver
           facilement les boucles et ainsi réduire les erreurs de dérive. Une représentation en sac de mots dynamique (DBoW2) est utilisée.
-          Ce système est présenté en Figure \ref{fig:ORBSLAM3}.
+          Ce système est présenté en Figure \ref{fig:ORBSLAM3}.          
 
           \begin{figure}[hbt]  
             \includegraphics[width=\textwidth]{ORB_SLAM3.png}    
             \caption{Schéma présentant le fonctionnement d'ORB-SLAM3.}
             \label{fig:ORBSLAM3}
-          \end{figure}           
+          \end{figure}      
 
           Le thread de tracking traite chaque nouvelle image afin de vérifier si elle représente une nouvelle image clé afin de la localiser
           dans la carte active de l'atlas. Si le tracking est perdu, le système essaye de se relocaliser en cherchant des repères visuels 
@@ -463,7 +463,7 @@
       surtout sur leur valeur ajoutée permettant d'améliorer les résultats de ce dernier.
 
       Enfin, l'article "ORB-SLAM3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM" semble être le plus abouti
-      que nous aillons pu lire, il est à l'état de l'art et obtient de meilleures performances que ses concurrents. L'article est assez bien expliqué
+      que nous ayons pu lire, il est à l'état de l'art et obtient de meilleures performances que ses concurrents. L'article est assez bien expliqué
       et fournit un code source disponible sur Github. Cette solution semble réutilisable pour notre problème, cela apporterait un bon moyen
       de traquer une personne malvoyante dans une pièce. Certains aspects de la publication semblent compliqués à comprendre, mais la méthode en 
       elle-même nous semble accessible. Il faudrait passer du temps sur leur code source afin de l'appréhender et se rendre compte de la faisabilité
@@ -494,13 +494,21 @@
       \subsubsection{Installation}
         Il a d'abord fallu se pencher sur l'installation de la solution que nous avions retenue, afin de construire notre module par-dessus.
         Nous avons été capables de produire une documentation d'installation de ORB-SLAM3 sur le Windows sub-system for Linux (\acrshort{wsl2})
-        et sur une machine virtuelle (\acrshort{vm}). Ces documentations d'installation appartiennent à Aubay et ne peuvent être divulguées dans
+        et sur une machine virtuelle (\acrshort{vm}).
+        Pour chaque module, nous avons vérifié qu'il pouvait bien s'installer avec les commandes d'acquisition de modules d'Ubuntu 20.04 
+        (\textit{sudo apt-get install ...}), 
+        puis nous avons ajouté ces commandes à notre script d'installation. Il a souvent été nécéssaire de définir de nouvelles variables d'environnement
+        afin que les modules que nous installions puisse fonctionner correctement. Cette création de variable d'environnement se faisait depuis le script d'installation
+        qui écrivait dans le fichier \textit{.bashrc} de notre système, fichier executé à chaque lancement du système. 
+        On a par exemple \textit{echo "export WORKDIR=`pwd`" >> ~/.bashrc}. Les bibliothèques de code utilisées décrites plus bas étaient installés avec \textit{cmake}.
+        Ces documentations d'installation appartiennent à Aubay et ne peuvent être divulguées dans
         ce document.
         Ensuite il a fallu calibrer la caméra que nous utilisions pour fonctionner avec ORB-SLAM3. 
         La calibration de la caméra assure que l'estimation de la position de la caméra est la plus proche de la position réelle de la caméra.
         Enfin, l'idée était de développer un algorithme de recherche du plus court chemin entre deux points donnés, par exemple entre la position
         de l'utilisateur et une destination précédemment sauvegardée.      
             
+     
         \paragraph{General}
           Notre méthode se base sur ORB-SLAM3, une solution open source créée dans une université en Espagne. L'idée était simple, nous voulions
           l'installer et la faire fonctionner puis ajouter les fonctionnalités nécessaires à notre POC. Ce projet open source a été
@@ -692,12 +700,12 @@
       \subsubsection{Difficultés rencontrées}
         Nous avons passé la majeure partie du temps que nous avions à disposition pour le POC à essayer d'installer ORB-SLAM3. 
         La recherche des bonnes
-        versions pour chaque bibliothèque nous a beaucoup retardés. Nous avons dû éditer certaines parties du code source, 
+        versions pour chaque bibliothèque nous a beaucoup retardé. Nous avons dû éditer certaines parties du code source, 
         notamment au niveau de CMakeLists.txt pour faire fonctionner le tout.
         De nombreux problèmes sont survenus concernant quasiment chaque package que nous devions installer, la plupart du temps à cause de
         problèmes de compatibilité ou de documentation manquante. La seule solution que nous ayons trouvé a été de chercher sans relâche jusqu'à
         trouver une solution.
-        Lorsque nous travaillions sur la VM, des latences et des crashs inattendus nous ont également fortement ralentis.       
+        Lorsque nous travaillions sur la VM, des latences et des crashs inattendus nous ont également fortement ralenti.       
  
       \subsubsection{Conclusion}
         Pour conclure sur la phase de POC, nous avons réussi à faire fonctionner un système SLAM pour la première fois chez Aubay, d'autres
@@ -728,7 +736,9 @@
         graphique afin de présenter les résultats à l'utilisateur. La structure de l'application est simple: Les 3 POCs communiquent à un 
         chef d'orchestre pour envoyer leur requête ou récupérer le résultat d'une requête précédemment effectuée et le frontend récupère
         les résultats à afficher après avoir sélectionné le mode de démonstration adapté. Ce fonctionnement est illustré dans la 
-        Figure \ref{fig:Structure}.
+        Figure \ref{fig:Structure}. C'est l'interface (en rouge) qui permet de lancer l'application et d'afficher les résultats.
+        Une fois l'application lancée par l'interface, la communication entre le chef d'orchestre (Commander) et les différents modules est 
+        établie grace à un serveur Flask.      
 
         \begin{figure}[hbt]  
           \includegraphics[width=\textwidth]{StructureApp.png}    
@@ -738,19 +748,57 @@
 
         Le POC SLAM se situe sur un système différent et utilise un langage de programmation différent des POCs CV et NLP, nous avons dû
         recourir aux sockets qui sont disponibles dans beaucoup de langages de programmation dont C++ et Python. Après avoir autorisé les 
-        communications au niveau du proxy et du par-feu en ouvrant les bons ports, cette communication par socket a pu être réalisée.
-        Une fois la communication rendue possible, nous avons ajouté des threads au code d'ORB-SLAM3 pour permettre des interruptions
+        communications au niveau du proxy et du par-feu en ouvrant les bons ports.
+        Une fois cette communication rendue possible, nous avons ajouté des threads au code d'ORB-SLAM3 pour permettre des interruptions
         pour envoyer les données nécessaires après leur traitement ou recevoir les instructions du chef d'orchestre
         afin d'exécuter les fonctions utiles au bon moment. Un schéma global des communications établies au sein du projet est disponible en 
-        annexes \ref{fig:Schema1} et \ref{fig:Schema2}.      
+        annexes \ref{fig:Schema1} et \ref{fig:Schema2}.   
 
-      \subsubsection{Développement de l'application}         
+        Une socket est un port ouvert sur une machine afin de recevoir ou d'envoyer de la donnée à d'autres ordinateurs sur un même réseau. 
+        Ce point d'entrée permet de gérer plusieurs types de protocoles de communication dont le transfert de fichiers locaux et de données 
+        qui nous intéresse ici. Dans la pratique, il faut toujours s'assurer que la socket est bien valide, que le port n'est pas déjà 
+        utilisé, que le port n'est pas endomagé à la suite d'une fermeture brutale. Il fallait également spécifier la taille de la donnée que 
+        l'on voulait envoyer, ici on mesurait simplement la taille de la chaîne de caractère à envoyer.     
+
+        Un thread quant à lui est un processus qui permet d'executer des instructions de langage machine au sein du processeur. Ce 
+        processus un peu spécial permet à deux instances d'un même programme programme de s'executer en "simultanné" (pas exactement en même-temps, 
+        mais à l'échelle de cette explication nous pouvons considérer que les deux processus s'executent en simultanné sans que cela n'altère 
+        la compréhension du lecteur) au sein d'un même processeur. Dans la pratique, cela nous a permis de lancer le programme principal, 
+        pour qu'il execute ses tâches, et lorsque que cela était nécéssaire (notamment lors d'une interraction avec l'utilisateur), d'envoyer 
+        les données nécéssaires à l'interface via le serveur Flask et les socket, sans que cela ne bloque le programme. 
+        Ceci n'aurait pas été possible sans l'utilisation de threads.    
+
+      \subsubsection{Développement de l'application}      
+        Aubay nous a proposé de choisir entre Angular et Flutter comme framework de 
+        développement, avec une préférence pour Flutter qui était une technologie encore inconnue de l'entreprise. Ayant déjà travaillé 
+        avec Flutter sur un petit projet personnel, j'ai orienté le développement sur ce framework. L'idée était de créer une page d'accueil 
+        contenant des boutons appelant les fonctionnalités de l'application. Nous devions donc être capable d'executer des scripts Python, 
+        afin de communiquer avec les composants de l'applications,  et de pouvoir recevoir des images à afficher pour constituer la vidéo de 
+        retour, en notant qu'une succession d'images affichées rapidement constitue une vidéo.
+
+        Flutter s'est avéré être très pratique à utiliser et à prendre en main, avec l'avantage de produire des pages sans avoir à se préoccuper 
+        des graphismes qui étaient déjà pris en charge. Cependant un certain nombres de problèmes sont survenus lorsque nous avons voulu récupérer 
+        des images depuis un serveur et les afficher en temps réel. En effet la récupération et la conversion au format adéquat pouvaient être lents
+        et ne pas permettre un affichage en temps réel. De plus l'execution de scripts Python était une option assez limité du framework que nous 
+        n'avions pas envisagée au moment de le choisir pour développer l'application. Nous nous sommes en fait rendu compte des limites de Flutter 
+        pendant que nous essayions de l'employer pour développer notre application de démonstration. A la vue des multiples problèmes engendrés par 
+        ce dernier, nous avons choisi de le laisser de côter pour partir sur une base connue. 
+
+        Nous avons recommencé le développement avec Python en utilisant le package PyQt5, un module de création de fenêtres graphiques. Les pages 
+        générées demandent un minimum de travail au niveau des graphismes pour donner un résultat satisfaisant pour la démonstration. Avec ce package, 
+        il nous était désormais facile d'appeler des scripts Python et de communiquer avec les autres parties du projet. Il a donc été assez rapide 
+        de reproduire les pages que nous avions déjà créées avec Flutter.      
+        
+        L'astuce a été de trouver comment afficher une vidéo récupérée image par image dans l'application. Après quelques tests et réféxions, 
+        il s'est trouvé qu'il fallait simplement procéder à l'affichage en continue d'une image récupérée avec le serveur Flask, et que 
+        l'image la plus récente remplace l'affichage courant, ce qui nous donne une vidéo de résultat.
+
         L'application fonctionne avec une caméra branchée pour transmettre le flux vidéo aux différents modules s'en servant ainsi qu'avec
         un microphone et un haut-parleur.  
         L'interface graphique donne la possibilité de lancer une démonstration et de démarrer les parties SLAM, CV et NLP via le serveur Flask 
-        et des sockets. J'ai développé cette interface en Python avec mon équipe grâce à la bibliothèque PyQt5. La page principale de l'application est
+        et des sockets. La page principale de l'application est
         montrée en Figure \ref{fig:Application}, on y voit les résultats des POCs CV et SLAM ainsi que les différents boutons permettant
-        à l'utilisateur d'interagir pour tester l'application. Ces boutons servent à: 
+        à l'utilisateur d'interagir pour tester l'application. Ces boutons servent à:
 
         \begin{itemize}
           \item Lancer une vidéo de démonstration.
@@ -759,7 +807,7 @@
           \item Sauvegarder la position courante comme un lieu favori afin de pouvoir s'y faire guider plus tard.
           \item Demander à se faire guider à un lieu précédemment sauvegardé.
           \item Afficher l'historique des commandes utilisées et réponses reçues.   
-        \end{itemize} 
+        \end{itemize}       
 
         \begin{figure}[hbt]  
           \includegraphics[width=\textwidth]{Application.png}    
