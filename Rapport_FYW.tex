@@ -7,7 +7,7 @@
 \usepackage{graphicx}
 
 %\usepackage[a4paper, total={6in, 8in}]{geometry}
-\usepackage[hmargin={3.3cm,3.3cm}, top=3.2cm,bottom=3.2cm]{geometry} 
+\usepackage[hmargin={3.3cm,3.3cm}, top=3.0cm,bottom=3.0cm]{geometry} 
 % Tester les ! dans les figures.
 % Used to format pars, specify the indent size and jump after par ending
 \usepackage[skip=10pt plus1pt, indent=25pt]{parskip}
@@ -225,7 +225,7 @@
     d’information de ses clients. Ils opèrent sur des marchés à forte valeur ajoutée, en France comme en Europe. C'est un acteur 
     référent de la transformation digitale. Son secteur d'activité est centré autour du conseil sur tout type de projet technologique.  
     C'est une ESN cotée en Bourse (SBF 250) et 46\% du capital est détenu par les managers. Les chiffres clés concernant Aubay 
-    sont présentés dans la Figure \ref{fig:PA1} ci-après. En 2022, l'entreprise emploie 7306 travailleurs, dont 2728 en France. 
+    sont présentés dans la Figure \ref{fig:PA1} ci-après. En 2022, l'entreprise emploie 7306 personnes, dont 2728 en France. 
     Selon son site internet, Aubay est implantée dans 7 pays européens, et a réalisée un chiffre d'affaires de 470,6 M€ en 2021. 
     D'ailleurs, ces dernières années, l'entreprise a connu une forte croissance de 10,4\% en 2021, qui coïncide avec une augmentation 
     constante des effectifs de l'entreprise, passant de 4600 employés en 2015 à plus de 7000 aujourd'hui.
@@ -258,8 +258,8 @@
     de cette contrainte afin de permettre une plus grande polyvalence pour ce genre d'outil.
     Le projet a été séparé en plusieurs parties délimitées par des dates clés qui sont présentées dans la Figure \ref{fig:Planning} 
     avec les livrables associés à chaque fin de phase.
-    La prise en main du projet a démarée début février, s'en est suivi la partie concernant les états de l'art (\acrshort{ea} sur la Figure \ref{fig:Planning}) 
-    qui devait être réalisée entre mi-février et mi-mars en parallèle du Design Thinking qui nous a permis de cadrer et définir le projet par 
+    La prise en main du projet a démaré début février, s'en est suivi la partie concernant les états de l'art (\acrshort{ea} sur la Figure \ref{fig:Planning}) 
+    qui devait être réalisée entre mi-février et mi-mars en parallèle du Design Thinking, qui nous a permis de cadrer et définir le projet par 
     rapport aux besoins de l'application et les tâches à accomplir. La phase de preuve de concept qui a suivi a duré jusqu'à mi-mai. 
     Nous sommes ensuite passés à la phase projet afin de concevoir l'application de démonstration nécessaire à la journée des stagiaires (JDS) 
     du 7 juillet, moment phare pour le pôle innovation de chez Aubay où tous 
@@ -272,9 +272,8 @@
     \end{figure}  
     
     J'ai réalisé ce projet dans une équipe de 11 stagiaires, tous en stage de fin d'études. Étant donné les multiples parties concernant le projet, 
-    à savoir la détection d'objets, la localisation de l'utilisateur et la gestion des interactions vocales, nous avons dû nous séparer en 3 
-    groupes afin de réaliser les états de l'art et les preuves de concept. J'ai personnellement travaillé sur la partie s'intéressant à la 
-    localisation et le guidage de l'utilisateur dans son environnement. 
+    à savoir : la détection d'objets, la localisation de l'utilisateur et la gestion des interactions vocales, nous avons dû nous séparer en 3 
+    groupes. J'ai personnellement travaillé sur la partie s'intéressant à la localisation et le guidage de l'utilisateur dans son environnement. 
     
     \pagebreak
   
@@ -311,7 +310,7 @@
 
           Le système de navigation contient un module de localisation intérieur qui va nous intéresser: un algorithme V\acrshort{slam} (Visual Simultaneous 
           Localization and Mapping) est utilisé. SLAM est un problème de computer vision visant à traquer les mouvements d'un module en se basant
-          sur ce qu'il voit. Il faut traiter les objets dynamiques qui entrent et sortent du champ de vision pour ne pas les prendre en computer
+          sur ce qu'il voit. Il faut traiter les objets dynamiques qui entrent et sortent du champ de vision pour ne pas les prendre en compte
           dans l'estimation de la position du module. L'estimation se fait en trouvant des points clés sur les images successives.  Visual SLAM
           se sert des informations récuperées pour trianguler la position 3D du module. 
     
@@ -329,7 +328,7 @@
             Les features \acrshort{fast} (Features from accelerated segment test) ont été adaptées pour accélérer le VIO à 
             la place des feature Shi-Thomas (une manière de détecter les coins sur une image) et la profondeur a été introduite afin d'obtenir une échelle 
             plus précise. Les résultats expérimentaux montrent que les features FAST augmentent la rapidité du système d'une manière plus conséquente 
-            que les features Shi-Tomas et \acrshort{orb} (Oriented FAST and Rotated \acrshort{brief}, expliqué en annexe) avec la même précision 
+            que les features Shi-Tomas et \acrshort{orb} (Oriented FAST and Rotated \acrshort{brief}, expliqués en annexe) avec la même précision 
             et robustesse. Ce module est composé de 3 parties:
 
           \underline{Visual-Inertial Frontend: }
@@ -382,14 +381,12 @@
           la carte locale. La segmentation est faite uniquement sur les images clés les plus récentes, accélérant grandement le processus.
           La segmentation peut être très rapide, mais reconnaît principalement les objets qu'elle connaît déjà et est moins efficace dans des 
           milieux inconnus avec des objets dynamiques nouveaux. Ce module essaye de résoudre ce problème.
-          Pour chaque nouvelle image l'idée est d'utiliser l'algorithme du K-means pour segmenter l'image de profondeur en N clusters.
+          Pour chaque nouvelle image, l'idée est d'utiliser l'algorithme du K-means pour segmenter l'image de profondeur en N clusters.
           Chaque cluster est considéré comme faisant partie du même objet. Pour chaque cluster, une erreur de reprojection est calculée. Si une 
           des erreurs moyennes est relativement supérieure aux autres, le cluster est considéré comme un objet dynamique et les points caractéristiques
           de l'objet seront supprimés du traitement. Cette manière de traiter les images permet de réduire le taux de faux positifs. 
           Les comparaisons sont effectuées d'une image clé à une autre puisqu'elles se ressemblent beaucoup, mais aussi entre la première estimation
-          et les cartes locales obtenues.
-
-        \pagebreak
+          et les cartes locales obtenues.        
 
         \subsubsection{ORB-SLAM3: An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM}
           ORB-SLAM3 \cite{camposORBSLAM3AccurateOpenSource2021} est une amélioration d'ORB-SLAM2, présenté 
@@ -465,7 +462,7 @@
       Enfin, l'article "ORB-SLAM3 : An Accurate Open-Source Library for Visual, Visual-Inertial and Multi-Map SLAM" semble être le plus abouti
       que nous ayons pu lire, il est à l'état de l'art et obtient de meilleures performances que ses concurrents. L'article est assez bien expliqué
       et fournit un code source disponible sur Github. Cette solution semble réutilisable pour notre problème, cela apporterait un bon moyen
-      de traquer une personne malvoyante dans une pièce. Certains aspects de la publication semblent compliqués à comprendre, mais la méthode en 
+      de traquer les mouvements d'une personne malvoyante dans une pièce. Certains aspects de la publication semblent compliqués à comprendre, mais la méthode en 
       elle-même nous semble accessible. Il faudrait passer du temps sur leur code source afin de l'appréhender et se rendre compte de la faisabilité
       de sa mise en place.
 
@@ -554,7 +551,7 @@
       \subsubsection{Calibration}
         Comme dit précédemment, la calibration de la caméra était une phase importante afin d'obtenir une bonne estimation de la position
         de la caméra utilisée. En effet, les paramètres intrinsèques et les distorsions de la caméra sont ce qui définit la manière dont 
-        un objet dans le monde réel va être projeté dans l'espace image. C'est la première étape nécessaire à obtenir une méthode de 
+        un objet dans le monde réel va être projeté dans l'espace image. C'est la première étape nécessaire à l'obtention d'une méthode de 
         SLAM performante. Ces paramètres varient d'une marque à une autre, mais aussi entre les différents modèles d'une même marque.
 
         Ros et Kalibr sont deux packages qui permettent d'effectuer une calibration. Le premier est pratique à utiliser puisqu'il donne un 
@@ -581,6 +578,8 @@
           Les coordonnées résultantes d'ORB-SLAM3 sont des nombres flottants généralement compris dans l'intervalle $[0,1]$ pour les vidéos
           courtes. Nous avions besoin d'un moyen de projeter ces coordonnées sur une grille afin de déterminer le chemin à parcourir
           et donner des indications de direction, il a alors fallu adapter le résultat fourni par ORB-SLAM3.
+
+        \pagebreak
 
          La projection est assez simple, nous multiplions la coordonnée flottante de la caméra par 10, on arrondit au supérieur afin d'obtenir
          un nombre entier puis un divise le résultat par 10. Cela nous a permis d'obtenir une grille de coordonnées discrétisées qui ne soit
@@ -637,14 +636,15 @@
             \item F = G + H            
           \end{itemize} 
           A* base se décision sur la valeur de F, il cherche toujours à minimiser cette valeur jusqu'à atteindre sa destination,
-          comme le montre la Figure \ref{fig:Astar}.          
+          comme le montre la Figure \ref{fig:Astar}.     
+          
+          \clearpage
           
           \begin{figure}[hbt]  
             \includegraphics[width=\textwidth]{Astar.png}    
             \caption{Exemple de A*.}
             \label{fig:Astar}
-          \end{figure} 
-
+          \end{figure}      
 
         \paragraph{Retourner à un point d'intérêt}
           Dans cette partie nous avons ajouté un bouton à l'interface graphique fournie avec ORB-SLAM3 qui affiche la liste des POI et 
@@ -663,7 +663,7 @@
         présenté en Figure \ref{fig:Test3}. Enfin nous avons créé une fonction de retour à un POI depuis la position courante, montrée dans la 
         Figure \ref{fig:Test4}.      
 
-        \begin{figure}[!tbp]
+        \begin{figure}[tbp]
           \centering
           \begin{minipage}[t]{0.4\textwidth}
             \includegraphics[width=\textwidth]{Test1.png}    
@@ -679,7 +679,7 @@
           \end{minipage}
         \end{figure}
 
-        \begin{figure}[!tbp]
+        \begin{figure}[tbp]
           \centering
           \begin{minipage}[t]{0.4\textwidth}            
             \includegraphics[width=90mm]{Test3.png}    
@@ -715,8 +715,8 @@
     \subsection{Phase projet}
       Une fois la phase de POC terminée, nous devions passer à la phase projet associant nos POCs
       afin de créer une application de démonstration pour la JDS du 7 juillet 2022. Cette journée est un jalon très important
-      pour tout stagiaire au sein de la cellule Innov' de chez Aubay. Elle sert à présenter le projet sur lequel chaque équipe a travaillé
-      afin de montrer à la direction générale ainsi qu'aux directeurs commerciaux ce dont les stagiaires sont capables et ce qu'Aubay pourrait
+      pour tout stagiaire au sein de la cellule Innov' de chez Aubay. Elle sert à présenter le projet sur lequel chaque équipe a travaillé,
+      afin de montrer à la direction générale ainsi qu'aux directeurs commerciaux, ce dont les stagiaires sont capables et ce qu'Aubay pourrait
       proposer à ses clients dans le futur. Nous avons donc réfléchi à la création d'une application et d'une
       interface graphique afin de démontrer le fonctionnement de notre application, bien que l'application finale soit destinée 
       à des personnes malvoyantes, ne nécessitant qu'une interface vocale.
@@ -732,6 +732,8 @@
         vidéo de Windows à WSL2. Cette solution a nécessité d'adapter la manière dont ORB-SLAM3 récupérait le flux vidéo avant de l'incorporer à 
         son fonctionnement normal.
 
+        \pagebreak
+
         L'application est composée d'un backend se chargeant des fonctionnalités tandis que le frontend s'occupe du rendu
         graphique afin de présenter les résultats à l'utilisateur. La structure de l'application est simple: Les 3 POCs communiquent à un 
         chef d'orchestre pour envoyer leur requête ou récupérer le résultat d'une requête précédemment effectuée et le frontend récupère
@@ -745,7 +747,7 @@
           \caption{Schéma présentant l'architecture de l'application.}
           \label{fig:Structure}
         \end{figure} 
-
+        
         Le POC SLAM se situe sur un système différent et utilise un langage de programmation différent des POCs CV et NLP, nous avons dû
         recourir aux sockets qui sont disponibles dans beaucoup de langages de programmation dont C++ et Python. Après avoir autorisé les 
         communications au niveau du proxy et du par-feu en ouvrant les bons ports.
@@ -756,7 +758,7 @@
 
         Une socket est un port ouvert sur une machine afin de recevoir ou d'envoyer de la donnée à d'autres ordinateurs sur un même réseau. 
         Ce point d'entrée permet de gérer plusieurs types de protocoles de communication, dont le transfert de fichiers locaux et de données 
-        qui nous intéresse ici. Dans la pratique, il faut toujours s'assurer que la socket est bien valide, que le port n'est pas déjà 
+        qui nous intéressent ici. Dans la pratique, il faut toujours s'assurer que la socket est bien valide, que le port n'est pas déjà 
         utilisé, que le port n'est pas endommagé à la suite d'une fermeture brutale. Il fallait également spécifier la taille de la donnée que 
         l'on voulait envoyer, ici on mesurait simplement la taille de la chaîne de caractère à envoyer.     
 
@@ -782,7 +784,7 @@
         et ne pas permettre un affichage en temps réel. De plus l'exécution de scripts Python était une option assez limitée du framework que nous 
         n'avions pas envisagée au moment de le choisir pour développer l'application. Nous nous sommes en fait rendu compte des limites de Flutter 
         pendant que nous essayions de l'employer pour développer notre application de démonstration. À la vue des multiples problèmes engendrés par 
-        ce dernier, nous avons choisi de le laisser de côter pour partir sur une base connue. 
+        ce dernier, nous avons choisi de l'abandonner au profit d'une solution connue.
 
         Nous avons recommencé le développement avec Python en utilisant le package PyQt5, un module de création de fenêtres graphiques. Les pages 
         générées demandent un minimum de travail au niveau des graphismes pour donner un résultat satisfaisant pour la démonstration. Avec ce package, 
@@ -793,8 +795,9 @@
         il s'est trouvé qu'il fallait simplement procéder à l'affichage en continu d'une image récupérée avec le serveur Flask, et que 
         l'image la plus récente remplace l'affichage courant, ce qui nous donne une vidéo de résultat.
 
-        L'application fonctionne avec une caméra branchée pour transmettre le flux vidéo aux différents modules s'en servant ainsi qu'avec
-        un microphone et un haut-parleur.  
+        \pagebreak
+
+        L'application fonctionne avec une caméra, un microphone et un haut-parleur.
         L'interface graphique donne la possibilité de lancer une démonstration et de démarrer les parties SLAM, CV et NLP via le serveur Flask 
         et des sockets. La page principale de l'application est
         montrée en Figure \ref{fig:Application}, on y voit les résultats des POCs CV et SLAM ainsi que les différents boutons permettant
@@ -860,6 +863,8 @@
       rendre compte de l'avancée du projet, si nous documentions bien les tâches à effectuer afin que par la suite, 
       il soit facile de reprendre le projet et de comprendre ce qui a été réalisé et pour quelles raisons.
 
+      \pagebreak
+
       Les personnes se portant volontaires pour être encadrants techniques sont généralement des personnes en
       intercontrat, attendant de trouver une mission les intéressant chez un client. C'est pourquoi il est 
       arrivé à deux reprises que notre encadrant technique change. Heureusement, Aubay a correctement géré 
@@ -905,6 +910,8 @@
       d'écouter le point de vue des autres, mais aussi de réussir à s'exprimer parmi la quantité de personnalités 
       différentes que j'ai pu rencontrer.
 
+    \pagebreak
+    
     \subsection{Possibilités d'évolution du projet}
       Concernant les possibilités d'évolution du projet, d'autres méthodes de localisation pourraient être envisagées ou venir
       compléter la nôtre (comme la publication parlant de DGS avec le SegNet qui enlève les objets dynamiques du traitement).
@@ -925,7 +932,7 @@
       les résumant.
 
       Le projet m'a permis de prendre conscience que j'aimais beaucoup le développement, en plus de ma forte 
-      affinité pour la data et l'intelligence artificielle. Les différentes rencontres que j'ai pu faire au 
+      appétence pour la data et l'intelligence artificielle. Les différentes rencontres que j'ai pu faire au 
       cours du projet, les discussions avec des personnes déjà en CDI, m'ont fait comprendre que je manquais
       encore de certaines compétences techniques avant de pouvoir atteindre les postes que je vise.
       Le but va être de me former et de monter en compétences dans le domaine du Cloud (AWS) qui devient nécessaire dans 
