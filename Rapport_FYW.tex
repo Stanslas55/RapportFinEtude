@@ -212,7 +212,8 @@
     Je tiens également à remercier la direction générale d'Aubay pour leur accueil et leur écoute ainsi qu'Ophélie CHEVALIER, campus manager, 
     pour tous les événements qu'elle a pu organiser et qui ont permis d'établir un climat chaleureux entre les différents groupes.
         
-    Enfin, je remercie les autres étudiants d’Aubay Innov' avec lesquels j'ai eu l'occasion d'échanger aussi bien humainement que techniquement.
+    Enfin, je remercie les autres étudiants d’Aubay Innov' ainsi que tous les encadrants avec lesquels j'ai eu l'occasion d'échanger 
+    aussi bien humainement que techniquement.
 
   \pagebreak
 
@@ -323,7 +324,7 @@
           \paragraph{Le module VIO}
             Le module d'odométrie visuelle-inertielle (\acrshort{vio} pour Visual-Inertial Odometry) se sert des entrées pour estimer avec précision la position 
             afin de proposer une trajectoire. Ce module VIO est basé sur VINS-Mono. VINS-Mono est un framework SLAM en temps réel pour les 
-            systèmes visuo-inertiels monoculaires. Il utilise une méthode de fenêtre glissante basée sur des optimisations pour fournir une odométrie 
+            systèmes visio-inertiels monoculaires. Il utilise une méthode de fenêtre glissante basée sur des optimisations pour fournir une odométrie 
             visuelle-inertielle de haute précision.
             Les features \acrshort{fast} (Features from accelerated segment test) ont été adaptées pour accélérer le VIO à 
             la place des feature Shi-Thomas (une manière de détecter les coins sur une image) et la profondeur a été introduite afin d'obtenir une échelle 
@@ -546,7 +547,7 @@
         \paragraph{ROS}
           Robot Operation System (\acrshort{ros}) est utile au moment de l'accès à la caméra par ORB-SLAM3 pour traiter le flux vidéo.
           Ce package censé être rapide à installer nous a posés beaucoup de soucis de packages cassés dans les dépôts en ligne. Nous avons 
-          essayé diverses solutions sans succès sur la VM, sans succès, pour finalement réussir à faire fonctionner le tout sur WSL2. 
+          essayé diverses solutions sans succès sur la VM, pour finalement réussir à faire fonctionner le tout sur WSL2. 
 
       \subsubsection{Calibration}
         Comme dit précédemment, la calibration de la caméra était une phase importante afin d'obtenir une bonne estimation de la position
@@ -636,7 +637,8 @@
             \item F = G + H            
           \end{itemize} 
           A* base se décision sur la valeur de F, il cherche toujours à minimiser cette valeur jusqu'à atteindre sa destination,
-          comme le montre la Figure \ref{fig:Astar}.     
+          comme le montre la Figure \ref{fig:Astar}. On observe la décision prise par l'algorithme pour rejoindre le point bleu à partir 
+          du point rouge, alors qu'ils sont séparés par un obstacle, rendant le chemin en ligne droite impossible.    
           
           \clearpage
           
@@ -654,14 +656,15 @@
         \paragraph{FYWBack}
             Après avoir récupéré la sortie de l'algorithme A* sous la forme d'une liste de coordonnées, $FYWBack()$ fourni des indications
             de directions en se basant sur la normale sur le plan de la caméra et calcule l'angle avec la section de chemin le plus proche
-            afin guider l'utilisateur. Le chemin à parcourir est régénéré section par section.            
+            afin de guider l'utilisateur. Le chemin à parcourir est régénéré section par section.            
       
       \subsubsection{Test et résultats}
-        Nous avons testé notre travail sur plusieurs vidéos prises dans l'openSpace. Nous avons d'abord essayé de créer une grille 2D de la 
-        carte locale comme présentée dans la Figure \ref{fig:Test1}. Ensuite, nous avons calculé les normales des images clés en temps réel 
+        Nous avons testé notre travail sur plusieurs vidéos prises dans l'open space. Nous avons d'abord essayé de créer une grille 2D de la 
+        carte locale et de positionner les coordonnées discrétisées dessus, comme présenté dans la Figure \ref{fig:Test1}, 
+        puis nous avons calculé les normales des images clés en temps réel 
         comme présenté dans la Figure \ref{fig:Test2}. Nous avons ensuite réussi à sauvegarder une position, appelée POI, et la nommer comme
         présenté en Figure \ref{fig:Test3}. Enfin nous avons créé une fonction de retour à un POI depuis la position courante, montrée dans la 
-        Figure \ref{fig:Test4}.      
+        Figure \ref{fig:Test4}.
 
         \begin{figure}[tbp]
           \centering
@@ -725,7 +728,7 @@
         Il est important de noter que nos 3 POCs ne fonctionnent pas sur les mêmes systèmes, en effet, le POC SLAM développé en C++
         fonctionne uniquement sur WSL2, tandis que les POCs Computer Vision (\acrshort{cv}) et Natural Language Processing (\acrshort{nlp}) 
         sont développés en Python sur Windows. Le problème étant que WSL2 ne nous permettait pas d'accéder au flux vidéo de la caméra nécessaire 
-        aux POCs SLAM et CV, qu'une VM nous le permettait, mais ne donnait pas accès aux unités de traitement graphiques (GPU) nécessaires aux 
+        aux POCs SLAM et CV, alors qu'une VM nous le permettait, mais ne donnait pas accès aux unités de traitement graphiques (GPU) nécessaires aux 
         POCs CV et NLP. Nous avons opté pour 
         trouver une solution concernant le problème de flux vidéo sur WSL2. Étant donné que les 3 POCs devaient fonctionner sur le même réseau 
         local, nous avons eu l'idée de mettre en place un serveur afin d'établir une communication entre Windows et WSL2 pour transmettre le flux 
@@ -801,16 +804,56 @@
         L'interface graphique donne la possibilité de lancer une démonstration et de démarrer les parties SLAM, CV et NLP via le serveur Flask 
         et des sockets. La page principale de l'application est
         montrée en Figure \ref{fig:Application}, on y voit les résultats des POCs CV et SLAM ainsi que les différents boutons permettant
-        à l'utilisateur d'interagir pour tester l'application. Ces boutons servent à:
+        à l'utilisateur d'interagir pour tester l'application:
 
-        \begin{itemize}
-          \item Lancer une vidéo de démonstration.
-          \item Lancer l'application en temps réel.
-          \item Utiliser le microphone pour exprimer une commande vocale lorsque l'application s'exécute en temps réel.
-          \item Sauvegarder la position courante comme un lieu favori afin de pouvoir s'y faire guider plus tard.
-          \item Demander à se faire guider à un lieu précédemment sauvegardé.
-          \item Afficher l'historique des commandes utilisées et réponses reçues.   
-        \end{itemize}       
+        "Vidéo démo" permet de lancer une vidéo de démonstration préenregistrée dans l'open space en cas de problème lors de l'accès à l'ordinateur à distance lors de la JDS.
+        
+        "Temps réel" est le bouton qui envoie le signal de départ au chef d'orchestre pour lancer tous les POCs. Quand ce bouton est pressé, les scripts Python 
+        lancant le serveur Flask, le POC SLAM, CV et NLP, sont appelés. La caméra s'allume et le flux vidéo est transmis aux POCs SLAM et CV pour commencer leur
+        traitement. SLAM envoie ses images résultantes par socket au serveur Flask qui fait le pont avec l'interface graphique, c'est l'image en bas à droite de 
+        l'application. En parallèle, CV détecte les obstacles et objets environnants en estimant leur distance à l'utilisateur. Ces détections sur le flux de la 
+        caméra sont montrées à l'utilisateur sur la partie centrale de l'application. CV fourni aussi une carte 2D des obstacles détectés, c'est la carte en haut
+        à droite de l'application.
+             
+        "Microphone" ouvre une interface demandant de prononcer une commande pour interagir avec l'application qui fonctionne en temps réel. L'utilisateur peut
+        prononcer des commandes telles que "Emmène-moi à un objet", ce à quoi l'application répondra à l'oral "Lequel ?", l'utilisateur devra prononcer le nom de 
+        l'objet, par exemple: "bouteille", "chaise" ou encore "porte", puis il se fera guider grace au module CV quand ce dernier aura détecté l'objet recherché dans 
+        le champ de vision de la caméra. Une autre commande possible est de demander la sauvegarde d'une position, via le module SLAM, en prononcant 
+        "Sauvegarde une position", ce à quoi l'application répond "Laquelle ?" afin de nommer ce lieu et de pouvoir s'y faire guider par le module SLAM plus tard. La liste 
+        exhaustive des commandes vocales possibles est présentée dans la Table \ref{tab:ListeCommandes}. Ces commandes provoquent des "interruptions" (gérées par les threads afin de ne pas 
+        perturber l'execution normale de ces programmes) dans les POCs afin de récupérer les informations nécéssaires à l'affichage graphique.
+        % TODO: Insérer le tableau Latex des commandes + vérifier que les commandes que j'ai écrites dans le texte sont les bonnes.
+        
+        \begin{table}[!hbt]
+          \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Commande} & \textbf{Réponse} \\
+            \hline \hline
+            Décris-moi les alentours" & "Les objets les plus proches sont [liste objets]" \\
+            \hline
+            "Emmène-moi à un objet" & "Lequel ?" \\ 
+            "(nom de l'objet)" & "(objet) trouvé" \\
+            \hline
+            "Sauvegarde une position" & "Laquelle ?" \\ 
+            "(nom de la position)" & "(nom de la position) enregistré" \\
+            \hline
+            "Liste les positions enregistrées" & "Vos lieux favoris sont : [liste des positions] \\
+            \hline
+            "Guide moi vers une position" & "Laquelle ?" \\ 
+            "(nom de la position)" & Début du guidage \\    
+            \hline  
+            
+          \end{tabular}
+          \caption{\label{tab:ListeCommandes} Liste des commandes vocales disponibles.}
+      \end{table}
+        
+        Il est également possible de faire appel aux fonctions de SLAM à l'écrit et au clic par les boutons "Sauvegarder une position" et "Retourner à une position". 
+        Le premier bouton demande une saisie à l'écrit pour enregistrer le nom de la position, tandis que le deuxième bouton affiche la liste des lieux sauvegardés que 
+        l'utilisateur peut sélectionner pour s'y faire guider.   
+      
+        "Historique" affiche l'historique des commandes vocales passées et des réponses reçues, ainsi que les lieux enregistrés et des lieux qui ont été demandés 
+        par l'utilisateur pour se faire guider, par le biais des boutons prévu à ces effets.   
+          
 
         \begin{figure}[hbt]  
           \includegraphics[width=\textwidth]{Application.png}    
