@@ -227,7 +227,7 @@
     référent de la transformation digitale. Son secteur d'activité est centré autour du conseil sur tout type de projet technologique.  
     C'est une ESN cotée en Bourse (SBF 250) et 46\% du capital est détenu par les managers. Les chiffres clés concernant Aubay 
     sont présentés dans la Figure \ref{fig:PA1} ci-après. En 2022, l'entreprise emploie 7306 personnes, dont 2728 en France. 
-    Selon son site internet, Aubay est implantée dans 7 pays européens, et a réalisée un chiffre d'affaires de 470,6 M€ en 2021. 
+    Selon son site internet, Aubay est implantée dans 7 pays européens, et a réalisé un chiffre d'affaires de 470,6 M€ en 2021. 
     D'ailleurs, ces dernières années, l'entreprise a connu une forte croissance de 10,4\% en 2021, qui coïncide avec une augmentation 
     constante des effectifs de l'entreprise, passant de 4600 employés en 2015 à plus de 7000 aujourd'hui.
   
@@ -259,7 +259,7 @@
     de cette contrainte afin de permettre une plus grande polyvalence pour ce genre d'outil.
     Le projet a été séparé en plusieurs parties délimitées par des dates clés qui sont présentées dans la Figure \ref{fig:Planning} 
     avec les livrables associés à chaque fin de phase.
-    La prise en main du projet a démaré début février, s'en est suivi la partie concernant les états de l'art (\acrshort{ea} sur la Figure \ref{fig:Planning}) 
+    La prise en main du projet a démarré début février, s'en est suivi la partie concernant les états de l'art (\acrshort{ea} sur la Figure \ref{fig:Planning}) 
     qui devait être réalisée entre mi-février et mi-mars en parallèle du Design Thinking, qui nous a permis de cadrer et définir le projet par 
     rapport aux besoins de l'application et les tâches à accomplir. La phase de preuve de concept qui a suivi a duré jusqu'à mi-mai. 
     Nous sommes ensuite passés à la phase projet afin de concevoir l'application de démonstration nécessaire à la journée des stagiaires (JDS) 
@@ -313,7 +313,7 @@
           Localization and Mapping) est utilisé. SLAM est un problème de computer vision visant à traquer les mouvements d'un module en se basant
           sur ce qu'il voit. Il faut traiter les objets dynamiques qui entrent et sortent du champ de vision pour ne pas les prendre en compte
           dans l'estimation de la position du module. L'estimation se fait en trouvant des points clés sur les images successives.  Visual SLAM
-          se sert des informations récuperées pour trianguler la position 3D du module. 
+          se sert des informations récupérées pour trianguler la position 3D du module. 
     
         \pagebreak
 
@@ -497,7 +497,7 @@
         (\textit{sudo apt-get install ...}), 
         puis nous avons ajouté ces commandes à notre script d'installation. Il a souvent été nécessaire de définir de nouvelles variables d'environnement
         afin que les modules que nous installions puissent fonctionner correctement. Cette création de variables d'environnement se faisait depuis le script d'installation
-        qui écrivait dans le fichier \textit{.bashrc} de notre système, fichier executé à chaque lancement du système. 
+        qui écrivait dans le fichier \textit{.bashrc} de notre système, fichier exécuté à chaque lancement du système. 
         On a par exemple \textit{echo "export WORKDIR=`pwd`" >> ~/.bashrc}. Les bibliothèques de code utilisées décrites plus bas étaient installées avec \textit{cmake}.
         Ces documentations d'installation appartiennent à Aubay et ne peuvent être divulguées dans
         ce document.
@@ -507,7 +507,7 @@
         de l'utilisateur et une destination précédemment sauvegardée.      
             
      
-        \paragraph{General}
+        \paragraph{Général}
           Notre méthode se base sur ORB-SLAM3, une solution open source créée dans une université en Espagne. L'idée était simple, nous voulions
           l'installer et la faire fonctionner puis ajouter les fonctionnalités nécessaires à notre POC. Ce projet open source a été
           développé en C++ et se base sur de nombreuses bibliothèques de code telles que Eigen, Pangolin, Sophus, DBoW2, g2o, Kalibr et ROS.
@@ -636,7 +636,7 @@
             Il faut faire attention à ne pas surestimer cette valeur.
             \item F = G + H            
           \end{itemize} 
-          A* base se décision sur la valeur de F, il cherche toujours à minimiser cette valeur jusqu'à atteindre sa destination,
+          A* base sa décision sur la valeur de F, il cherche toujours à minimiser cette valeur jusqu'à atteindre sa destination,
           comme le montre la Figure \ref{fig:Astar}. On observe la décision prise par l'algorithme pour rejoindre le point bleu à partir 
           du point rouge, alors qu'ils sont séparés par un obstacle, rendant le chemin en ligne droite impossible.    
           
@@ -703,12 +703,12 @@
       \subsubsection{Difficultés rencontrées}
         Nous avons passé la majeure partie du temps que nous avions à disposition pour le POC à essayer d'installer ORB-SLAM3. 
         La recherche des bonnes
-        versions pour chaque bibliothèque nous a beaucoup retardé. Nous avons dû éditer certaines parties du code source, 
+        versions pour chaque bibliothèque nous a beaucoup retardés. Nous avons dû éditer certaines parties du code source, 
         notamment au niveau de CMakeLists.txt pour faire fonctionner le tout.
         De nombreux problèmes sont survenus concernant quasiment chaque package que nous devions installer, la plupart du temps à cause de
         problèmes de compatibilité ou de documentation manquante. La seule solution que nous ayons trouvé a été de chercher sans relâche jusqu'à
         trouver une solution.
-        Lorsque nous travaillions sur la VM, des latences et des crashs inattendus nous ont également fortement ralenti.       
+        Lorsque nous travaillions sur la VM, des latences et des crashs inattendus nous ont également fortement ralentis.       
  
       \subsubsection{Conclusion}
         Pour conclure sur la phase de POC, nous avons réussi à faire fonctionner un système SLAM pour la première fois chez Aubay, d'autres
@@ -809,20 +809,20 @@
         "Vidéo démo" permet de lancer une vidéo de démonstration préenregistrée dans l'open space en cas de problème lors de l'accès à l'ordinateur à distance lors de la JDS.
         
         "Temps réel" est le bouton qui envoie le signal de départ au chef d'orchestre pour lancer tous les POCs. Quand ce bouton est pressé, les scripts Python 
-        lancant le serveur Flask, le POC SLAM, CV et NLP, sont appelés. La caméra s'allume et le flux vidéo est transmis aux POCs SLAM et CV pour commencer leur
+        lançant le serveur Flask, le POC SLAM, CV et NLP, sont appelés. La caméra s'allume et le flux vidéo est transmis aux POCs SLAM et CV pour commencer leur
         traitement. SLAM envoie ses images résultantes par socket au serveur Flask qui fait le pont avec l'interface graphique, c'est l'image en bas à droite de 
         l'application. En parallèle, CV détecte les obstacles et objets environnants en estimant leur distance à l'utilisateur. Ces détections sur le flux de la 
-        caméra sont montrées à l'utilisateur sur la partie centrale de l'application. CV fourni aussi une carte 2D des obstacles détectés, c'est la carte en haut
+        caméra sont montrées à l'utilisateur sur la partie centrale de l'application. CV fournis aussi une carte 2D des obstacles détectés, c'est la carte en haut
         à droite de l'application.
              
         "Microphone" ouvre une interface demandant de prononcer une commande pour interagir avec l'application qui fonctionne en temps réel. L'utilisateur peut
         prononcer des commandes telles que "Emmène-moi à un objet", ce à quoi l'application répondra à l'oral "Lequel ?", l'utilisateur devra prononcer le nom de 
-        l'objet, par exemple: "bouteille", "chaise" ou encore "porte", puis il se fera guider grace au module CV quand ce dernier aura détecté l'objet recherché dans 
-        le champ de vision de la caméra. Une autre commande possible est de demander la sauvegarde d'une position, via le module SLAM, en prononcant 
+        l'objet, par exemple: "bouteille", "chaise" ou encore "porte", puis il se fera guider grâce au module CV quand ce dernier aura détecté l'objet recherché dans 
+        le champ de vision de la caméra. Une autre commande possible est de demander la sauvegarde d'une position, via le module SLAM, en prononçant 
         "Sauvegarde une position", ce à quoi l'application répond "Laquelle ?" afin de nommer ce lieu et de pouvoir s'y faire guider par le module SLAM plus tard. La liste 
         exhaustive des commandes vocales possibles est présentée dans la Table \ref{tab:ListeCommandes}. Ces commandes provoquent des "interruptions" (gérées par les threads afin de ne pas 
-        perturber l'execution normale de ces programmes) dans les POCs afin de récupérer les informations nécéssaires à l'affichage graphique.
-        % TODO: Insérer le tableau Latex des commandes + vérifier que les commandes que j'ai écrites dans le texte sont les bonnes.
+        perturber l'exécution normale de ces programmes) dans les POCs afin de récupérer les informations nécessaires à l'affichage graphique.
+       
         
         \begin{table}[!hbt]
           \begin{tabular}{|c|c|}
@@ -852,8 +852,7 @@
         l'utilisateur peut sélectionner pour s'y faire guider.   
       
         "Historique" affiche l'historique des commandes vocales passées et des réponses reçues, ainsi que les lieux enregistrés et des lieux qui ont été demandés 
-        par l'utilisateur pour se faire guider, par le biais des boutons prévu à ces effets.   
-          
+        par l'utilisateur pour se faire guider, par le biais des boutons prévu à ces effets.             
 
         \begin{figure}[hbt]  
           \includegraphics[width=\textwidth]{Application.png}    
@@ -872,11 +871,11 @@
   \section{Les dimensions humaines et managériales} 
     \subsection{Le plan humain}
       Le côté humain chez Aubay est beaucoup mis en avant. Dans le cadre de ce projet, cet aspect s'est 
-      matérialisé sous la forme d'un open space dans lequel plusieurs équipes travaillant sur des projets 
-      différents, ce qui permettait sur les temps de pause de créer du lien autour des différents endroits 
+      matérialisé sous la forme d'un open space dans lequel plusieurs équipes travaillaient sur des projets 
+      différents. Cela permettait sur les temps de pause de créer du lien autour des différents endroits 
       sociaux tels que la machine à café, la cafétéria ou encore le baby-foot. La crise sanitaire a empêché
       l'organisation d'événements pendant un certain temps, et c'est justement au moment de ce stage qu'Aubay 
-      a pu recommencer à organiser des évènements de rencontres après les heures de travail. Ces évènements 
+      a pu recommencer à organiser des évènements de rencontres après les heures de travail. Ces moments de convivialité 
       ont grandement participé au côté humain tel que j'ai pu le vivre durant cette expérience.
 
       Nous étions assez proches de nos encadrants et pouvions leur parler librement, leurs bureaux étant très 
