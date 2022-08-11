@@ -72,9 +72,9 @@
 \usepackage{csquotes}
 
 \defbibenvironment{bibliography}
-  {\begin{enumerate}}
-  {\end{enumerate}}
-  {\item}
+{\begin{enumerate}}
+{\end{enumerate}}
+{\item}
 
 \addbibresource{PFE.bib}
 
@@ -486,16 +486,14 @@
   \section{Les dimensions techniques du projet}
     \subsection{Phase de preuve de concept}
       Le projet FYW vise à aider les personnes malvoyantes à se repérer en milieu intérieur. 
-      La preuve de concept (\acrshort{poc}) sur laquelle j'ai travaillé avec mon équipe, se concentrait sur la création d'une carte locale
-      de l'environnement, en nous basant sur des points d'intérêts (\acrshort{poi}) entre les images vues successivement, c'est la méthode
-      SLAM.
+      La preuve de concept (\acrshort{poc}) sur laquelle j'ai travaillé avec mon équipe, se concentrait sur la création d'une carte locale de l'environnement, en nous basant sur des points d'intérêts (\acrshort{poi}) entre les images vues successivement, c'est la méthode SLAM. Dans cette partie j'ai beaucoup travaillé sur la recherche de solutions concernant les problèmes de version, sur l'installation au niveau de la machine virtuelle ainsi que l'ajout du module de recherche du plus court chemin dans l'écosystème ORB-SLAM3.
       \subsubsection{Installation}
         Il a d'abord fallu se pencher sur l'installation de la solution que nous avions retenue, afin de construire notre module par-dessus.
         Nous avons été capables de produire une documentation d'installation de ORB-SLAM3 sur le Windows sub-system for Linux (\acrshort{wsl2})
         et sur une machine virtuelle (\acrshort{vm}).
         Pour chaque module, nous avons vérifié qu'il pouvait bien s'installer avec les commandes d'acquisition de modules d'Ubuntu 20.04 
         (\textit{sudo apt-get install ...}), 
-        puis nous avons ajouté ces commandes à notre script d'installation. Il a souvent été nécessaire de définir de nouvelles variables d'environnement
+        puis j'ai proposé d'écrire un script contenant ces commandes afin d'automatiser notre installation. Il a souvent été nécessaire de définir de nouvelles variables d'environnement
         afin que les modules que nous installions puissent fonctionner correctement. Cette création de variables d'environnement se faisait depuis le script d'installation
         qui écrivait dans le fichier \textit{.bashrc} de notre système, fichier exécuté à chaque lancement du système. 
         On a par exemple \textit{echo "export WORKDIR=`pwd`" >> ~/.bashrc}. Les bibliothèques de code utilisées décrites plus bas étaient installées avec \textit{cmake}.
@@ -522,13 +520,12 @@
           d'une caméra, et non une vidéo préenregistrée. Le problème était que bien que wsl2 ait accès aux appareils USB (en prenant en compte 
           que pour cela il était nécessaire de créer un nouveau noyau Linux contenant les bons pilotes) et que la caméra soit visible dans les
           pilotes USB, le sous-système n'était pas capable de créer la vidéo dans /dev/video, rendant le flux vidéo inaccessible à notre
-          application. Nous avons choisi de basculer sur un système Ubuntu 20.04 sur VM afin de disposer des fonctionnalités de base
-          nécessaires à notre avancée.     
+          application. J'ai alors proposé de basculer sur un système Ubuntu 20.04 sur VM afin de disposer des fonctionnalités de base
+          nécessaires à notre avancée. Ayant beaucoup travaillé sur des machines virtuelles lors de ma formation, j'étais à l'aise avec cet outil qui était assez méconnu de mes collègues, je suis donc devenu le référent en matière de machines virtuelles.
 
         \paragraph{Eigen}
           Eigen est une bibliothèque d'algèbre linéaire, elle traite les vecteurs, matrices, solveurs numériques et les algorithmes
-          associés. Cette bibliothèque est nécessaire au bon fonctionnement d'ORB-SLAM3. Pour l'installer, nous avons dû chercher la version 
-          adaptée puisque la bibliothèque a évolué depuis la publication du dépôt Github d'ORB-SLAM3, rendant les versions les plus récentes
+          associés. Cette bibliothèque est nécessaire au bon fonctionnement d'ORB-SLAM3. Pour l'installer, nous avons dû chercher la version adaptée puisque la bibliothèque a évolué depuis la publication du dépôt Github d'ORB-SLAM3, rendant les versions les plus récentes
           de Eigen incompatible avec le projet. Nous avons essayé plusieurs versions qui n'ont pas fonctionné jusqu'à déterminer que la version 
           3.3.1 était la version utilisée au moment du développement d'ORB-SLAM3.
 
@@ -546,9 +543,7 @@
 
         \paragraph{ROS}
           Robot Operation System (\acrshort{ros}) est utile au moment de l'accès à la caméra par ORB-SLAM3 pour traiter le flux vidéo.
-          Ce package censé être rapide à installer nous a posés beaucoup de soucis de packages cassés dans les dépôts en ligne. Nous avons 
-          essayé diverses solutions sans succès sur la VM, pour finalement réussir à faire fonctionner le tout sur WSL2. 
-
+          
       \subsubsection{Calibration}
         Comme dit précédemment, la calibration de la caméra était une phase importante afin d'obtenir une bonne estimation de la position
         de la caméra utilisée. En effet, les paramètres intrinsèques et les distorsions de la caméra sont ce qui définit la manière dont 
@@ -573,14 +568,14 @@
         Après avoir passé un certain temps sur le code source d'ORB-SLAM3 pour comprendre comment chaque partie fonctionnait, nous avons
         été en capacité de réfléchir à comment nous implanter dedans pour ajouter notre contribution. L'idée était d'être capable de garder
         en mémoire les lieux importants pour l'utilisateur (POI) et de lui permettre d'y retourner en trouvant le chemin le plus court
-        entre la position courante et la destination voulue grâce à l'algorithme A*.    
+        entre la position courante et la destination voulue grâce à l'algorithme A*.
+        
+        \pagebreak
 
         \paragraph{Matrice de coordonnées}
           Les coordonnées résultantes d'ORB-SLAM3 sont des nombres flottants généralement compris dans l'intervalle $[0,1]$ pour les vidéos
           courtes. Nous avions besoin d'un moyen de projeter ces coordonnées sur une grille afin de déterminer le chemin à parcourir
           et donner des indications de direction, il a alors fallu adapter le résultat fourni par ORB-SLAM3.
-
-        \pagebreak
 
          La projection est assez simple, nous multiplions la coordonnée flottante de la caméra par 10, on arrondit au supérieur afin d'obtenir
          un nombre entier puis un divise le résultat par 10. Cela nous a permis d'obtenir une grille de coordonnées discrétisées qui ne soit
@@ -722,7 +717,7 @@
       afin de montrer à la direction générale ainsi qu'aux directeurs commerciaux, ce dont les stagiaires sont capables et ce qu'Aubay pourrait
       proposer à ses clients dans le futur. Nous avons donc réfléchi à la création d'une application et d'une
       interface graphique afin de démontrer le fonctionnement de notre application, bien que l'application finale soit destinée 
-      à des personnes malvoyantes, ne nécessitant qu'une interface vocale.
+      à des personnes malvoyantes, ne nécessitant qu'une interface vocale. Pour cette partie, j'ai pris la direction du développement de l'interface graphique.
 
       \subsubsection{Protocole de communication}
         Il est important de noter que nos 3 POCs ne fonctionnent pas sur les mêmes systèmes, en effet, le POC SLAM développé en C++
@@ -778,7 +773,7 @@
         développement, avec une préférence pour Flutter qui était une technologie encore inconnue de l'entreprise. Ayant déjà travaillé 
         avec Flutter sur un petit projet personnel, j'ai orienté le développement sur ce framework. L'idée était de créer une page d'accueil 
         contenant des boutons appelant les fonctionnalités de l'application. Nous devions donc être capables d'exécuter des scripts Python, 
-        afin de communiquer avec les composants de l'application,  et de pouvoir recevoir des images à afficher pour constituer la vidéo de 
+        afin de communiquer avec les composants de l'application, et de pouvoir recevoir des images à afficher pour constituer la vidéo de 
         retour, en notant qu'une succession d'images affichées rapidement constitue une vidéo.
 
         Flutter s'est avéré être très pratique à utiliser et à prendre en main, avec l'avantage de produire des pages sans avoir à se préoccuper 
